@@ -1,0 +1,1869 @@
+/* Platform dark — misma familia navy que sidebar / encabezado (sin gris neutro) */
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) {
+  --plat-d-canvas: #0a1420;
+  --plat-d-surface: #0f1e32;
+  --plat-d-elevated: #16304a;
+  --plat-d-muted: #0c1828;
+  --plat-d-border: rgba(96, 165, 250, 0.16);
+  --plat-d-border-strong: rgba(56, 189, 248, 0.32);
+  --plat-d-text: #e8f1fa;
+  --plat-d-heading: #f5f9fc;
+  --plat-d-accent: #38bdf8;
+  --plat-d-brand: #1b75bb;
+  --plat-d-secondary: #9ec0db;
+  --plat-d-muted-text: #7a9bb8;
+  --plat-d-danger: #fb7185;
+  --plat-d-danger-soft: rgba(251, 113, 133, 0.14);
+  --plat-d-ok: #4ade80;
+  --plat-d-warn: #fbbf24;
+
+  color: var(--plat-d-text) !important;
+  background: var(--plat-d-canvas) !important;
+  scrollbar-color: rgba(56, 189, 248, 0.35) rgba(255, 255, 255, 0.05);
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) ::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) ::-webkit-scrollbar-thumb {
+  background: rgba(125, 211, 252, 0.32);
+}
+
+/* ========== Global text: kill leftover navy / slate ========== */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) :is(h1, h2, h3, h4, .plat-quote-panel h2, .plat-metric) {
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-topbar {
+  border-color: rgba(148, 163, 184, 0.14) !important;
+  background: linear-gradient(
+    135deg,
+    #0a1628 0%,
+    #123556 48%,
+    #0c2038 100%
+  ) !important;
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  color: #f1f5f9 !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero::before,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-topbar::before {
+  content: none !important;
+  background: none !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero-head h1,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-topbar h1 {
+  color: #ffffff !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero-head p,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-topbar p {
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero-tabs {
+  background: rgba(8, 16, 28, 0.55) !important;
+  border-top: 1px solid rgba(148, 163, 184, 0.14) !important;
+  box-shadow: none !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero .plat-tab {
+  color: rgba(168, 197, 216, 0.72) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero .plat-tab:hover {
+  color: #e8f4fc !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero .plat-tab.is-active {
+  color: var(--plat-d-accent) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero .plat-tab.is-active::after {
+  background: var(--plat-d-accent) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero .plat-tab .plat-tab-count,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero .plat-tab .plat-chip-count {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: rgba(226, 239, 249, 0.92) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero .plat-tab.is-active .plat-tab-count,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero .plat-tab.is-active .plat-chip-count {
+  background: rgba(56, 189, 248, 0.2) !important;
+  color: #7dd3fc !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero .plat-btn.is-ghost {
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #e2e8f0 !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero .plat-btn.is-ghost:hover {
+  background: rgba(56, 189, 248, 0.12) !important;
+  border-color: rgba(56, 189, 248, 0.35) !important;
+  color: #7dd3fc !important;
+}
+
+/* Hero unificado: los tabs no son una card aparte */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero .plat-tabs,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero-tabs .plat-tabs {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) :is(p, label, small, .plat-quote-muted, .plat-metric-sub, .plat-section-label, .plat-field, dt) {
+  color: var(--plat-d-secondary) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) :is(strong, b, dd, td, th, li, span) {
+  color: inherit;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) a:not(.plat-btn):not(.plat-nav a):not(.plat-site-header a) {
+  color: var(--plat-d-accent);
+}
+
+/* ========== Global inputs: no white leftovers ========== */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+)
+  :is(
+    input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="hidden"]),
+    textarea,
+    select
+  ) {
+  background: var(--plat-d-elevated) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+  color-scheme: dark;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+)
+  :is(input, textarea)::placeholder {
+  color: var(--plat-d-muted-text) !important;
+  opacity: 1 !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+)
+  :is(input, textarea, select):focus {
+  border-color: var(--plat-d-border-strong) !important;
+  box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.15) !important;
+  outline: none;
+}
+
+/* ========== Cards / panels / filters ========== */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+)
+  :is(
+    .plat-quote-panel.plat-card,
+    .plat-inbox,
+    .plat-profile-hero,
+    .plat-profile-card,
+    .plat-profile-panel,
+    .plat-profile-drawer,
+    .plat-messages-panel.plat-notify-center,
+    .plat-dashboard-kpi,
+    .plat-dashboard-pipeline,
+    .plat-dashboard-attention,
+    .plat-dashboard-recent,
+    .plat-dashboard-hero,
+    .plat-chart-card,
+    .plat-dash-metric,
+    .plat-news-kpi,
+    .plat-news-activity,
+    .plat-blog-canvas,
+    .plat-modal,
+    .plat-avatar-crop-modal,
+    .plat-menu-panel,
+    .plat-columns-panel,
+    .plat-date-panel,
+    .plat-chat-menu,
+    .plat-client-panel
+  ) {
+  background: linear-gradient(
+    180deg,
+    #12263c 0%,
+    var(--plat-d-surface) 42%,
+    #0e1c2e 100%
+  ) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+  box-shadow:
+    0 8px 28px rgba(4, 12, 24, 0.45),
+    inset 0 1px 0 rgba(125, 211, 252, 0.06) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-filter-bar,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-tabs {
+  background: rgba(8, 20, 36, 0.55) !important;
+  border-color: var(--plat-d-border) !important;
+  box-shadow: inset 0 -1px 0 rgba(96, 165, 250, 0.08) !important;
+}
+
+/* Hero unificado: los tabs no son una card aparte */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero .plat-tabs,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero-tabs .plat-tabs {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-section-hero-tabs {
+  background: rgba(8, 14, 22, 0.72) !important;
+  border-top: 1px solid var(--plat-d-border) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-tab,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-filter-chip {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: rgba(148, 163, 184, 0.82) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-tab.is-active,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-filter-chip.is-active {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--plat-d-accent) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+)
+  :is(.plat-hub-hero, .plat-hub-card) {
+  background: var(--plat-d-surface) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-hub-banner {
+  background: rgba(59, 130, 246, 0.12) !important;
+  border-color: rgba(59, 130, 246, 0.35) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-hub-banner strong {
+  color: #93c5fd !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+)
+  :is(
+    .plat-hub-hero-top h2,
+    .plat-hub-card-head h3,
+    .plat-hub-stat strong,
+    .plat-hub-kv strong,
+    .plat-hub-list strong
+  ) {
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+)
+  :is(
+    .plat-hub-hint,
+    .plat-hub-body,
+    .plat-hub-list p,
+    .plat-hub-progress-meta
+  ) {
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+)
+  :is(
+    .plat-hub-stat,
+    .plat-hub-kv > div,
+    .plat-hub-steps li,
+    .plat-hub-list li
+  ) {
+  background: var(--plat-d-elevated) !important;
+  border-color: var(--plat-d-border) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-hub-form textarea {
+  background: var(--plat-d-elevated) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-hub-card.is-danger {
+  border-color: rgba(248, 113, 113, 0.35) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-hub-paywall {
+  background: rgba(251, 191, 36, 0.12) !important;
+  border-color: rgba(251, 191, 36, 0.35) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-hub-paywall strong {
+  color: #fbbf24 !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-hub-paywall span {
+  color: #fde68a !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-project-payment-select.is-unpaid {
+  background-color: rgba(251, 191, 36, 0.14) !important;
+  border-color: rgba(251, 191, 36, 0.4) !important;
+  color: #fbbf24 !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-project-payment-select.is-deposit {
+  background-color: rgba(56, 189, 248, 0.12) !important;
+  border-color: rgba(56, 189, 248, 0.35) !important;
+  color: #7dd3fc !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-project-payment-select.is-paid {
+  background-color: rgba(74, 222, 128, 0.12) !important;
+  border-color: rgba(74, 222, 128, 0.35) !important;
+  color: #86efac !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-client-preview-form select {
+  background: var(--plat-d-elevated) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-projects-filters,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-list-toolbar {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Search pill */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-search {
+  background: var(--plat-d-elevated) !important;
+  border: 1px solid var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-search svg {
+  color: var(--plat-d-accent) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-search input {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--plat-d-text) !important;
+}
+
+/* Resultados de buscar contacto (cotizador) */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-contacts button {
+  background: var(--plat-d-elevated) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-contacts button:hover {
+  background: rgba(125, 211, 252, 0.1) !important;
+  border-color: var(--plat-d-border-strong) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-contacts strong {
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-contacts span {
+  color: var(--plat-d-secondary) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-search-empty,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-muted {
+  color: var(--plat-d-secondary) !important;
+}
+
+/* Tables */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-list-scroll,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-projects-board .plat-quote-list-scroll {
+  background: var(--plat-d-muted) !important;
+  border-color: var(--plat-d-border) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-table th,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-list-scroll thead th {
+  background: var(--plat-d-elevated) !important;
+  color: var(--plat-d-secondary) !important;
+  border-color: var(--plat-d-border) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-table td {
+  color: var(--plat-d-text) !important;
+  border-color: var(--plat-d-border) !important;
+  background: transparent;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-table tr:hover td {
+  background: rgba(125, 211, 252, 0.06) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-code {
+  color: var(--plat-d-accent) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-cancel-meta,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-cancel-meta small {
+  color: var(--plat-d-danger) !important;
+}
+
+/* Project expand detail — was white */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-projects-board .plat-project-detail-row td,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-project-detail {
+  background: var(--plat-d-muted) !important;
+  color: var(--plat-d-text) !important;
+  border-color: var(--plat-d-border) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-project-detail-label {
+  color: var(--plat-d-muted-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-project-detail strong,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-project-value-cell {
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-project-detail-services,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-project-services-panel,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-project-services-total,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-project-services-head {
+  background: var(--plat-d-elevated) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-project-detail-services h4 {
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-project-services-empty {
+  background: rgba(10, 16, 22, 0.65) !important;
+  border-color: var(--plat-d-border) !important;
+  border-style: dashed !important;
+  color: var(--plat-d-muted-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-project-services-items li {
+  border-bottom-color: var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-project-services-items li strong,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-project-service-math strong {
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-project-services-items li p,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-project-service-math span {
+  color: var(--plat-d-muted-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-service-chip {
+  background: rgba(125, 211, 252, 0.12) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-progress {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-progress > span,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-progress > i {
+  background: var(--plat-d-accent) !important;
+}
+
+/* Quote commerce */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-commerce-group,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-json {
+  background: var(--plat-d-elevated) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-json-collapsed {
+  background: rgba(10, 16, 22, 0.65) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-muted-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-json-collapsed:hover {
+  border-color: var(--plat-d-border-strong) !important;
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-commerce-label,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-commerce-hint,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-discount-toggle span,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-discount-toggle small {
+  color: var(--plat-d-secondary) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-discount-toggle strong,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-panel h2 svg {
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-policy {
+  background: rgba(125, 211, 252, 0.1) !important;
+  border-color: var(--plat-d-border-strong) !important;
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-select .plat-menu-trigger,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-menu-trigger,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-filter-select .plat-menu-trigger,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-date-trigger {
+  background: var(--plat-d-elevated) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-menu-item {
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-menu-item:hover,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-menu-item.is-active {
+  background: rgba(125, 211, 252, 0.12) !important;
+  color: var(--plat-d-heading) !important;
+}
+
+/* Chips / badges / pills — no .plat-tab (tabs van underline, sin “cuadrados”) */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) :is(.plat-chip, .plat-filter-chip, .plat-notify-pill) {
+  background: var(--plat-d-elevated) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-secondary) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) :is(.plat-chip.is-active, .plat-notify-pill.is-active) {
+  background: rgba(27, 117, 187, 0.22) !important;
+  border-color: rgba(56, 189, 248, 0.35) !important;
+  color: #e2e8f0 !important;
+  box-shadow: none !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-chip.plat-chip-open.is-active {
+  background: rgba(74, 222, 128, 0.16) !important;
+  border-color: rgba(74, 222, 128, 0.42) !important;
+  color: var(--plat-d-ok) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-chip.plat-chip-closed.is-active {
+  background: rgba(251, 113, 133, 0.14) !important;
+  border-color: rgba(251, 113, 133, 0.4) !important;
+  color: var(--plat-d-danger) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-bot-mode-chip.is-active {
+  background: rgba(251, 191, 36, 0.14) !important;
+  border-color: rgba(251, 191, 36, 0.4) !important;
+  color: var(--plat-d-warn) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-btn.is-ghost {
+  background: var(--plat-d-elevated) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-btn.is-ghost:hover {
+  background: rgba(125, 211, 252, 0.14) !important;
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-sidebar .plat-btn.is-ghost {
+  background: transparent !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-sidebar .plat-btn.is-ghost:hover {
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: #fff !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-btn.is-danger,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-menu-item.is-danger,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-profile-panel-item.is-danger {
+  color: var(--plat-d-danger) !important;
+}
+
+/* Dashboard */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-hero-copy h2,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-welcome-copy h2 {
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-hero-copy p,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-empty,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-pipeline-note,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-kpi-body span,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-pipeline-label,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-chart-empty {
+  color: var(--plat-d-secondary) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-kpi-body strong,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-pipeline-value,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-feed-main strong,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-section-head h2,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-section-head h3 {
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-pipeline-track > li:not(.plat-dashboard-pipeline-arrow) {
+  background: var(--plat-d-elevated) !important;
+  border-color: var(--plat-d-border) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-attention .plat-dashboard-empty,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-attention .plat-dashboard-feed {
+  background: var(--plat-d-muted) !important;
+  color: var(--plat-d-secondary) !important;
+  border-color: var(--plat-d-border) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-feed-item {
+  background: var(--plat-d-elevated) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-feed-main span,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-feed-when {
+  color: var(--plat-d-muted-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-pill {
+  background: rgba(125, 211, 252, 0.2) !important;
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-welcome-stat {
+  background: var(--plat-d-elevated) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-welcome-stat-text strong {
+  color: var(--plat-d-heading) !important;
+}
+
+/* Inbox — dark mode (Webchat / Mensajes / Formularios) */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox {
+  background: var(--plat-d-surface) !important;
+  border-color: var(--plat-d-border-strong) !important;
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-inbox-list,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-inbox-filters {
+  background: var(--plat-d-canvas) !important;
+  border-color: transparent !important;
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-inbox-detail,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-inbox-detail-head {
+  background: var(--plat-d-canvas) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-inbox-list {
+  border-right: 1px solid var(--plat-d-border-strong) !important;
+  box-shadow: none;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-inbox-filters {
+  border-bottom: 0 !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-chat-row {
+  background: var(--plat-d-elevated) !important;
+  border: 1px solid var(--plat-d-border) !important;
+  border-radius: 0.85rem !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-chat-row:hover,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-chat-row.is-active,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-chat-row.is-menu-open {
+  background: #1a3a58 !important;
+  border-color: rgba(56, 189, 248, 0.35) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-inbox-empty,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-inbox-empty-detail,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-inbox-muted {
+  color: var(--plat-d-muted-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat {
+  --plat-chat-wallpaper: none;
+  --plat-chat-wall-bg: var(--plat-d-canvas);
+  --plat-chat-wall-dim: transparent;
+  --plat-chat-chrome: var(--plat-d-canvas);
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat .plat-inbox-detail,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat .plat-live-detail {
+  background-color: var(--plat-d-canvas) !important;
+  background-image: none !important;
+  padding: 0 !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat .plat-live-thread {
+  background: transparent !important;
+  border: 0 !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat .plat-inbox-list,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat .plat-inbox-filters {
+  background: var(--plat-d-canvas) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat .plat-inbox-list {
+  border-right: 1px solid var(--plat-d-border-strong) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat .plat-inbox-filters {
+  border-color: transparent !important;
+  border-bottom: 0 !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat .plat-inbox-detail-head {
+  background: var(--plat-d-canvas) !important;
+  background-image: none !important;
+  border-bottom: 1px solid var(--plat-d-border) !important;
+  border-color: var(--plat-d-border) !important;
+  overflow: visible;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-summary-chip {
+  border-color: rgba(125, 211, 252, 0.35);
+  background: rgba(27, 117, 187, 0.22);
+  color: #bae6fd;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-name {
+  color: rgba(168, 197, 216, 0.78);
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat .chat-composer.is-platform {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat .chat-composer.is-platform .chat-composer-tool {
+  color: rgba(168, 197, 216, 0.78) !important;
+  background: transparent !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat .chat-composer.is-platform .chat-composer-tool:hover,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat .chat-composer.is-platform .chat-composer-tool.is-open {
+  background: rgba(125, 211, 252, 0.1) !important;
+  color: #e8f4fc !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat .chat-composer.is-platform .chat-composer-input {
+  background: var(--plat-d-elevated) !important;
+  color: var(--plat-d-text) !important;
+  border: 0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat .chat-composer.is-platform .chat-composer-input::placeholder {
+  color: var(--plat-d-muted-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat .chat-composer.is-platform .chat-composer-send,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat .chat-composer.is-platform .chat-composer-send:disabled {
+  background: #1b75bb !important;
+  color: #ffffff !important;
+  border: 0 !important;
+  opacity: 1 !important;
+  filter: none !important;
+  box-shadow: 0 2px 10px rgba(27, 117, 187, 0.5) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat .chat-composer.is-platform .chat-composer-send svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  opacity: 1 !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-live-chat .chat-composer.is-platform .chat-composer-preview {
+  background: var(--plat-d-elevated) !important;
+  border-color: var(--plat-d-border) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-inbox-item,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-inbox-detail h2 {
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-chat-row.is-unread .plat-inbox-item-top strong,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-chat-row.is-open .plat-inbox-item-top strong {
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-live-bubble.is-visitor {
+  background: var(--plat-d-elevated) !important;
+  color: var(--plat-d-text) !important;
+  border-color: var(--plat-d-border) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-live-bubble.is-admin {
+  background: #1b75bb !important;
+  border-color: rgba(125, 211, 252, 0.35) !important;
+  color: #f5f9fc !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .chat-composer.is-platform .chat-composer-input {
+  background: var(--plat-d-elevated) !important;
+  color: var(--plat-d-text) !important;
+  border-color: var(--plat-d-border) !important;
+}
+
+/* Notify / profile drawers */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-notify-backdrop,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-modal-backdrop {
+  background: rgba(0, 0, 0, 0.62) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-notify-center-top h2,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-profile-drawer-top h2,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-profile-panel-head p,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-profile-hero-title-row h2,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-profile-card-body h3 {
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-notify-center-footer {
+  background: var(--plat-d-muted) !important;
+  border-color: var(--plat-d-border) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-notify-card.is-unread {
+  background: rgba(125, 211, 252, 0.08) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-notify-card-title strong,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-profile-data-row dd,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-profile-panel-item {
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-profile-edit-btn,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-profile-card-btn,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-profile-card-body strong {
+  background: rgba(125, 211, 252, 0.12);
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-profile-card-btn.is-danger {
+  background: var(--plat-d-elevated) !important;
+  border: 1px solid rgba(251, 113, 133, 0.35) !important;
+  color: var(--plat-d-danger) !important;
+}
+
+/* Blog */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-blog-field input,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-blog-field select,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .tiptap,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-blog-editor-prose,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-blog-cover-drop {
+  background: var(--plat-d-elevated) !important;
+  color: var(--plat-d-text) !important;
+  border-color: var(--plat-d-border) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-blog-topic-chip,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-blog-topic-chip.is-menu {
+  color: #bae6fd !important;
+  background: rgba(125, 211, 252, 0.1) !important;
+  border-color: rgba(125, 211, 252, 0.35) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-blog-topic-chip.is-menu:hover,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-blog-topic-chip.is-menu.is-open {
+  background: rgba(125, 211, 252, 0.16) !important;
+  border-color: rgba(125, 211, 252, 0.5) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .tiptap :is(h1, h2, h3),
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-blog-editor-prose :is(h1, h2, h3) {
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-slash-menu,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-blog-slash-menu {
+  background: var(--plat-d-surface) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+}
+
+/* Charts / legends */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .recharts-legend-item-text {
+  fill: var(--plat-d-secondary) !important;
+  color: var(--plat-d-secondary) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .recharts-default-tooltip,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .recharts-tooltip-label,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .recharts-tooltip-item,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .recharts-tooltip-item-name,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .recharts-tooltip-item-value,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .recharts-tooltip-item-separator {
+  color: #e8f1fa !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-status-legend li {
+  color: var(--plat-d-secondary) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-status-legend strong {
+  color: var(--plat-d-heading) !important;
+}
+
+/* Misc */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-error {
+  color: var(--plat-d-danger) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-success {
+  color: var(--plat-d-ok) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-badge {
+  background: rgba(125, 211, 252, 0.14) !important;
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-badge.is-danger {
+  background: var(--plat-d-danger-soft) !important;
+  color: var(--plat-d-danger) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-badge.is-done {
+  background: rgba(74, 222, 128, 0.14) !important;
+  color: var(--plat-d-ok) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-badge.is-warn {
+  background: rgba(251, 191, 36, 0.14) !important;
+  color: var(--plat-d-warn) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-menu-panel,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-quote-select-panel {
+  background: var(--plat-d-surface) !important;
+  border: 1px solid var(--plat-d-border-strong) !important;
+  border-radius: 0.85rem !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
+  overflow: hidden;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-menu-item.is-active {
+  background: rgba(125, 211, 252, 0.2) !important;
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-filter-select > span {
+  color: var(--plat-d-secondary) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-projects-board .plat-project-status-select {
+  background-color: var(--plat-d-elevated) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237dd3fc' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0.55rem center !important;
+  background-size: 0.75rem !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+  border-radius: 0.5rem !important;
+}
+
+/* Inbox chat menus + bubble meta (was near-invisible navy on dark) */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-chat-menu {
+  background: var(--plat-d-surface) !important;
+  border: 1px solid var(--plat-d-border-strong) !important;
+  border-radius: 0.85rem !important;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-chat-menu-item {
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-chat-menu-item:hover {
+  background: rgba(125, 211, 252, 0.14) !important;
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-chat-menu-item.is-danger {
+  color: var(--plat-d-danger) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-chat-menu-item.is-danger:hover {
+  background: var(--plat-d-danger-soft) !important;
+  color: #fecdd3 !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-chat-menu-trigger {
+  color: var(--plat-d-secondary) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-chat-menu-trigger:hover,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-chat-menu-trigger.is-open {
+  background: rgba(125, 211, 252, 0.12) !important;
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-live-bubble {
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-live-bubble span,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-live-bubble small {
+  color: var(--plat-d-secondary) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-inbox-detail-actions .plat-btn,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-inbox-detail-actions button,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-inbox-mark-read,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-inbox .plat-contact-link {
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-news-kpi-hint,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-news-clicks-empty,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-news-activity > header span,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-news-clicks-links li {
+  color: var(--plat-d-muted-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-news-kpi-icon {
+  background: rgba(125, 211, 252, 0.12) !important;
+  color: #7dd3fc !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-news-metrics-charts .plat-chart-card,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-news-activity {
+  border-color: var(--plat-d-border) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-news-metrics-charts .plat-chart-card h3,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-news-activity > header h3 {
+  color: var(--plat-d-heading) !important;
+  text-transform: none !important;
+  letter-spacing: -0.015em !important;
+  font-weight: 700 !important;
+}
