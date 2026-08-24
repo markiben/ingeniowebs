@@ -8,21 +8,6 @@ export type ProjectStatus =
 
 export type PricingType = "fixed" | "hourly";
 
-export type ProposalStatus =
-  | "draft"
-  | "sent"
-  | "approved"
-  | "rejected"
-  | "expired";
-
-export type SupportTicketStatus =
-  | "open"
-  | "in_progress"
-  | "resolved"
-  | "closed";
-
-export type SupportTicketPriority = "low" | "medium" | "high";
-
 export type PlatformUser = {
   id: string;
   email: string;
@@ -161,47 +146,6 @@ export type PlatformBlogDraft = {
   publishedAt?: string | null;
   createdAt: string;
   updatedAt: string;
-};
-
-export type PlatformProposal = {
-  id: string;
-  title: string;
-  clientName: string;
-  clientEmail: string;
-  value: number;
-  currency: "ARS" | "USD";
-  status: ProposalStatus;
-  leadId?: string | null;
-  notes?: string;
-  createdAt: string;
-  updatedAt: string;
-  sentAt?: string | null;
-  decidedAt?: string | null;
-};
-
-export type PlatformSupportTicket = {
-  id: string;
-  title: string;
-  clientName: string;
-  clientEmail: string;
-  projectId?: string | null;
-  category: string;
-  priority: SupportTicketPriority;
-  status: SupportTicketStatus;
-  description: string;
-  createdAt: string;
-  updatedAt: string;
-  resolvedAt?: string | null;
-};
-
-/** Gasto de adquisición / marketing para calcular CAC. */
-export type PlatformAcquisitionSpend = {
-  id: string;
-  label: string;
-  amount: number;
-  currency: "ARS" | "USD";
-  spentAt: string;
-  createdAt: string;
 };
 
 export type LiveChatAttachment = {
@@ -376,9 +320,6 @@ export type PlatformDatabase = {
   leads: PlatformLead[];
   messages: PlatformMessage[];
   blogDrafts: PlatformBlogDraft[];
-  proposals: PlatformProposal[];
-  supportTickets: PlatformSupportTicket[];
-  acquisitionSpends: PlatformAcquisitionSpend[];
   liveChats: LiveChatSession[];
   newsletterSubscribers: NewsletterSubscriber[];
   /** Clicks de campañas rastreadas (vacío hasta activar tracking). */

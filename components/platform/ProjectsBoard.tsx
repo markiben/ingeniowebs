@@ -16,7 +16,6 @@ import {
   ChevronDown,
   ChevronRight,
   Download,
-  Eye,
   FileText,
   Mail,
   Plus,
@@ -974,14 +973,6 @@ export default function ProjectsBoard({
                                   PDF
                                 </span>
                                 <div className="plat-project-pdf-row">
-                                  <Link
-                                    className="plat-btn is-primary is-compact"
-                                    href={`/plataforma/vista-cliente?proyecto=${project.id}`}
-                                    title="Ver hub del cliente"
-                                  >
-                                    <Eye size={14} />
-                                    Vista cliente
-                                  </Link>
                                   <a
                                     className="plat-btn is-ghost is-compact"
                                     href={`/api/plataforma/projects/${project.id}/pdf`}

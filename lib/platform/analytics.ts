@@ -1,10 +1,7 @@
 import type {
-  PlatformAcquisitionSpend,
   PlatformLead,
   PlatformMessage,
   PlatformProject,
-  PlatformProposal,
-  PlatformSupportTicket,
   PlatformUser,
 } from "./types";
 import { normalizeProjectStatus } from "./project-status";
@@ -102,23 +99,11 @@ function averageTicket(
   );
 }
 
-function sumSpend(
-  spends: PlatformAcquisitionSpend[],
-  currency: PlatformAcquisitionSpend["currency"],
-) {
-  return spends
-    .filter((spend) => spend.currency === currency)
-    .reduce((sum, spend) => sum + (spend.amount || 0), 0);
-}
-
 export function buildAnalytics(
   projects: PlatformProject[],
   leads: PlatformLead[],
   messages: PlatformMessage[],
   clients: PlatformUser[],
-  proposals: PlatformProposal[],
-  tickets: PlatformSupportTicket[],
-  spends: PlatformAcquisitionSpend[],
   filter: AnalyticsFilter,
 ) {
   const scopedProjects = filterProjects(projects, filter);
@@ -129,13 +114,6 @@ export function buildAnalytics(
   const scopedClients = clients.filter((client) =>
     inRange(client.createdAt, filter),
   );
-  const scopedProposals = proposals.filter((proposal) =>
-    inRange(proposal.createdAt, filter),
-  );
-  const scopedTickets = tickets.filter((ticket) =>
-    inRange(ticket.createdAt, filter),
-  );
-  const scopedSpends = spends.filter((spend) => inRange(spend.spentAt, filter));
 
   const activeProjects = scopedProjects.filter(
     (project) =>
@@ -177,32 +155,10 @@ export function buildAnalytics(
     .filter((project) => project.currency === "ARS")
     .reduce((sum, project) => sum + projectCostOverrun(project), 0);
 
-  const proposalsSent = scopedProposals.filter(
-    (proposal) =>
-      proposal.status === "sent" ||
-      proposal.status === "approved" ||
-      proposal.status === "rejected" ||
-      proposal.status === "expired",
-  ).length;
-  const proposalsApproved = scopedProposals.filter(
-    (proposal) => proposal.status === "approved",
-  ).length;
-  const proposalConversion =
-    proposalsSent > 0 ? (proposalsApproved / proposalsSent) * 100 : 0;
   const leadConversion =
     scopedLeads.length > 0
       ? (scopedClients.length / scopedLeads.length) * 100
       : 0;
-
-  const activeTickets = scopedTickets.filter(
-    (ticket) => ticket.status === "open" || ticket.status === "in_progress",
-  ).length;
-
-  const spendUsd = sumSpend(scopedSpends, "USD");
-  const spendArs = sumSpend(scopedSpends, "ARS");
-  const newCustomers = scopedClients.length;
-  const cacUsd = newCustomers > 0 ? spendUsd / newCustomers : 0;
-  const cacArs = newCustomers > 0 ? spendArs / newCustomers : 0;
 
   const completedCount = scopedProjects.filter(
     (project) => normalizeProjectStatus(project.status) === "completed",
@@ -224,100 +180,117 @@ export function buildAnalytics(
   ];
   const statusTotal = scopedProjects.length;
 
-  const hoursSeries = scopedProjects
-    .filter(
-      (project) => project.hoursEstimated > 0 || project.hoursInvested > 0,
-    )
-    .slice(0, 8)
-    .map((project) => ({
-      label: project.code,
-      estimadas: project.hoursEstimated,
-      invertidas: project.hoursInvested,
-      delta: projectHoursDelta(project),
-    }));
-
-  let volumeSeries: { label: string; proyectos: number; valor: number }[] = [];
+  // Both series need the same "projects created in this date bucket" split
+  // (per day, per month, or per year depending on the active filter) — the
+  // hours chart used to bucket by project instead, which meant it silently
+  // dropped anything past the first 8 projects.
+  let dateBuckets: { label: string; projects: PlatformProject[] }[] = [];
 
   if (filter.range === "day") {
-    volumeSeries = [
-      {
-        label: `${filter.day}/${filter.month + 1}`,
-        proyectos: scopedProjects.length,
-        valor: scopedProjects.reduce(
-          (sum, project) => sum + projectNetValue(project),
-          0,
-        ),
-      },
+    dateBuckets = [
+      { label: `${filter.day}/${filter.month + 1}`, projects: scopedProjects },
     ];
   } else if (filter.range === "month") {
     const totalDays = daysInMonth(filter.year, filter.month);
-    volumeSeries = Array.from({ length: totalDays }, (_, index) => {
+    dateBuckets = Array.from({ length: totalDays }, (_, index) => {
       const day = index + 1;
-      const dayProjects = scopedProjects.filter((project) => {
-        const date = new Date(project.createdAt);
-        return date.getDate() === day;
-      });
       return {
         label: String(day),
-        proyectos: dayProjects.length,
-        valor: dayProjects.reduce(
-          (sum, project) => sum + projectNetValue(project),
-          0,
-        ),
+        projects: scopedProjects.filter((project) => {
+          const date = new Date(project.createdAt);
+          return date.getDate() === day;
+        }),
       };
     });
   } else if (filter.range === "year") {
-    volumeSeries = MONTH_LABELS.map((label, month) => {
-      const monthProjects = scopedProjects.filter((project) => {
+    dateBuckets = MONTH_LABELS.map((label, month) => ({
+      label,
+      projects: scopedProjects.filter((project) => {
         const date = new Date(project.createdAt);
         return date.getMonth() === month;
-      });
-      return {
-        label,
-        proyectos: monthProjects.length,
-        valor: monthProjects.reduce(
-          (sum, project) => sum + projectNetValue(project),
-          0,
-        ),
-      };
-    });
+      }),
+    }));
   } else {
     const now = new Date();
-    volumeSeries = Array.from({ length: 12 }, (_, offset) => {
-      const date = new Date(now.getFullYear(), now.getMonth() - 11 + offset, 1);
-      const monthProjects = projects.filter((project) => {
-        const created = new Date(project.createdAt);
-        return (
-          created.getFullYear() === date.getFullYear() &&
-          created.getMonth() === date.getMonth()
-        );
-      });
+
+    // Window starts at the first month that actually has a project, not
+    // a flat 12 months back: a young account was rendering eleven empty
+    // months to show one bar. Capped at 12 so an old account still gets
+    // a readable axis, and never shorter than 3 so a brand-new account
+    // still reads as a trend rather than a single floating column.
+    // Empty months *inside* the window are kept — a gap in activity is
+    // information, and trimming them would distort the time axis.
+    const monthIndex = (d: Date) => d.getFullYear() * 12 + d.getMonth();
+    const currentIndex = monthIndex(now);
+    const firstProjectIndex = projects.reduce((earliest, project) => {
+      const created = new Date(project.createdAt);
+      if (!Number.isFinite(created.getTime())) return earliest;
+      return Math.min(earliest, monthIndex(created));
+    }, currentIndex);
+
+    const span = Math.min(12, Math.max(3, currentIndex - firstProjectIndex + 1));
+
+    dateBuckets = Array.from({ length: span }, (_, offset) => {
+      const date = new Date(
+        now.getFullYear(),
+        now.getMonth() - (span - 1) + offset,
+        1,
+      );
       return {
         label: `${MONTH_LABELS[date.getMonth()]} ${String(date.getFullYear()).slice(2)}`,
-        proyectos: monthProjects.length,
-        valor: monthProjects.reduce(
-          (sum, project) => sum + projectNetValue(project),
-          0,
-        ),
+        projects: scopedProjects.filter((project) => {
+          const created = new Date(project.createdAt);
+          return (
+            created.getFullYear() === date.getFullYear() &&
+            created.getMonth() === date.getMonth()
+          );
+        }),
       };
     });
   }
 
-  const availableYears = Array.from(
-    new Set(
-      [
-        ...projects.map((project) => new Date(project.createdAt).getFullYear()),
-        ...proposals.map((proposal) =>
-          new Date(proposal.createdAt).getFullYear(),
-        ),
-        ...spends.map((spend) => new Date(spend.spentAt).getFullYear()),
-      ].filter((year) => Number.isFinite(year)),
+  const volumeSeries = dateBuckets.map((bucket) => ({
+    label: bucket.label,
+    proyectos: bucket.projects.length,
+    valor: bucket.projects.reduce(
+      (sum, project) => sum + projectNetValue(project),
+      0,
     ),
-  ).sort((a, b) => b - a);
+  }));
 
-  if (!availableYears.length) {
-    availableYears.push(new Date().getFullYear());
-  }
+  const hoursSeries = dateBuckets.map((bucket) => ({
+    label: bucket.label,
+    estimadas: bucket.projects.reduce(
+      (sum, project) => sum + (project.hoursEstimated || 0),
+      0,
+    ),
+    invertidas: bucket.projects.reduce(
+      (sum, project) => sum + (project.hoursInvested || 0),
+      0,
+    ),
+  }));
+
+  const availableYears = (() => {
+    const platformStartYear = 2026;
+    const currentYear = new Date().getFullYear();
+    const yearsFromData = [
+      ...projects.map((project) => new Date(project.createdAt).getFullYear()),
+    ].filter((year) => Number.isFinite(year));
+
+    const startYear = yearsFromData.length
+      ? Math.min(platformStartYear, ...yearsFromData)
+      : platformStartYear;
+    const endYear = Math.max(
+      currentYear,
+      yearsFromData.length ? Math.max(...yearsFromData) : platformStartYear,
+    );
+
+    const years: number[] = [];
+    for (let year = endYear; year >= startYear; year -= 1) {
+      years.push(year);
+    }
+    return years;
+  })();
 
   return {
     cards: {
@@ -342,15 +315,7 @@ export function buildAnalytics(
       fixedOverBudget: fixedOverBudget.length,
       marginAtRiskUsd,
       marginAtRiskArs,
-      proposalsSent,
-      proposalsApproved,
-      proposalConversion,
       leadConversion,
-      activeTickets,
-      spendUsd,
-      spendArs,
-      cacUsd,
-      cacArs,
     },
     statusSeries,
     statusTotal,

@@ -17,9 +17,6 @@ export default async function PlatformHomePage() {
     leads,
     messages,
     clients,
-    proposals,
-    supportTickets,
-    acquisitionSpends,
     liveChats,
     quotes,
   } = data;
@@ -35,9 +32,6 @@ export default async function PlatformHomePage() {
           leads={leads}
           messages={messages}
           liveChats={liveChats}
-          proposals={proposals}
-          tickets={supportTickets}
-          spends={acquisitionSpends}
         />
       ) : (
         <>

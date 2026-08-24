@@ -288,7 +288,6 @@ export default function ClientsTable({
       right: Math.max(8, window.innerWidth - rect.right),
     });
     setOpenActionsId(rowKey);
-    setOpenMenu(null);
   }
 
   function startEditing(row: ClientRow) {
@@ -592,7 +591,7 @@ export default function ClientsTable({
                               placeholder={
                                 row.clientId
                                   ? "Empresa"
-                                  : "Disponible al registrarse"
+                                  : "Empresa · al registrarse"
                               }
                             />
                           </div>
@@ -607,20 +606,27 @@ export default function ClientsTable({
                               {row.company}
                             </div>
                           ) : null}
-                          {row.projectCount > 0 ? (
-                            <div className="plat-client-company">
-                              <Link
-                                className="plat-contact-link"
-                                href={`/plataforma/proyectos?codigo=${encodeURIComponent(row.email)}`}
-                                title="Ver proyectos"
-                              >
-                                {row.projectCount} proyecto
-                                {row.projectCount === 1 ? "" : "s"}
-                              </Link>
-                            </div>
-                          ) : null}
                         </div>
                       )}
+                      {/* Sibling of .plat-client-block rather than a child:
+                          renders identically here (both are stacked block
+                          divs), but on mobile the card lays this cell out
+                          with `display: contents`, and being a sibling lets
+                          the project count sit on its own grid row beside
+                          the actions menu instead of being trapped under
+                          the name. */}
+                      {!isEditing && row.projectCount > 0 ? (
+                        <div className="plat-client-company plat-client-projects">
+                          <Link
+                            className="plat-contact-link"
+                            href={`/plataforma/proyectos?codigo=${encodeURIComponent(row.email)}`}
+                            title="Ver proyectos"
+                          >
+                            {row.projectCount} proyecto
+                            {row.projectCount === 1 ? "" : "s"}
+                          </Link>
+                        </div>
+                      ) : null}
                     </td>
                   ) : null}
                   {visible.email ? (
@@ -688,8 +694,13 @@ export default function ClientsTable({
                           }
                           disabled={!row.clientId}
                           aria-label="Teléfono"
+                          /* Names the field first, then explains why it's
+                             disabled. The bare "Disponible al registrarse"
+                             was identical to the Empresa placeholder, so
+                             two adjacent fields read the same and neither
+                             said which was which. */
                           placeholder={
-                            row.clientId ? "" : "Disponible al registrarse"
+                            row.clientId ? "" : "Teléfono · al registrarse"
                           }
                         />
                       ) : whatsappUrl ? (
@@ -703,7 +714,7 @@ export default function ClientsTable({
                           {row.phone}
                         </a>
                       ) : (
-                        "—"
+                        <span className="plat-cell-empty">—</span>
                       )}
                     </td>
                   ) : null}

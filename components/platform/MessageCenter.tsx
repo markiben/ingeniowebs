@@ -4,6 +4,8 @@ import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CalendarDays, CheckCheck, ChevronDown, Mail, Trash2 } from "lucide-react";
 import PlatformConfirmDialog from "@/components/platform/PlatformConfirmDialog";
+import InboxMobileBack from "@/components/platform/InboxMobileBack";
+import useIsMobile from "@/components/platform/useIsMobile";
 import {
   deleteMessageAction,
   markMessageReadAction,
@@ -85,6 +87,7 @@ export default function MessageCenter({
 }) {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const isMobile = useIsMobile();
   const [filter, setFilter] = useState<MessageFilter>("unread");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<{
@@ -139,13 +142,21 @@ export default function MessageCenter({
       setSelectedId(fromQuery);
       return;
     }
+    // See LiveChatCenter: this has to win over "keep the current selection"
+    // — isMobile starts false until the media-query effect resolves, so an
+    // earlier run of this same effect may have already auto-picked one
+    // before we knew we were on mobile.
+    if (isMobile) {
+      setSelectedId(null);
+      return;
+    }
     setSelectedId((current) => {
       if (current && filtered.some((message) => message.id === current)) {
         return current;
       }
       return filtered[0]?.id ?? null;
     });
-  }, [searchParams, messages, filtered]);
+  }, [searchParams, messages, filtered, isMobile]);
 
   const selected =
     filtered.find((message) => message.id === selectedId) ??
@@ -164,7 +175,7 @@ export default function MessageCenter({
   }
 
   return (
-    <div className="plat-inbox">
+    <div className={`plat-inbox${selected ? " has-mobile-selection" : ""}`}>
       <aside className="plat-inbox-list">
         <div className="plat-inbox-filters">
           <button
@@ -314,6 +325,12 @@ export default function MessageCenter({
         {selected ? (
           <>
             <header className="plat-inbox-detail-head">
+              <InboxMobileBack
+                onClick={() => {
+                  setSelectedId(null);
+                  router.replace(inboxPath("mensajes"), { scroll: false });
+                }}
+              />
               <div className="plat-inbox-detail-main">
                 <div className="plat-inbox-detail-title">
                   <h2>{selected.name}</h2>

@@ -61,9 +61,6 @@ import type {
   ClientProjectUpdate,
   PricingType,
   ProjectStatus,
-  ProposalStatus,
-  SupportTicketPriority,
-  SupportTicketStatus,
 } from "./types";
 
 type ActionFail = { ok: false; error: string };
@@ -731,168 +728,6 @@ export async function updateProjectHoursAction(formData: FormData) {
 
   revalidatePath("/plataforma");
   revalidatePath("/plataforma/proyectos");
-  return ok();
-}
-
-export async function createProposalAction(formData: FormData) {
-  const session = await requireSession("admin");
-  if (!session) return fail("No autorizado.");
-
-  const title = String(formData.get("title") ?? "").trim();
-  const clientName = String(formData.get("clientName") ?? "").trim();
-  const clientEmail = String(formData.get("clientEmail") ?? "")
-    .trim()
-    .toLowerCase();
-  const value = Number(formData.get("value") ?? 0);
-  const currency = String(formData.get("currency") ?? "USD") as "ARS" | "USD";
-  const status = String(formData.get("status") ?? "sent") as ProposalStatus;
-  const notes = String(formData.get("notes") ?? "").trim();
-
-  if (!title || !clientName || !clientEmail) {
-    return fail("Título y datos del cliente son obligatorios.");
-  }
-
-  const now = new Date().toISOString();
-  updateDb((db) => {
-    db.proposals.unshift({
-      id: createId("prop"),
-      title,
-      clientName,
-      clientEmail,
-      value,
-      currency,
-      status,
-      notes: notes || undefined,
-      createdAt: now,
-      updatedAt: now,
-      sentAt: status === "draft" ? null : now,
-      decidedAt:
-        status === "approved" || status === "rejected" ? now : null,
-    });
-  });
-
-  revalidatePath("/plataforma");
-  revalidatePath("/plataforma/propuestas");
-  return ok();
-}
-
-export async function updateProposalStatusAction(
-  proposalId: string,
-  status: ProposalStatus,
-) {
-  const session = await requireSession("admin");
-  if (!session) return fail("No autorizado.");
-
-  const now = new Date().toISOString();
-  updateDb((db) => {
-    const proposal = db.proposals.find((entry) => entry.id === proposalId);
-    if (!proposal) return;
-    proposal.status = status;
-    proposal.updatedAt = now;
-    if (status !== "draft" && !proposal.sentAt) proposal.sentAt = now;
-    if (status === "approved" || status === "rejected" || status === "expired") {
-      proposal.decidedAt = now;
-    }
-  });
-
-  revalidatePath("/plataforma");
-  revalidatePath("/plataforma/propuestas");
-  return ok();
-}
-
-export async function createSupportTicketAction(formData: FormData) {
-  const session = await requireSession("admin");
-  if (!session) return fail("No autorizado.");
-
-  const title = String(formData.get("title") ?? "").trim();
-  const clientName = String(formData.get("clientName") ?? "").trim();
-  const clientEmail = String(formData.get("clientEmail") ?? "")
-    .trim()
-    .toLowerCase();
-  const projectId = String(formData.get("projectId") ?? "").trim() || null;
-  const category = String(formData.get("category") ?? "mantenimiento").trim();
-  const priority = String(
-    formData.get("priority") ?? "medium",
-  ) as SupportTicketPriority;
-  const description = String(formData.get("description") ?? "").trim();
-
-  if (!title || !clientName) {
-    return fail("Título y cliente son obligatorios.");
-  }
-
-  const now = new Date().toISOString();
-  updateDb((db) => {
-    db.supportTickets.unshift({
-      id: createId("tkt"),
-      title,
-      clientName,
-      clientEmail,
-      projectId,
-      category,
-      priority:
-        priority === "high" || priority === "low" ? priority : "medium",
-      status: "open",
-      description,
-      createdAt: now,
-      updatedAt: now,
-      resolvedAt: null,
-    });
-  });
-
-  revalidatePath("/plataforma");
-  revalidatePath("/plataforma/soporte");
-  return ok();
-}
-
-export async function updateSupportTicketStatusAction(
-  ticketId: string,
-  status: SupportTicketStatus,
-) {
-  const session = await requireSession("admin");
-  if (!session) return fail("No autorizado.");
-
-  const now = new Date().toISOString();
-  updateDb((db) => {
-    const ticket = db.supportTickets.find((entry) => entry.id === ticketId);
-    if (!ticket) return;
-    ticket.status = status;
-    ticket.updatedAt = now;
-    ticket.resolvedAt =
-      status === "resolved" || status === "closed" ? now : null;
-  });
-
-  revalidatePath("/plataforma");
-  revalidatePath("/plataforma/soporte");
-  return ok();
-}
-
-export async function createAcquisitionSpendAction(formData: FormData) {
-  const session = await requireSession("admin");
-  if (!session) return fail("No autorizado.");
-
-  const label = String(formData.get("label") ?? "").trim();
-  const amount = Number(formData.get("amount") ?? 0);
-  const currency = String(formData.get("currency") ?? "USD") as "ARS" | "USD";
-  const spentAt = String(formData.get("spentAt") ?? "").trim() || new Date().toISOString();
-
-  if (!label || !(amount > 0)) {
-    return fail("Indicá concepto e importe del gasto.");
-  }
-
-  const now = new Date().toISOString();
-  updateDb((db) => {
-    db.acquisitionSpends.unshift({
-      id: createId("spend"),
-      label,
-      amount,
-      currency,
-      spentAt: new Date(spentAt).toISOString(),
-      createdAt: now,
-    });
-  });
-
-  revalidatePath("/plataforma");
-  revalidatePath("/plataforma/ventas");
   return ok();
 }
 
@@ -1900,9 +1735,6 @@ export async function getDashboardData() {
     leads: session.role === "admin" ? db.leads : [],
     messages: session.role === "admin" ? db.messages : [],
     blogDrafts: session.role === "admin" ? db.blogDrafts : [],
-    proposals: session.role === "admin" ? db.proposals : [],
-    supportTickets: session.role === "admin" ? db.supportTickets : [],
-    acquisitionSpends: session.role === "admin" ? db.acquisitionSpends : [],
     liveChats:
       session.role === "admin"
         ? readDb().liveChats.map((chat) => ({ ...chat, visitorToken: "" }))

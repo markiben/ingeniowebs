@@ -16,6 +16,8 @@ import {
 import ChatComposer from "@/components/chat/ChatComposer";
 import ChatMessageBody from "@/components/chat/ChatMessageBody";
 import PlatformConfirmDialog from "@/components/platform/PlatformConfirmDialog";
+import InboxMobileBack from "@/components/platform/InboxMobileBack";
+import useIsMobile from "@/components/platform/useIsMobile";
 import {
   closeLiveChatAction,
   deleteLiveChatAction,
@@ -156,6 +158,7 @@ export default function LiveChatCenter({
 }) {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const isMobile = useIsMobile();
   const [filter, setFilter] = useState<ChatFilter>("open");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [draft, setDraft] = useState("");
@@ -170,9 +173,14 @@ export default function LiveChatCenter({
   const [pending, startTransition] = useTransition();
   const [threadEl, setThreadEl] = useState<HTMLDivElement | null>(null);
   const [nowTick, setNowTick] = useState(() => Date.now());
+  const [showJumpToLatest, setShowJumpToLatest] = useState(false);
   const typingTimerRef = useRef<number | null>(null);
   const lastTypingSentRef = useRef(0);
   const listRef = useRef<HTMLUListElement>(null);
+  const nearBottomRef = useRef(true);
+  const lastSelectedIdRef = useRef<string | null>(null);
+  const lastMessageCountRef = useRef(0);
+  const lastThreadElRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setBotEnabled(botMode);
@@ -219,28 +227,78 @@ export default function LiveChatCenter({
       setSelectedId(fromQuery);
       return;
     }
+    // Mobile is a list/detail view: no selection means "show the list", so
+    // auto-picking a chat here would undo the back button (and skip the
+    // list on first load). This has to win over "keep the current
+    // selection" too — `isMobile` starts false until the media-query
+    // effect resolves, so an earlier run of this same effect may have
+    // already auto-picked one before we knew we were on mobile. Desktop
+    // shows both panes at once, so it still auto-picks one for the detail
+    // pane and is allowed to keep the current selection across refreshes.
+    if (isMobile) {
+      setSelectedId(null);
+      return;
+    }
     setSelectedId((current) => {
       if (current && filtered.some((chat) => chat.id === current)) {
         return current;
       }
       return filtered[0]?.id ?? null;
     });
-  }, [searchParams, chats, filtered]);
+  }, [searchParams, chats, filtered, isMobile]);
 
   const selected =
     filtered.find((chat) => chat.id === selectedId) ??
     sorted.find((chat) => chat.id === selectedId) ??
     null;
 
+  // Track how close to the bottom the reader is, so a poll refresh (chats
+  // resync every few seconds) doesn't yank them back to "now" while they're
+  // scrolled up reading older messages.
   useEffect(() => {
     if (!threadEl) return;
-    threadEl.scrollTop = threadEl.scrollHeight;
-  }, [
-    selected?.messages,
-    threadEl,
-    selected?.id,
-    selected?.visitorTypingAt,
-  ]);
+    function syncNearBottom() {
+      if (!threadEl) return;
+      const distance =
+        threadEl.scrollHeight - threadEl.scrollTop - threadEl.clientHeight;
+      const nearBottom = distance < 120;
+      nearBottomRef.current = nearBottom;
+      setShowJumpToLatest(!nearBottom);
+    }
+    syncNearBottom();
+    threadEl.addEventListener("scroll", syncNearBottom, { passive: true });
+    return () => threadEl.removeEventListener("scroll", syncNearBottom);
+  }, [threadEl, selected?.id]);
+
+  useEffect(() => {
+    if (!threadEl || !selected) return;
+    // A fresh DOM node (re-opening the pane on mobile unmounts/remounts it)
+    // always starts scrolled to the top, regardless of whether it's
+    // logically "the same chat" as last time — treat that as a change too.
+    const chatChanged =
+      lastSelectedIdRef.current !== selected.id ||
+      lastThreadElRef.current !== threadEl;
+    const messageCount = selected.messages.length;
+    const hasNewMessage = !chatChanged && messageCount > lastMessageCountRef.current;
+    lastSelectedIdRef.current = selected.id;
+    lastMessageCountRef.current = messageCount;
+    lastThreadElRef.current = threadEl;
+
+    // Opening a chat always jumps to its latest message. Once open, only
+    // auto-follow new messages if the reader was already at the bottom —
+    // otherwise leave their scroll position alone (see effect above) and
+    // let the "jump to latest" button handle it.
+    if (chatChanged || (hasNewMessage && nearBottomRef.current)) {
+      threadEl.scrollTop = threadEl.scrollHeight;
+      nearBottomRef.current = true;
+      setShowJumpToLatest(false);
+    }
+  }, [selected?.messages, threadEl, selected?.id, selected?.visitorTypingAt]);
+
+  const scrollToLatest = () => {
+    if (!threadEl) return;
+    threadEl.scrollTo({ top: threadEl.scrollHeight, behavior: "smooth" });
+  };
 
   const selectedUnread = selected
     ? isLiveChatUnreadForAdmin(selected)
@@ -285,9 +343,6 @@ export default function LiveChatCenter({
       selected.status === "open" &&
       isLiveChatOnline(selected.visitorLastSeenAt, nowTick),
   );
-  const agentName = botEnabled
-    ? LIVE_CHAT_AGENT_NAME
-    : operator.name || selected?.adminDisplayName || LIVE_CHAT_AGENT_NAME;
   const selectedQuoteSummary = selected
     ? quoteSummaryForSession(selected)
     : null;
@@ -339,7 +394,7 @@ export default function LiveChatCenter({
   }
 
   return (
-    <div className="plat-inbox plat-live-chat">
+    <div className={`plat-inbox plat-live-chat${selected ? " has-mobile-selection" : ""}`}>
       <aside className="plat-inbox-list">
         <div className="plat-inbox-filters">
           <button
@@ -538,6 +593,12 @@ export default function LiveChatCenter({
         {selected ? (
           <>
             <header className="plat-inbox-detail-head">
+              <InboxMobileBack
+                onClick={() => {
+                  setSelectedId(null);
+                  router.replace(inboxPath("chat"), { scroll: false });
+                }}
+              />
               <div className="plat-inbox-detail-main">
                 <div className="plat-inbox-detail-title">
                   <h2>
@@ -579,7 +640,12 @@ export default function LiveChatCenter({
                       title="Ver resumen para cotizador"
                     >
                       <ClipboardList size={14} strokeWidth={2} />
-                      Resumen cotizador
+                      <span className="plat-quote-summary-chip-full">
+                        Resumen cotizador
+                      </span>
+                      <span className="plat-quote-summary-chip-short">
+                        Resumen
+                      </span>
                     </button>
                   ) : null}
                 </div>
@@ -662,6 +728,7 @@ export default function LiveChatCenter({
               ) : null}
             </header>
 
+            <div className="plat-live-thread-wrap">
             <div className="plat-live-thread" ref={setThreadEl}>
               {selected.messages.map((message) => {
                 if (isQuoteSystemMessage(message)) return null;
@@ -751,13 +818,24 @@ export default function LiveChatCenter({
                 </div>
               ) : null}
             </div>
+            {showJumpToLatest ? (
+              <button
+                type="button"
+                className="plat-live-jump-latest"
+                onClick={scrollToLatest}
+                aria-label="Ir al último mensaje"
+              >
+                <ChevronDown size={16} strokeWidth={2.5} />
+              </button>
+            ) : null}
+            </div>
 
             {selected.status === "open" ? (
               <ChatComposer
                 variant="platform"
                 value={draft}
                 onChange={onAdminDraftChange}
-                placeholder={`Responder como ${agentName}...`}
+                placeholder="Escribe un mensaje..."
                 disabled={pending}
                 sendLabel="Enviar"
                 emojiTitle="Emojis"

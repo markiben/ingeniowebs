@@ -272,6 +272,10 @@
     .plat-dashboard-attention,
     .plat-dashboard-recent,
     .plat-dashboard-hero,
+    .plat-ops-status,
+    .plat-ops-inbox,
+    .plat-ops-feed-panel,
+    .plat-ops-panel,
     .plat-chart-card,
     .plat-dash-metric,
     .plat-news-kpi,
@@ -334,6 +338,103 @@
   background: rgba(8, 14, 22, 0.72) !important;
   border-top: 1px solid var(--plat-d-border) !important;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-metrics-tabs.plat-tabs {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-metrics-filters.plat-section-hero-tabs {
+  border-top: 0 !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-date-nav-label {
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-date-weekday {
+  color: var(--plat-d-secondary) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-date-nav-btn {
+  background: var(--plat-d-elevated) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-date-nav-btn:hover {
+  border-color: rgba(125, 211, 252, 0.35) !important;
+  color: var(--plat-d-accent) !important;
+  background: rgba(125, 211, 252, 0.1) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-date-day {
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-date-day:hover {
+  background: rgba(125, 211, 252, 0.12) !important;
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-date-day.is-today:not(.is-selected) {
+  box-shadow: inset 0 0 0 1px rgba(125, 211, 252, 0.45) !important;
+  color: var(--plat-d-accent) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-date-day.is-selected {
+  background: #1b75bb !important;
+  color: #fff !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-date-today {
+  border-color: rgba(125, 211, 252, 0.28) !important;
+  background: rgba(125, 211, 252, 0.08) !important;
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-date-today:hover {
+  background: rgba(125, 211, 252, 0.14) !important;
 }
 
 :is(
@@ -1092,6 +1193,116 @@
   color: var(--plat-d-heading) !important;
 }
 
+/* Operación — dark (misma familia que dashboard) */
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-status-compact strong,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-inbox-head h3,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-inbox-row-value,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-feed-main strong,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-panel-head h3 {
+  color: var(--plat-d-heading) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-status-compact span:last-child,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-inbox-row-label,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-empty,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-panel-head p,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-feed-tab {
+  color: var(--plat-d-secondary) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-feed-main span,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-feed-when {
+  color: var(--plat-d-muted-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-inbox-row,
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-feed-item {
+  background: var(--plat-d-elevated) !important;
+  border-color: var(--plat-d-border) !important;
+  color: var(--plat-d-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-feed-item.is-urgent {
+  border-color: rgba(251, 113, 133, 0.35) !important;
+  background: rgba(251, 113, 133, 0.1) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-feed-item.is-warn {
+  border-color: rgba(251, 191, 36, 0.32) !important;
+  background: rgba(251, 191, 36, 0.08) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-inbox-link {
+  color: var(--plat-d-accent) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-inbox-row-icon {
+  background: rgba(56, 189, 248, 0.12) !important;
+  color: var(--plat-d-accent) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-ops-feed-tab.is-active {
+  color: var(--plat-d-heading) !important;
+  border-bottom-color: var(--plat-d-accent) !important;
+}
+
 :is(
   html.plat-dark-boot .plat-body.is-app,
   .plat-body.is-app[data-plat-theme="dark"]
@@ -1165,7 +1376,7 @@
 ) .plat-inbox .plat-chat-row {
   background: var(--plat-d-elevated) !important;
   border: 1px solid var(--plat-d-border) !important;
-  border-radius: 0.85rem !important;
+  border-radius: var(--pr-md) !important;
 }
 
 :is(
@@ -1685,7 +1896,7 @@
 ) .plat-quote-select-panel {
   background: var(--plat-d-surface) !important;
   border: 1px solid var(--plat-d-border-strong) !important;
-  border-radius: 0.85rem !important;
+  border-radius: var(--pr-md) !important;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
   overflow: hidden;
 }
@@ -1716,7 +1927,7 @@
   background-size: 0.75rem !important;
   border-color: var(--plat-d-border) !important;
   color: var(--plat-d-text) !important;
-  border-radius: 0.5rem !important;
+  border-radius: var(--pr-sm) !important;
 }
 
 /* Inbox chat menus + bubble meta (was near-invisible navy on dark) */
@@ -1726,7 +1937,7 @@
 ) .plat-chat-menu {
   background: var(--plat-d-surface) !important;
   border: 1px solid var(--plat-d-border-strong) !important;
-  border-radius: 0.85rem !important;
+  border-radius: var(--pr-md) !important;
   box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5) !important;
 }
 
@@ -1833,6 +2044,13 @@
   .plat-body.is-app[data-plat-theme="dark"]
 ) .plat-news-clicks-links li {
   color: var(--plat-d-muted-text) !important;
+}
+
+:is(
+  html.plat-dark-boot .plat-body.is-app,
+  .plat-body.is-app[data-plat-theme="dark"]
+) .plat-dashboard-metrics-grid .plat-news-kpi .plat-metric {
+  color: var(--plat-d-heading) !important;
 }
 
 :is(

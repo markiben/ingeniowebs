@@ -22,9 +22,6 @@ const emptyDb = (): PlatformDatabase => ({
   leads: [],
   messages: [],
   blogDrafts: [],
-  proposals: [],
-  supportTickets: [],
-  acquisitionSpends: [],
   liveChats: [],
   newsletterSubscribers: [],
   newsletterClicks: [],
@@ -142,9 +139,6 @@ export function readDb(): PlatformDatabase {
       leads: parsed.leads ?? [],
       messages: parsed.messages ?? [],
       blogDrafts: parsed.blogDrafts ?? [],
-      proposals: parsed.proposals ?? [],
-      supportTickets: parsed.supportTickets ?? [],
-      acquisitionSpends: parsed.acquisitionSpends ?? [],
       liveChats: parsed.liveChats ?? [],
       newsletterSubscribers: (parsed.newsletterSubscribers ?? []).map((entry) => {
         const item = entry as NewsletterSubscriber;

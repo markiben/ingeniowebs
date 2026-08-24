@@ -5,8 +5,6 @@ import type {
   PlatformLead,
   PlatformMessage,
   PlatformNotificationState,
-  PlatformProposal,
-  PlatformSupportTicket,
   PlatformUser,
 } from "./types";
 
@@ -14,9 +12,7 @@ export type PlatformNotificationKind =
   | "form"
   | "message"
   | "livechat"
-  | "client"
-  | "proposal"
-  | "ticket";
+  | "client";
 
 export type PlatformNotificationBucket = "new" | "read" | "archived";
 
@@ -38,8 +34,6 @@ const KIND_LABEL: Record<PlatformNotificationKind, string> = {
   message: "Mensaje",
   livechat: "Webchat",
   client: "Cliente",
-  proposal: "Propuesta",
-  ticket: "Soporte",
 };
 
 function daysAgo(days: number) {
@@ -67,15 +61,12 @@ export function buildPlatformNotifications(input: {
   messages: PlatformMessage[];
   liveChats?: LiveChatSession[];
   clients: PlatformUser[];
-  proposals: PlatformProposal[];
-  tickets: PlatformSupportTicket[];
   notificationStates?: PlatformNotificationState[];
 }): PlatformNotification[] {
   const items: PlatformNotification[] = [];
   const states = input.notificationStates ?? [];
   const recentFrom = daysAgo(30);
   const recentClientFrom = daysAgo(7);
-  const recentProposalFrom = daysAgo(14);
 
   const push = (
     item: Omit<PlatformNotification, "status"> & {
@@ -167,45 +158,6 @@ export function buildPlatformNotifications(input: {
       href: "/plataforma/clientes",
       createdAt: client.createdAt,
       meta: KIND_LABEL.client,
-      sourceUnread: !states.some((entry) => entry.id === id),
-    });
-  }
-
-  for (const proposal of input.proposals) {
-    if (proposal.status !== "approved") continue;
-    const id = `proposal_${proposal.id}`;
-    const when = proposal.decidedAt || proposal.updatedAt || proposal.createdAt;
-    const kept = states.some(
-      (entry) => entry.id === id && entry.status === "archived",
-    );
-    if (new Date(when).getTime() < recentProposalFrom && !kept) continue;
-    push({
-      id,
-      kind: "proposal",
-      title: proposal.title,
-      preview: `Aceptada por ${proposal.clientName}`,
-      href: "/plataforma/propuestas",
-      createdAt: when,
-      meta: KIND_LABEL.proposal,
-      sourceUnread: !states.some((entry) => entry.id === id),
-    });
-  }
-
-  for (const ticket of input.tickets) {
-    if (ticket.status !== "open" && ticket.status !== "in_progress") continue;
-    const id = `ticket_${ticket.id}`;
-    const statusLabel =
-      ticket.status === "open" ? "abierto" : "en progreso";
-    push({
-      id,
-      kind: "ticket",
-      title: ticket.title,
-      preview: preview(
-        `${ticket.clientName} · ${ticket.description || ticket.category}`,
-      ),
-      href: "/plataforma/soporte",
-      createdAt: ticket.createdAt,
-      meta: `${KIND_LABEL.ticket} · ${statusLabel}`,
       sourceUnread: !states.some((entry) => entry.id === id),
     });
   }

@@ -21,8 +21,6 @@ export default async function PlatformAppShell({
           messages: data.messages,
           liveChats: data.liveChats,
           clients: data.clients,
-          proposals: data.proposals,
-          tickets: data.supportTickets,
           notificationStates: data.notificationStates,
         })
       : [];

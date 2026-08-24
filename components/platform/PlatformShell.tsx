@@ -13,8 +13,10 @@ import {
   LayoutDashboard,
   LogOut,
   Mail,
+  Menu,
   Newspaper,
   Users,
+  X,
 } from "lucide-react";
 import Logo from "@/components/Logo";
 import NotificationsPanel from "@/components/platform/NotificationsPanel";
@@ -81,6 +83,7 @@ export default function PlatformShell({
   const [expanded, setExpanded] = useState(readSidebarExpanded);
   const [isMobile, setIsMobile] = useState(false);
   const [animateSidebar, setAnimateSidebar] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const railMode = !expanded && !isMobile;
 
@@ -108,6 +111,19 @@ export default function PlatformShell({
     }
   }, []);
 
+  useEffect(() => {
+    setMobileNavOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!isMobile || !mobileNavOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [isMobile, mobileNavOpen]);
+
   function toggleSidebar() {
     setAnimateSidebar(true);
     setExpanded((value) => {
@@ -129,6 +145,17 @@ export default function PlatformShell({
         <header className="plat-site-header">
           <div className="nav-bar">
             <div className="plat-top-nav-inner">
+              {isMobile ? (
+                <button
+                  type="button"
+                  className="plat-mobile-menu-btn"
+                  onClick={() => setMobileNavOpen((open) => !open)}
+                  aria-label={mobileNavOpen ? "Cerrar menú" : "Abrir menú"}
+                  aria-expanded={mobileNavOpen}
+                >
+                  <Menu size={20} strokeWidth={2.25} />
+                </button>
+              ) : null}
               <Link href="/plataforma" className="plat-top-nav-brand">
                 <Logo variant="navbar" height={34} />
               </Link>
@@ -142,16 +169,35 @@ export default function PlatformShell({
           </div>
         </header>
 
+        {isMobile && mobileNavOpen ? (
+          <button
+            type="button"
+            className="plat-mobile-nav-backdrop"
+            aria-label="Cerrar menú"
+            onClick={() => setMobileNavOpen(false)}
+          />
+        ) : null}
+
         <div
           className={`plat-shell${railMode ? " is-collapsed" : ""}${
             animateSidebar ? " is-animating" : ""
-          }`}
+          }${isMobile && mobileNavOpen ? " is-mobile-nav-open" : ""}`}
           suppressHydrationWarning
         >
-          <aside className="plat-sidebar">
+          <aside className="plat-sidebar" aria-hidden={isMobile && !mobileNavOpen}>
             <div className="plat-menubar">
               <span className="plat-menubar-icon-slot" aria-hidden="true" />
-              <span className="plat-menubar-label">Menubar</span>
+              <span className="plat-menubar-label">Menú</span>
+              {isMobile ? (
+                <button
+                  type="button"
+                  className="plat-mobile-nav-close"
+                  onClick={() => setMobileNavOpen(false)}
+                  aria-label="Cerrar menú"
+                >
+                  <X size={18} strokeWidth={2.25} />
+                </button>
+              ) : null}
               <button
                 type="button"
                 className="plat-menubar-toggle"
@@ -180,6 +226,7 @@ export default function PlatformShell({
                     href={link.href}
                     className={active ? "is-active" : undefined}
                     title={link.label}
+                    onClick={() => setMobileNavOpen(false)}
                   >
                     <Icon size={16} strokeWidth={2} />
                     <span className="plat-nav-label">{link.label}</span>

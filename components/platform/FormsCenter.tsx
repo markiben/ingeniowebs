@@ -10,6 +10,8 @@ import {
   Trash2,
 } from "lucide-react";
 import PlatformConfirmDialog from "@/components/platform/PlatformConfirmDialog";
+import InboxMobileBack from "@/components/platform/InboxMobileBack";
+import useIsMobile from "@/components/platform/useIsMobile";
 import {
   deleteLeadAction,
   markLeadReadAction,
@@ -111,6 +113,7 @@ function leadPreview(lead: PlatformLead) {
 export default function FormsCenter({ leads }: { leads: PlatformLead[] }) {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const isMobile = useIsMobile();
   const [filter, setFilter] = useState<LeadFilter>("unread");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<{
@@ -165,13 +168,21 @@ export default function FormsCenter({ leads }: { leads: PlatformLead[] }) {
       setSelectedId(fromQuery);
       return;
     }
+    // See LiveChatCenter: this has to win over "keep the current selection"
+    // — isMobile starts false until the media-query effect resolves, so an
+    // earlier run of this same effect may have already auto-picked one
+    // before we knew we were on mobile.
+    if (isMobile) {
+      setSelectedId(null);
+      return;
+    }
     setSelectedId((current) => {
       if (current && filtered.some((lead) => lead.id === current)) {
         return current;
       }
       return filtered[0]?.id ?? null;
     });
-  }, [searchParams, leads, filtered]);
+  }, [searchParams, leads, filtered, isMobile]);
 
   const selected =
     filtered.find((lead) => lead.id === selectedId) ??
@@ -199,7 +210,7 @@ export default function FormsCenter({ leads }: { leads: PlatformLead[] }) {
   }
 
   return (
-    <div className="plat-inbox plat-forms">
+    <div className={`plat-inbox plat-forms${selected ? " has-mobile-selection" : ""}`}>
       <aside className="plat-inbox-list">
         <div className="plat-inbox-filters">
           <button
@@ -340,6 +351,12 @@ export default function FormsCenter({ leads }: { leads: PlatformLead[] }) {
         {selected && selectedParsed ? (
           <>
             <header className="plat-inbox-detail-head">
+              <InboxMobileBack
+                onClick={() => {
+                  setSelectedId(null);
+                  router.replace(inboxPath("formularios"), { scroll: false });
+                }}
+              />
               <div className="plat-inbox-detail-main">
                 <div className="plat-inbox-detail-title">
                   <h2>{selected.name}</h2>

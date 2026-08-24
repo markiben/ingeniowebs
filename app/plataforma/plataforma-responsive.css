@@ -1,0 +1,2792 @@
+/**
+ * Responsive overrides — tablets & mobile only.
+ * Desktop (min-width rules in plataforma.css) is intentionally untouched.
+ * Breakpoints: 1024px tablet · 900px mobile · 560px small phone
+ */
+
+/* ── Tablet (≤1024px) ───────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .plat-dashboard-metrics-charts {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: none;
+  }
+
+  .plat-dashboard-metrics-charts .plat-chart-card {
+    height: auto;
+    min-height: 16rem;
+    width: 100%;
+    max-width: none;
+    padding: 0.9rem 0.9rem 0.95rem !important;
+  }
+
+  .plat-dashboard-metrics-charts .plat-chart-wrap {
+    width: 100%;
+    min-width: 0;
+    min-height: 13rem;
+  }
+
+  .plat-dashboard-metrics-charts .plat-chart-wrap > .recharts-responsive-container {
+    min-height: 13rem !important;
+    height: 13rem !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+  }
+
+  .plat-news-metrics-charts {
+    grid-template-columns: 1fr;
+  }
+
+  .plat-charts {
+    grid-template-columns: 1fr;
+  }
+
+  .plat-ops-feed-panel.plat-quote-panel.plat-card {
+    padding: 0 !important;
+  }
+
+  .plat-ops-feed-scroll {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .plat-quote-layout {
+    gap: 0.85rem;
+  }
+
+  .plat-section-hero-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+/* ── Mobile (≤900px) ───────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  /* Chart card titles ("VOLUMEN Y NETO", "HORAS ESTIMADAS VS. INVERTIDAS")
+     are bold + uppercase, which reads oversized at the 0.95rem desktop
+     size inside a narrow mobile card. */
+  .plat-chart-card h3 {
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* Section banner filter tabs (Métricas/Operación, Activos/Archivados,
+     Todos/En curso/..., Webchat/Mensajes/Formularios, etc.) at every
+     section header — same 0.88rem desktop size reads too big/bulky on
+     a 375px banner. */
+  /* Specificity must beat `.plat-body.is-app .plat-tab` (3 classes) —
+     the same trap as the mobile-nav backdrop above. */
+  .plat-body.is-app .plat-section-hero-tabs .plat-tab {
+    padding: 0.6rem 0.55rem;
+    font-size: 0.7rem;
+  }
+
+  .plat-body.is-app .plat-section-hero-tabs .plat-tab .plat-tab-count,
+  .plat-body.is-app .plat-section-hero-tabs .plat-tab .plat-chip-count {
+    min-width: 1.05rem;
+    height: 1.05rem;
+    padding: 0 0.3rem;
+    font-size: 0.6rem;
+  }
+
+  /* Same status-filter pattern (Todos/Enviadas/Aprobadas...) as the
+     section-hero tabs above, but this one lives inside the card body
+     (e.g. Cotizaciones list), not the banner — same specificity trap. */
+  .plat-body.is-app .plat-quote-status-tabs .plat-tab {
+    padding: 0.6rem 0.55rem;
+    font-size: 0.7rem;
+  }
+
+  .plat-body.is-app .plat-quote-status-tabs .plat-tab .plat-tab-count {
+    min-width: 1.05rem;
+    height: 1.05rem;
+    padding: 0 0.3rem;
+    font-size: 0.6rem;
+  }
+
+  /* Hubs: avoid scroll trapping (match projects/inbox pattern) */
+  .plat-main:has(.plat-quote-hub),
+  .plat-main:has(.plat-newsletter-hub),
+  .plat-content:has(.plat-quote-hub),
+  .plat-content:has(.plat-newsletter-hub) {
+    overflow: visible;
+    min-height: auto;
+    height: auto;
+  }
+
+  .plat-quote-hub,
+  .plat-newsletter-hub {
+    min-height: 0;
+    height: auto;
+  }
+
+  .plat-newsletter-hub > .plat-card,
+  .plat-quote-hub > .plat-section-hero {
+    flex-shrink: 0;
+  }
+
+  .plat-newsletter-metrics {
+    overflow: visible;
+  }
+
+  /* Dashboard metrics: stack charts, relax desktop height fill */
+  .plat-dashboard-metrics-body {
+    overflow-y: auto;
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .plat-dashboard-metrics-body > .plat-dashboard-metrics-charts {
+    flex: 0 0 auto;
+    min-height: auto;
+  }
+
+  .plat-dashboard-metrics-grid.plat-news-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .plat-dashboard-metrics-grid .plat-news-kpi {
+    min-height: 4.75rem;
+    padding: 0.65rem 0.7rem;
+  }
+
+  .plat-dashboard-metrics-grid .plat-news-kpi .plat-metric {
+    font-size: 1.05rem;
+    line-height: 1.15;
+  }
+
+  .plat-dashboard-metrics-grid .plat-news-kpi .plat-metric-sub {
+    font-size: 0.7rem;
+    line-height: 1.25;
+  }
+
+  /* Period tabs row 1 · controls row 2 */
+  .plat-dashboard-metrics-filters-row {
+    flex-wrap: wrap;
+    align-items: center;
+    overflow: visible;
+    gap: 0.45rem 0.55rem;
+    padding-top: 0.15rem;
+    padding-bottom: 0.15rem;
+  }
+
+  /* 4 short labels (General/Por año/Por mes/Por fecha) at the desktop
+     font-size don't fit 375px and used to rely on horizontal scroll —
+     which read as the last label just getting cut off. Shrink them and
+     split the row evenly instead so all four stay fully visible. */
+  .plat-dashboard-metrics-tabs.plat-tabs {
+    flex: 1 1 auto;
+    width: 100% !important;
+    max-width: 100%;
+    overflow-x: visible;
+    flex-wrap: nowrap;
+  }
+
+  .plat-dashboard-metrics-tabs.plat-tabs .plat-tab {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0.55rem 0.3rem;
+    font-size: 0.74rem;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .plat-dashboard-metrics-controls {
+    flex: 1 1 100%;
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-left: 0;
+    padding-top: 0.35rem;
+    border-top: 1px solid rgba(125, 211, 252, 0.1);
+  }
+
+  .plat-dashboard-metrics-controls .plat-metrics-menu {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  .plat-dashboard-metrics-controls .plat-metrics-date.plat-date-picker {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .plat-dashboard-metrics-controls .plat-metrics-date .plat-date-trigger {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .plat-dashboard-metrics-filters:not(:has(.plat-dashboard-metrics-controls))
+    .plat-dashboard-metrics-filters-row {
+    gap: 0;
+  }
+
+  .plat-dashboard-metrics-filters:not(:has(.plat-dashboard-metrics-controls))
+    .plat-dashboard-metrics-controls {
+    display: none;
+  }
+
+  /* Inbox: master / detail (one pane at a time) */
+  .plat-inbox {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    height: auto;
+    max-height: none;
+  }
+
+  .plat-inbox-list,
+  .plat-inbox-detail {
+    min-height: 0;
+    max-height: none;
+    border: 0;
+  }
+
+  /* Webchat zeroes this padding and lets its header bar bleed edge to
+     edge (its own internal padding + bottom border). Mensajes/Formularios
+     use the same .plat-inbox-detail class but never got the same
+     treatment, so their header sat inset with dead space above and on
+     the sides instead of matching the Webchat look. */
+  .plat-inbox-detail {
+    padding: 0;
+  }
+
+  .plat-inbox-detail-head {
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(125, 211, 252, 0.14);
+  }
+
+  .plat-inbox-body {
+    margin: 0;
+    padding: 0.75rem 0.85rem;
+  }
+
+  .plat-inbox-list ul {
+    max-height: none !important;
+  }
+
+  .plat-inbox:not(.has-mobile-selection) .plat-inbox-detail {
+    display: none;
+  }
+
+  .plat-inbox.has-mobile-selection .plat-inbox-list {
+    display: none;
+  }
+
+  /* Bounded, like WhatsApp: header pinned, message thread scrolls inside
+     this box instead of the whole page growing to fit every message. */
+  .plat-inbox.has-mobile-selection .plat-inbox-detail {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    height: min(70svh, 38rem);
+    max-height: min(70svh, 38rem);
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .plat-inbox.has-mobile-selection .plat-live-thread {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+    overflow-y: auto;
+  }
+
+  .plat-inbox-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 1.7rem;
+    height: 1.7rem;
+    margin-right: 0.3rem;
+    padding: 0;
+    border: 1px solid rgba(125, 211, 252, 0.2);
+    border-radius: 0.5rem;
+    background: rgba(8, 20, 36, 0.55);
+    color: #7dd3fc;
+    cursor: pointer;
+  }
+
+  .plat-inbox-back svg {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+
+  .plat-inbox-back:hover {
+    background: rgba(27, 117, 187, 0.2);
+    color: #e0f2fe;
+  }
+
+  /* A legacy @media(max-width:720px) rule elsewhere sets this to
+     flex-direction: column (stacking the back arrow above the name)
+     — override it back to a row so the arrow sits beside the name
+     instead of wasting a whole line above it. */
+  .plat-inbox-detail-head {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0.35rem;
+    padding: 0.5rem 0.6rem !important;
+  }
+
+  .plat-inbox-back {
+    margin-top: 0.05rem;
+  }
+
+  .plat-inbox-detail-head .plat-inbox-detail-main {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .plat-inbox-detail-title {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0.3rem;
+    scrollbar-width: none;
+  }
+
+  .plat-inbox-detail-title::-webkit-scrollbar {
+    display: none;
+  }
+
+  .plat-inbox-detail h2 {
+    font-size: 0.92rem;
+    gap: 0.3rem;
+  }
+
+  .plat-inbox-detail-head .plat-badge {
+    min-width: 0;
+    padding: 0.15rem 0.45rem;
+    font-size: 0.6rem;
+  }
+
+  .plat-inbox-detail-head .plat-quote-summary-chip {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.6rem;
+  }
+
+  .plat-quote-summary-chip-full {
+    display: none;
+  }
+
+  .plat-quote-summary-chip-short {
+    display: inline;
+  }
+
+  .plat-inbox-contacts {
+    margin-top: 0.3rem;
+    font-size: 0.72rem;
+  }
+
+  .plat-inbox-meta {
+    margin-top: 0.25rem;
+    gap: 0.3rem;
+    font-size: 0.68rem;
+  }
+
+  .plat-inbox-meta svg {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  .plat-content:has(.plat-inbox) .plat-inbox {
+    flex: none;
+    min-height: 0;
+    height: auto;
+  }
+
+  /* Search boxes (Clientes, Proyectos, Cotizaciones, Newsletter, Blog):
+     no font-size was ever set, so it fell back to the browser's 16px
+     input default — noticeably bigger than the rest of the compacted
+     mobile type scale. Note: going below 16px makes iOS Safari zoom the
+     page in on focus; 14px is the accepted trade-off for consistency. */
+  .plat-quote-search input {
+    font-size: 0.875rem;
+  }
+
+  .plat-quote-search svg {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+
+  /* Filters & toolbars */
+  .plat-projects-filters,
+  .plat-table-filters,
+  .plat-news-metrics-toolbar,
+  .plat-newsletter-export {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  /* flex-basis (16rem) is set for the desktop row layout above; once the
+     container switches to flex-direction: column it's read as a HEIGHT
+     instead of a width, ballooning the search box into an empty block. */
+  .plat-projects-filters .plat-quote-list-filter,
+  .plat-table-filters .plat-quote-list-filter {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .plat-projects-filters .plat-filter-select,
+  .plat-table-filters .plat-filter-select,
+  .plat-news-metrics-toolbar .plat-filter-select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .plat-projects-filters .plat-filter-select select,
+  .plat-projects-filters .plat-menu-trigger,
+  .plat-table-filters .plat-filter-select select,
+  .plat-table-filters .plat-filter-select input,
+  .plat-news-metrics-toolbar .plat-menu-trigger {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .plat-inbox-filters {
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    padding: 0.6rem 0.7rem 0.45rem;
+  }
+
+  .plat-inbox-filters .plat-chip {
+    gap: 0.3rem;
+    padding: 0.28rem 0.55rem;
+    font-size: 0.7rem;
+  }
+
+  .plat-inbox-filters .plat-chip-count {
+    min-width: 0.95rem;
+    height: 0.95rem;
+    padding: 0 0.25rem;
+    font-size: 0.6rem;
+  }
+
+  .plat-inbox-filters .plat-bot-mode-chip svg {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
+  /* Tables: horizontal scroll with minimum readable width */
+  .plat-quote-list-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .plat-blog-list .plat-table {
+    min-width: 42rem;
+  }
+
+  /* Primary title/name column: with 4-6 narrow status/payment columns
+     competing for space, auto table-layout can squeeze it to ~140px,
+     wrapping a long project or article name into 6-7 short lines. Give
+     it a width floor and tighten its type so text reads as 2-3 lines. */
+  .plat-blog-list .plat-table td:first-child,
+  .plat-blog-list .plat-table th:first-child {
+    min-width: 11rem;
+  }
+
+  .plat-blog-list .plat-table td:first-child strong {
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
+
+  /* Cotizaciones: swap the desktop table for a stacked card per quote —
+     the standard mobile-list pattern (name/status up top, secondary
+     detail below, actions pinned to the bottom) instead of a table too
+     wide for the screen. Placement is by column index; the component's
+     column order (Código, Cliente, Total, Fecha, Estado, Proyecto, PDF,
+     Acciones) is fixed, so nth-of-type is reliable without touching
+     the markup. */
+  .plat-quote-hub .plat-quote-list .plat-table {
+    min-width: 0;
+    width: 100%;
+    border-spacing: 0;
+  }
+
+  .plat-quote-hub .plat-quote-list .plat-table thead {
+    display: none;
+  }
+
+  .plat-quote-hub .plat-quote-list .plat-table,
+  .plat-quote-hub .plat-quote-list .plat-table tbody,
+  .plat-quote-hub .plat-quote-list .plat-table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .plat-quote-hub .plat-quote-list .plat-table tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 0.3rem 0.6rem;
+    margin-bottom: 0.6rem;
+    padding: 0.75rem 0.85rem;
+    border: 1px solid rgba(125, 211, 252, 0.14);
+    border-radius: 0.85rem;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .plat-quote-hub .plat-quote-list .plat-table td {
+    display: block;
+    padding: 0;
+    border: 0;
+  }
+
+  /* Row 1: code + status */
+  .plat-quote-hub .plat-quote-list .plat-table td:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .plat-quote-hub .plat-quote-list .plat-table td:nth-of-type(5) {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+  }
+
+  /* Row 2: client name + email, full width */
+  .plat-quote-hub .plat-quote-list .plat-table td:nth-of-type(2) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  /* Row 3: total + date */
+  .plat-quote-hub .plat-quote-list .plat-table td:nth-of-type(3) {
+    grid-column: 1;
+    grid-row: 3;
+    font-weight: 700;
+    color: #f5f9fc;
+  }
+
+  .plat-quote-hub .plat-quote-list .plat-table td:nth-of-type(4) {
+    grid-column: 2;
+    grid-row: 3;
+    text-align: right;
+    color: #7a9bb8;
+    font-size: 0.74rem;
+  }
+
+  /* Row 4: linked project, full width */
+  .plat-quote-hub .plat-quote-list .plat-table td:nth-of-type(6) {
+    grid-column: 1 / -1;
+    grid-row: 4;
+  }
+
+  /* Row 5: PDF + actions. The divider goes on the full-width project
+     cell above them — putting a border-top on each of these two cells
+     instead leaves a visible gap where the grid column gap falls. */
+  .plat-quote-hub .plat-quote-list .plat-table td:nth-of-type(6) {
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid rgba(125, 211, 252, 0.1);
+  }
+
+  .plat-quote-hub .plat-quote-list .plat-table td:nth-of-type(7),
+  .plat-quote-hub .plat-quote-list .plat-table td:nth-of-type(8) {
+    grid-row: 5;
+    padding-top: 0.2rem;
+  }
+
+  .plat-quote-hub .plat-quote-list .plat-table td:nth-of-type(7) {
+    grid-column: 1;
+  }
+
+  .plat-quote-hub .plat-quote-list .plat-table td:nth-of-type(8) {
+    grid-column: 2;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* Row highlight (hover / focused / editing) is painted per-cell for
+     the desktop table. Once the cells become grid items with gaps
+     between them, that same background renders as a stack of
+     disconnected bars across the card. Move it to the row so the whole
+     card highlights as one surface. */
+  .plat-body.is-app .plat-quote-hub .plat-quote-list .plat-table tbody tr:hover,
+  .plat-body.is-app .plat-projects-board .plat-table tbody tr:hover,
+  .plat-body.is-app .plat-clients-board .plat-table tbody tr:hover,
+  .plat-body.is-app .plat-newsletter-board .plat-table tbody tr:hover {
+    background: rgba(125, 211, 252, 0.06);
+    border-color: rgba(125, 211, 252, 0.24);
+  }
+
+  .plat-body.is-app .plat-quote-hub .plat-quote-list .plat-table tr.is-focused,
+  .plat-body.is-app .plat-projects-board .plat-table tr.is-focused,
+  .plat-body.is-app .plat-projects-board .plat-table tr.is-editing,
+  .plat-body.is-app .plat-clients-board .plat-table tr.is-focused,
+  .plat-body.is-app .plat-clients-board .plat-table tr.is-editing {
+    background: rgba(125, 211, 252, 0.1);
+    border-color: rgba(125, 211, 252, 0.32);
+  }
+
+  .plat-body.is-app .plat-quote-hub .plat-quote-list .plat-table tbody td,
+  .plat-body.is-app .plat-projects-board .plat-table tbody td,
+  .plat-body.is-app .plat-clients-board .plat-table tbody td,
+  .plat-body.is-app .plat-newsletter-board .plat-table tbody td {
+    background: transparent !important;
+  }
+
+  /* plataforma-dark.css repaints the same cells with its own
+     `!important` at specificity (0,5,3), which outranks the rule above.
+     Two !important declarations are settled by specificity first, so
+     match its selector shape exactly — then this file, imported last,
+     wins on source order. */
+  :is(
+      html.plat-dark-boot .plat-body.is-app,
+      .plat-body.is-app[data-plat-theme="dark"]
+    )
+    .plat-quote-list
+    .plat-table
+    tbody
+    td {
+    background: transparent !important;
+  }
+
+  /* Action dropdowns are `position: fixed` and anchored by their right
+     edge to the trigger button (`right: innerWidth - button.right`).
+     On desktop that button sits in the last column so the panel lands
+     just inside the viewport; in the card layout it sits on the LEFT,
+     which pushed the panel's left edge off-screen — the menu rendered
+     half outside the window. Pin these to the viewport edge instead.
+     `!important` is deliberate: the offset is an inline style, and this
+     is the one case where a stylesheet still wins. */
+  .plat-body.is-app .plat-menu-panel.is-quote-actions {
+    right: 0.75rem !important;
+    left: auto !important;
+    width: max-content;
+    max-width: calc(100vw - 1.5rem);
+    max-height: min(60svh, 22rem);
+    overflow-y: auto;
+  }
+
+  /* Shared card-table reset used by Proyectos/Clientes/Newsletter/Blog
+     below — same technique as Cotizaciones above. */
+  .plat-projects-board .plat-table,
+  .plat-clients-board .plat-table,
+  .plat-newsletter-board .plat-table,
+  .plat-news-activity .plat-table,
+  .plat-blog-list .plat-table {
+    min-width: 0;
+    width: 100%;
+    border-spacing: 0;
+  }
+
+  .plat-projects-board .plat-table thead,
+  .plat-clients-board .plat-table thead,
+  .plat-newsletter-board .plat-table thead,
+  .plat-news-activity .plat-table thead,
+  .plat-blog-list .plat-table thead {
+    display: none;
+  }
+
+  .plat-projects-board .plat-table,
+  .plat-projects-board .plat-table tbody,
+  .plat-clients-board .plat-table,
+  .plat-clients-board .plat-table tbody,
+  .plat-newsletter-board .plat-table,
+  .plat-newsletter-board .plat-table tbody,
+  .plat-news-activity .plat-table,
+  .plat-news-activity .plat-table tbody,
+  .plat-blog-list .plat-table,
+  .plat-blog-list .plat-table tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .plat-projects-board .plat-table tr,
+  .plat-clients-board .plat-table tr,
+  .plat-newsletter-board .plat-table tr,
+  .plat-news-activity .plat-table tr,
+  .plat-blog-list .plat-table tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 0.3rem 0.6rem;
+    margin-bottom: 0.6rem;
+    padding: 0.75rem 0.85rem;
+    border: 1px solid rgba(125, 211, 252, 0.14);
+    border-radius: 0.85rem;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .plat-projects-board .plat-table td,
+  .plat-clients-board .plat-table td,
+  .plat-newsletter-board .plat-table td,
+  .plat-news-activity .plat-table td,
+  .plat-blog-list .plat-table td {
+    display: block;
+    padding: 0;
+    border: 0;
+  }
+
+  /* Proyectos: título+código (row1, full width) · cliente (row2) ·
+     avance (row3) · estado + pago side by side (row4) · acciones (row5) */
+  .plat-projects-board .plat-table td:nth-of-type(1),
+  .plat-projects-board .plat-table td:nth-of-type(2),
+  .plat-projects-board .plat-table td:nth-of-type(3) {
+    grid-column: 1 / -1;
+  }
+
+  .plat-projects-board .plat-table td:nth-of-type(1) {
+    grid-row: 1;
+  }
+
+  .plat-projects-board .plat-table td:nth-of-type(2) {
+    grid-row: 2;
+  }
+
+  .plat-projects-board .plat-table td:nth-of-type(3) {
+    grid-row: 3;
+  }
+
+  .plat-projects-board .plat-table td:nth-of-type(4) {
+    grid-column: 1;
+    grid-row: 4;
+  }
+
+  .plat-projects-board .plat-table td:nth-of-type(5) {
+    grid-column: 2;
+    grid-row: 4;
+  }
+
+  .plat-projects-board .plat-table td:nth-of-type(4) select,
+  .plat-projects-board .plat-table td:nth-of-type(5) select {
+    width: 100%;
+  }
+
+  .plat-projects-board .plat-table td:nth-of-type(6) {
+    grid-column: 1 / -1;
+    grid-row: 5;
+    padding-top: 0.5rem;
+    margin-top: 0.35rem;
+    border-top: 1px solid rgba(125, 211, 252, 0.1);
+  }
+
+  /* The expandable detail row is a colSpan row, not a 2-column card, so
+     it opts out of the grid above. Left as a bare block it read as
+     loose content spilling outside the card; instead give it the card's
+     own border/background and flatten the seam between the two so the
+     pair reads as one card that grew. */
+  .plat-projects-board .plat-table tbody tr:has(+ .plat-project-detail-row) {
+    margin-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-color: transparent;
+  }
+
+  .plat-projects-board .plat-table tr.plat-project-detail-row {
+    display: block;
+    margin: 0 0 0.6rem;
+    padding: 0.2rem 0.85rem 0.75rem;
+    border: 1px solid rgba(125, 211, 252, 0.14);
+    border-top: 0;
+    border-radius: 0 0 0.85rem 0.85rem;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .plat-projects-board .plat-table tr.plat-project-detail-row > td {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Detail pairs (Código/Inicio, Cotización/Valor…) stay 2-up, but the
+     PDF actions need the full width or the second button is clipped. */
+  /* `align-items: end` bottom-aligns every pair to the tallest cell in
+     its row. Once PDF grew to three wrapped buttons, "Horas" beside it
+     dropped ~60px down and read as belonging to another row. */
+  .plat-body.is-app .plat-project-detail-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem 0.75rem;
+    align-items: start;
+  }
+
+  .plat-body.is-app .plat-project-pdf-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .plat-body.is-app .plat-project-pdf-row .plat-btn {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  /* "Vista cliente" collapses to its eye icon — the label is the widest
+     thing in this row and the icon already carries the meaning.
+     Hidden visually but kept in the accessibility tree (same clip-rect
+     technique the collapsed sidebar uses): `display: none` would strip
+     the button's accessible name and leave screen readers with only an
+     unlabelled icon. */
+  .plat-body.is-app .plat-project-pdf-row .plat-btn-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* WCAG 2.2 target size (24×24 CSS px): the contact/email links sit on
+     their own line inside a card row, so the "inline in a sentence"
+     exception doesn't cover them — they were 15-17px tall. Padding
+     alone would shift the layout, so grow the line box instead.
+     Scoped to table cells on purpose: the same class also appears mid
+     sentence in the newsletter hint, where inline-flex knocks the link
+     off the surrounding text's baseline — and where the WCAG inline
+     exception genuinely applies. */
+  .plat-body.is-app .plat-clients-board .plat-table td .plat-contact-link,
+  .plat-body.is-app .plat-newsletter-board .plat-table td .plat-contact-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+  }
+
+  /* Clientes card, row by row:
+       1  nombre                    | estado de registro
+       2  email
+       3  teléfono
+       4  cantidad de proyectos     | menú de acciones
+     Column order in the table is Registro(1), Nombre(2), Email(3),
+     Teléfono(4), Acciones(5).
+
+     The name cell holds both the name block and the project count, so
+     it's flattened with `display: contents` — that promotes its two
+     children to grid items of the card and lets the count sit on the
+     last row next to the actions menu instead of being stuck under the
+     name. Excluded while editing, where the same cell holds the name
+     and company inputs and needs to stay a single stacked field. */
+  .plat-clients-board .plat-table tr:not(.is-editing) td:nth-of-type(2) {
+    display: contents;
+  }
+
+  .plat-clients-board .plat-table tr:not(.is-editing) .plat-client-block {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+  }
+
+  .plat-clients-board .plat-table td:nth-of-type(1) {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+  }
+
+  .plat-clients-board .plat-table td:nth-of-type(3),
+  .plat-clients-board .plat-table td:nth-of-type(4) {
+    grid-column: 1 / -1;
+    font-size: 0.82rem;
+    color: #9ec0db;
+  }
+
+  .plat-clients-board .plat-table td:nth-of-type(3) {
+    grid-row: 2;
+  }
+
+  /* The divider lives on the phone row, which spans the full width —
+     splitting it across the two cells below would leave a visible gap
+     where the grid column gap falls. */
+  .plat-clients-board .plat-table td:nth-of-type(4) {
+    grid-row: 3;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid rgba(125, 211, 252, 0.1);
+  }
+
+  .plat-clients-board .plat-table tr:not(.is-editing) .plat-client-projects {
+    grid-column: 1;
+    grid-row: 4;
+    align-self: center;
+    margin: 0;
+    padding-top: 0.2rem;
+  }
+
+  .plat-clients-board .plat-table tr:not(.is-editing) td:nth-of-type(5) {
+    grid-column: 2;
+    grid-row: 4;
+    justify-self: end;
+    padding-top: 0.2rem;
+  }
+
+  /* The cell already ends flush with the status badge above it, but
+     `.plat-menu` is a block that fills the cell while the trigger only
+     takes its content width — so the button sat 37px short of that
+     edge. Push it to the end so both line up on one right margin. */
+  .plat-clients-board .plat-table tr:not(.is-editing) td:nth-of-type(5) .plat-menu {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* 40px is taller than this row needs; the trigger is ~100px wide, so
+     trimming the height keeps it a comfortable tap target (still well
+     over the 24px minimum) while the card reads tighter. `height` has
+     to be set alongside `min-height` — the base rule fixes both at
+     2.5rem, and a fixed height wins over a smaller min-height. */
+  .plat-clients-board
+    .plat-table
+    tr:not(.is-editing)
+    td:nth-of-type(5)
+    .plat-menu-trigger {
+    height: 2.1rem;
+    min-height: 2.1rem;
+    padding-block: 0;
+  }
+
+  /* Newsletter: nombre (left) + estado (right) on row1, email row2,
+     origen + fecha side by side row3, acciones row4. */
+  .plat-newsletter-board .plat-table td:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .plat-newsletter-board .plat-table td:nth-of-type(3) {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+  }
+
+  .plat-newsletter-board .plat-table td:nth-of-type(2) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .plat-newsletter-board .plat-table td:nth-of-type(4) {
+    grid-column: 1;
+    grid-row: 3;
+    font-size: 0.74rem;
+    color: #7a9bb8;
+  }
+
+  .plat-newsletter-board .plat-table td:nth-of-type(5) {
+    grid-column: 2;
+    grid-row: 3;
+    text-align: right;
+    font-size: 0.74rem;
+    color: #7a9bb8;
+  }
+
+  .plat-newsletter-board .plat-table td:nth-of-type(6) {
+    grid-column: 1 / -1;
+    grid-row: 4;
+    padding-top: 0.5rem;
+    margin-top: 0.35rem;
+    border-top: 1px solid rgba(125, 211, 252, 0.1);
+  }
+
+  /* Blog: título (left) + estado (right) on row1, tópico + fecha
+     side by side on row2, acciones row3. Columns are
+     Título(1) Tópico(2) Estado(3) Fecha(4) Acciones(5). */
+  .plat-blog-list .plat-table td:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: var(--pm-md);
+    line-height: 1.3;
+  }
+
+  .plat-blog-list .plat-table td:nth-of-type(3) {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+  }
+
+  .plat-blog-list .plat-table td:nth-of-type(2) {
+    grid-column: 1;
+    grid-row: 2;
+    font-size: var(--pm-sm);
+    color: #9ec0db;
+  }
+
+  .plat-blog-list .plat-table td:nth-of-type(4) {
+    grid-column: 2;
+    grid-row: 2;
+    text-align: right;
+    font-size: var(--pm-sm);
+    color: #7a9bb8;
+  }
+
+  .plat-blog-list .plat-table td:nth-of-type(5) {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    padding-top: 0.5rem;
+    margin-top: 0.35rem;
+    border-top: 1px solid rgba(125, 211, 252, 0.1);
+  }
+
+  /* Long titles get two lines, then ellipsis. */
+  .plat-blog-list .plat-table td:nth-of-type(1) strong {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+
+  /* The empty-state row is a single colSpan cell — let it fill the card
+     instead of sitting in column 1 of the 2-column grid.
+
+     Excludes the Proyectos detail row, which is also a colSpan cell but
+     is real content, not an empty state: it was inheriting the centred
+     text and rendering every label/value in the detail grid centred. */
+  .plat-body.is-app
+    .plat-quote-list
+    .plat-table
+    tbody
+    tr:not(.plat-project-detail-row)
+    td[colspan] {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    text-align: center;
+    color: #9ec0db;
+  }
+
+  /* Quote builder */
+  .plat-quote-panel-head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.65rem;
+  }
+
+  .plat-quote-panel-head h2 {
+    font-size: 0.88rem;
+  }
+
+  .plat-quote-panel-head h2 svg {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+
+  .plat-quote-panel-head p {
+    font-size: 0.74rem;
+  }
+
+  .plat-quote-panel-head .plat-quote-actions {
+    width: 100%;
+    justify-content: stretch;
+    flex-wrap: wrap;
+  }
+
+  .plat-quote-panel-head .plat-quote-actions .plat-btn {
+    flex: 1 1 auto;
+    justify-content: center;
+    min-height: 2.75rem;
+  }
+
+  .plat-quote-commerce,
+  .plat-quote-grid.is-payment,
+  .plat-quote-grid.is-recipient {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tarifa holds three short fields (hours, rate, currency) — stacking
+     them burns three full rows for ~4 characters each. */
+  .plat-quote-grid.is-pricing {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .plat-quote-grid.is-pricing > .plat-field:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  /* `.plat-quote-panel-head .plat-btn { width: 100% }` (set for the
+     panel's own primary actions) also caught the JSON toolbar, stacking
+     three short buttons into three rows. Keep them on one line. */
+  .plat-quote-panel-head .plat-quote-json-tools {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.35rem;
+    width: 100%;
+  }
+
+  .plat-quote-panel-head .plat-quote-json-tools .plat-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+    padding-inline: 0.4rem;
+    font-size: var(--pm-sm);
+    white-space: nowrap;
+  }
+
+  /* Blog: the two secondary actions (Vista previa, Guardar borrador)
+     share a row; only Publicar — the committing action — gets the full
+     width. Three stacked full-width buttons wasted a third of the
+     screen and gave "Publicar" no visual precedence. */
+  .plat-blog-actions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .plat-blog-actions .plat-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding-inline: 0.5rem;
+  }
+
+  .plat-blog-actions .plat-btn:last-child {
+    flex: 1 1 100%;
+  }
+
+  .plat-blog-preview-modal {
+    width: min(100%, 100vw - 1rem);
+    max-height: min(92svh, 100%);
+    margin: 0.5rem;
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  /* Date picker: stay inside viewport */
+  .plat-date-panel {
+    width: min(17.75rem, calc(100vw - 1.5rem));
+    max-width: calc(100vw - 1.5rem);
+  }
+
+  .plat-dashboard-metrics-controls .plat-metrics-date .plat-date-panel {
+    left: auto;
+    right: 0;
+  }
+
+  /* Ops dashboard: content-height layout, no bottom dead space */
+  .plat-main:has(.plat-dashboard-hub:has(.plat-ops)),
+  .plat-content:has(.plat-dashboard-hub:has(.plat-ops)) {
+    overflow: visible;
+    min-height: auto;
+    height: auto;
+  }
+
+  .plat-content > .plat-dashboard-hub:has(.plat-ops) {
+    height: auto;
+    flex: 0 1 auto;
+  }
+
+  .plat-dashboard-hub > .plat-ops {
+    flex: 0 1 auto;
+    height: auto;
+    min-height: 0;
+  }
+
+  .plat-ops {
+    height: auto;
+    min-height: 0;
+  }
+
+  /* Bounded height + its own scroll: the tabs ("Requiere atención" /
+     "Actividad reciente") stay pinned while the list scrolls inside,
+     instead of the whole page growing to fit every item. */
+  .plat-ops-feed-panel {
+    flex: 0 1 auto;
+    height: min(60svh, 34rem);
+    min-height: 0;
+    max-height: min(60svh, 34rem);
+    overflow: hidden;
+    padding: 0 !important;
+  }
+
+  .plat-ops-feed-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Match .plat-ops-inbox horizontal inset (0.85rem 1rem) */
+    padding: 0.65rem 1rem 0.75rem;
+  }
+
+  /* Métricas: full-width chart cards on mobile/tablet */
+  .plat-dashboard-metrics-charts {
+    width: 100%;
+    max-width: none;
+  }
+
+  .plat-dashboard-metrics-charts .plat-chart-card {
+    width: 100%;
+    max-width: none;
+    padding: 0.85rem 0.85rem 0.9rem !important;
+  }
+
+  .plat-dashboard-metrics-charts .plat-chart-wrap {
+    width: 100%;
+    min-width: 0;
+    min-height: 13rem;
+  }
+
+  .plat-dashboard-metrics-charts .plat-chart-wrap > .recharts-responsive-container {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+  }
+
+  /* Three single-digit counters stacked one per row spent 215px of card
+     on three numbers. Desktop already shows them 3-across; do the same
+     here with the content stacked inside each tile (icon+value on one
+     line, label under it) so the labels still fit at ~100px wide. */
+  .plat-ops-inbox-rows {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.4rem;
+  }
+
+  .plat-ops-inbox-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "icon value"
+      "label label";
+    align-items: center;
+    gap: 0.15rem 0.35rem;
+    padding: 0.55rem 0.5rem;
+    text-align: left;
+  }
+
+  .plat-ops-inbox-row-icon {
+    grid-area: icon;
+  }
+
+  .plat-ops-inbox-row-value {
+    grid-area: value;
+    justify-self: end;
+    font-size: 1.05rem;
+    line-height: 1.1;
+  }
+
+  .plat-ops-inbox-row-label {
+    grid-area: label;
+    font-size: var(--pm-xs);
+    line-height: 1.25;
+  }
+
+  /* Client hub */
+  .plat-hub-stats,
+  .plat-hub-steps,
+  .plat-hub-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .plat-hub-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ── Small phone (≤560px) ───────────────────────────────────────── */
+
+@media (max-width: 560px) {
+  .plat-dashboard-metrics-grid.plat-news-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+
+  .plat-dashboard-metrics-grid .plat-news-kpi {
+    min-height: 4.35rem;
+    padding: 0.55rem 0.6rem;
+  }
+
+  .plat-dashboard-metrics-grid .plat-news-kpi .plat-metric {
+    font-size: 0.98rem;
+  }
+
+  /* Full-width cards and the step checklist go single column; the
+     label+value tiles (Valor, Abonado, Pago…) hold a few characters
+     each, so keeping them 2-up saves a screenful of scrolling. */
+  .plat-hub-steps,
+  .plat-hub-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .plat-hub-stats,
+  .plat-hub-kv {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* …except the documents tile, which holds two buttons side by side. */
+  .plat-hub-stats .plat-hub-stat-docs {
+    grid-column: 1 / -1;
+  }
+
+  .plat-ops-feed-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.35rem;
+  }
+
+  .plat-ops-feed-when {
+    white-space: normal;
+  }
+
+  .plat-section-hero-head {
+    padding: 0.9rem 0.85rem 0.75rem;
+  }
+
+  /* Feed panel uses .plat-ops-feed-scroll padding; avoid double inset */
+  .plat-quote-panel.plat-card:not(.plat-ops-feed-panel) {
+    padding: 0.9rem 0.85rem !important;
+  }
+
+  .plat-ops-feed-panel.plat-quote-panel.plat-card {
+    padding: 0 !important;
+  }
+
+  .plat-ops-feed-scroll {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+
+  .plat-card.plat-quote-panel {
+    border-radius: 0.9rem;
+  }
+
+  .plat-inbox-item {
+    padding: 0.65rem 0.7rem;
+  }
+
+  .plat-live-thread {
+    padding: 0.65rem;
+  }
+}
+
+/* Desktop-only: hide mobile back control */
+@media (min-width: 901px) {
+  .plat-inbox-back {
+    display: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE TYPE SCALE — normalization layer
+   ───────────────────────────────────────────────────────────────────
+   The desktop stylesheet grew organically and each section picked its
+   own sizes: an audit at 375px found 7 distinct font sizes on
+   Proyectos, 11 on Cotizador and 12 on Vista cliente, with near-dupes
+   (14 / 13.6 / 13.12px) that read as noise rather than hierarchy.
+   Desktop has the width to absorb that; a phone does not.
+
+   This block runs last so it wins on source order, and maps every
+   platform surface onto ONE 7-step scale. Roles, not one-off values:
+
+     2xs .62  counts inside tabs/badges
+     xs  .68  uppercase eyebrows + status badges
+     sm  .75  meta, captions, timestamps
+     base .8  body copy and card descriptions
+     md  .875 primary content, list titles, inputs
+     lg  .95  card titles (h2/h3)
+     xl  1.2  page title (h1) and KPI numbers
+
+   Layout/behaviour is untouched — sizes and rhythm only. Everything is
+   inside max-width:900px, so desktop keeps its own scale verbatim.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .plat-body.is-app {
+    --pm-2xs: 0.62rem;
+    --pm-xs: 0.68rem;
+    --pm-sm: 0.75rem;
+    --pm-base: 0.8rem;
+    --pm-md: 0.875rem;
+    --pm-lg: 0.95rem;
+    --pm-xl: 1.2rem;
+  }
+
+  /* ── Page banner ─────────────────────────────────────────────── */
+  .plat-body.is-app .plat-section-hero-head h1 {
+    font-size: var(--pm-xl);
+    line-height: 1.25;
+  }
+
+  /* Filter tabs wrap instead of scrolling horizontally. Proyectos has
+     five (488px of tabs in a 350px bar), so the scrolling version left
+     "Finalizado" sliced by the card edge with no visible affordance
+     that more existed. Wrapping costs one extra row on that one page
+     and guarantees nothing is ever clipped. */
+  .plat-body.is-app .plat-section-hero-tabs .plat-tabs,
+  .plat-body.is-app .plat-quote-status-tabs {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    row-gap: 0;
+  }
+
+  .plat-body.is-app .plat-section-hero-head p {
+    font-size: var(--pm-base);
+    line-height: 1.4;
+  }
+
+  /* Dashboard only: its subtitle ("Control del flujo: inbox,
+     cotizaciones, proyectos y clientes") just restates the nav, and
+     263px of banner + two tab rows was pushing the first metric a
+     third of the way down the screen. Other sections keep theirs —
+     they explain something the page doesn't otherwise say.
+
+     Plain descendant chain rather than `.plat-content:has(…)` simply
+     because the hub wraps the banner directly and the extra `:has()`
+     buys nothing. (An earlier version of this comment blamed the build
+     for dropping non-subject `:has()`; that was wrong — the rule was
+     missing because Turbopack was serving a stale `.next` cache. Both
+     `:has()` in any position and `justify-content: stretch` compile
+     fine. If a rule you just wrote seems to be ignored, delete `.next`
+     before suspecting the CSS.) */
+  .plat-body.is-app .plat-dashboard-hub .plat-section-hero-head p {
+    display: none;
+  }
+
+  /* ── Card titles + descriptions ──────────────────────────────── */
+  .plat-body.is-app .plat-quote-panel-head h2,
+  .plat-body.is-app .plat-hub-card-head h3,
+  .plat-body.is-app .plat-hub-hero-top h2,
+  .plat-body.is-app .plat-chart-card h3,
+  .plat-body.is-app .plat-ops-inbox-head h3,
+  .plat-body.is-app .plat-ops-panel-head h3 {
+    font-size: var(--pm-lg);
+    line-height: 1.3;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  .plat-body.is-app .plat-quote-panel-head p,
+  .plat-body.is-app .plat-hub-card-head p,
+  .plat-body.is-app .plat-ops-panel-head p,
+  .plat-body.is-app .plat-hub-banner,
+  .plat-body.is-app .plat-hub-body,
+  .plat-body.is-app .plat-hub-empty,
+  .plat-body.is-app .plat-hub-hint,
+  .plat-body.is-app .plat-hub-note,
+  .plat-body.is-app .plat-hub-policy,
+  .plat-body.is-app .plat-hub-warn,
+  .plat-body.is-app .plat-newsletter-hint,
+  .plat-body.is-app .plat-inbox-body,
+  .plat-body.is-app .plat-quote-muted {
+    font-size: var(--pm-base);
+    line-height: 1.45;
+  }
+
+  /* Bare <label>/<p> with no class fall back to the browser's 16px and
+     stick out next to everything above — pin the stragglers too. */
+  .plat-body.is-app .plat-client-preview-picker > label,
+  .plat-body.is-app .plat-hub-form label {
+    font-size: var(--pm-xs);
+    letter-spacing: 0.05em;
+  }
+
+  /* Card head icons scale with their title instead of staying 18px */
+  .plat-body.is-app .plat-quote-panel-head h2 svg,
+  .plat-body.is-app .plat-hub-card-head svg {
+    width: 0.95rem;
+    height: 0.95rem;
+    flex-shrink: 0;
+  }
+
+  /* Status legend: four entries wrapped as 3 + 1, leaving "Cancelados"
+     orphaned and centred on its own row, which reads as a layout bug.
+     A 2×2 grid is the same height but looks deliberate, and the labels
+     line up so the counts are comparable at a glance. */
+  .plat-body.is-app .plat-dashboard-metrics-charts .plat-status-legend {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.4rem 0.5rem;
+  }
+
+  .plat-body.is-app .plat-dashboard-metrics-charts .plat-status-legend li {
+    justify-content: flex-start;
+    font-size: var(--pm-sm);
+  }
+
+  /* ── Uppercase eyebrows / field labels ───────────────────────── */
+  .plat-body.is-app .plat-hub-kicker,
+  .plat-body.is-app .plat-hub-stat span,
+  .plat-body.is-app .plat-hub-kv span,
+  .plat-body.is-app .plat-filter-select,
+  .plat-body.is-app .plat-date-picker-label,
+  .plat-body.is-app .plat-card .plat-metric-label,
+  .plat-body.is-app .plat-project-detail-label,
+  .plat-body.is-app .plat-quote-commerce-label,
+  .plat-body.is-app .plat-quote-total-label,
+  .plat-body.is-app .plat-field > span {
+    font-size: var(--pm-xs);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Cotizador specifics ─────────────────────────────────────── */
+  /* Grid items default to min-width:auto, so a group can't shrink below
+     its content's min-content width — at 320px that pushed the
+     commerce card 9px past the viewport. */
+  .plat-body.is-app .plat-quote-commerce-stack > *,
+  .plat-body.is-app .plat-quote-grid > *,
+  .plat-body.is-app .plat-quote-commerce > * {
+    min-width: 0;
+  }
+  .plat-body.is-app .plat-quote-discount-toggle strong {
+    font-size: var(--pm-md);
+  }
+
+  .plat-body.is-app .plat-quote-discount-toggle small,
+  .plat-body.is-app .plat-quote-commerce-hint,
+  .plat-body.is-app .plat-quote-total small {
+    font-size: var(--pm-sm);
+  }
+
+  .plat-body.is-app .plat-quote-json-collapsed {
+    font-size: var(--pm-base);
+  }
+
+  /* The proposal total is the one deliberate outlier — it stays the
+     largest number on the screen, just not 23px on a 375px phone. */
+  .plat-body.is-app .plat-quote-total strong {
+    font-size: 1.35rem;
+  }
+
+  /* ── Values, list titles, primary content ────────────────────── */
+  .plat-body.is-app .plat-hub-stat strong,
+  .plat-body.is-app .plat-hub-kv strong,
+  .plat-body.is-app .plat-hub-list strong,
+  .plat-body.is-app .plat-hub-meta,
+  .plat-body.is-app .plat-hub-steps li {
+    font-size: var(--pm-md);
+    line-height: 1.35;
+  }
+
+  .plat-body.is-app .plat-card .plat-metric {
+    font-size: var(--pm-xl);
+    line-height: 1.2;
+  }
+
+  /* ── Meta / captions / timestamps ────────────────────────────── */
+  .plat-body.is-app .plat-hub-list small,
+  .plat-body.is-app .plat-hub-list p,
+  .plat-body.is-app .plat-hub-list-top span,
+  .plat-body.is-app .plat-hub-progress-meta,
+  .plat-body.is-app .plat-card .plat-metric-sub,
+  .plat-body.is-app .plat-inbox-meta,
+  .plat-body.is-app .plat-inbox-date {
+    font-size: var(--pm-sm);
+    line-height: 1.35;
+  }
+
+  /* ── Status badges + counters ────────────────────────────────── */
+  .plat-body.is-app .plat-badge {
+    min-width: 0;
+    padding: 0.16rem 0.45rem;
+    font-size: var(--pm-xs);
+  }
+
+  .plat-body.is-app .plat-tab-count,
+  .plat-body.is-app .plat-chip-count,
+  .plat-body.is-app .plat-ops-feed-tab-count {
+    font-size: var(--pm-2xs);
+  }
+
+  /* ── Controls: inputs, selects, buttons ──────────────────────── */
+  /* 0.875rem is the floor — iOS Safari zooms the page on focus for
+     anything under 16px, and 14px is the smallest that still keeps
+     that zoom visually negligible. */
+  .plat-body.is-app .plat-filter-select select,
+  .plat-body.is-app .plat-filter-select input,
+  .plat-body.is-app .plat-quote-search input,
+  .plat-body.is-app .plat-cell-input,
+  .plat-body.is-app .plat-hub-form textarea,
+  .plat-body.is-app .plat-project-status-select,
+  .plat-body.is-app .plat-project-payment-select {
+    font-size: var(--pm-md);
+  }
+
+  .plat-body.is-app .plat-btn {
+    font-size: var(--pm-base);
+  }
+
+  .plat-body.is-app .plat-btn.is-compact,
+  .plat-body.is-app .plat-menu-trigger.is-compact {
+    font-size: var(--pm-sm);
+  }
+
+  /* ── Vertical rhythm ─────────────────────────────────────────── */
+  .plat-body.is-app .plat-hub {
+    gap: 0.7rem;
+  }
+
+  .plat-body.is-app .plat-hub-hero,
+  .plat-body.is-app .plat-hub-card {
+    padding: 0.85rem 0.9rem;
+  }
+
+  .plat-body.is-app .plat-hub-grid,
+  .plat-body.is-app .plat-hub-stats {
+    gap: 0.5rem;
+  }
+
+  .plat-body.is-app .plat-hub-stat {
+    padding: 0.6rem 0.7rem;
+  }
+
+  .plat-body.is-app .plat-hub-kv > div {
+    padding: 0.55rem 0.65rem;
+  }
+
+  .plat-body.is-app .plat-hub-steps li {
+    padding: 0.5rem 0.6rem;
+  }
+
+  /* Hero heading and its actions stack rather than fighting for width */
+  .plat-body.is-app .plat-hub-hero-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  /* ── Blog composer ──────────────────────────────────────────── */
+  /* The editor deliberately styles its fields like the published
+     article (big title, smaller subtitle). Keep that hierarchy but at
+     phone scale — 25px of placeholder was wrapping mid-word. */
+  .plat-body.is-app .plat-blog-title-input {
+    font-size: 1.25rem;
+  }
+
+  .plat-body.is-app .plat-blog-subtitle-input {
+    font-size: var(--pm-base);
+  }
+
+  .plat-body.is-app .plat-blog-editor-prose {
+    font-size: var(--pm-md);
+  }
+
+  .plat-body.is-app .plat-blog-cover-drop {
+    min-height: 6.5rem;
+    padding: 0.9rem;
+  }
+
+  /* Three levels of padding nest here — page gutter, card, then the
+     canvas's own 1.2rem — leaving the writing area 282px of a 375px
+     screen and clipping the subtitle placeholder. The canvas is already
+     visually inset by the card, so it doesn't need its desktop padding
+     on top. */
+  .plat-body.is-app .plat-blog-canvas {
+    padding: 0.85rem 0.75rem 0.9rem;
+  }
+
+  /* `align-items: center` centred the icon against a two-line hint, so
+     the text read as if it were wrapping around it. */
+  .plat-body.is-app .plat-blog-editor-tools {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.35rem;
+    font-size: var(--pm-sm);
+    line-height: 1.35;
+  }
+
+  .plat-body.is-app .plat-blog-editor-tools svg {
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .plat-body.is-app .plat-blog-editor-hint,
+  .plat-body.is-app .plat-blog-body-label {
+    font-size: var(--pm-sm);
+  }
+
+  /* ── Newsletter toolbar ─────────────────────────────────────── */
+  /* Search + 2 dropdowns + 2 buttons + hint stacked one per row pushed
+     the first contact ~500px down the page. Pair up the short controls
+     so the list starts within the first screen. */
+  .plat-body.is-app .plat-newsletter-board .plat-projects-filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  /* Search and the export pair are full-width rows; only the two short
+     dropdowns share a row. */
+  .plat-body.is-app .plat-newsletter-board .plat-projects-filters
+    > .plat-quote-list-filter,
+  .plat-body.is-app .plat-newsletter-board .plat-projects-filters
+    > .plat-newsletter-export {
+    grid-column: 1 / -1;
+  }
+
+  .plat-body.is-app .plat-newsletter-export {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .plat-body.is-app .plat-newsletter-export .plat-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: center;
+    padding-inline: 0.5rem;
+    font-size: var(--pm-sm);
+    white-space: nowrap;
+  }
+
+  /* ── Proyectos card ─────────────────────────────────────────── */
+  /* `align-items:center` parks the expand chevron halfway down a
+     3-line title; pin it to the first line instead. */
+  .plat-body.is-app .plat-project-title-row {
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+  .plat-body.is-app .plat-project-expand {
+    margin-top: -0.1rem;
+  }
+
+  /* Long names ran 3-4 lines at the desktop weight/size and dominated
+     the card. Two lines is enough to identify a project. */
+  .plat-body.is-app .plat-project-title-row strong {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: var(--pm-md);
+    line-height: 1.3;
+  }
+
+  .plat-body.is-app .plat-project-meta-line {
+    font-size: var(--pm-sm);
+  }
+
+  /* Status + payment selects: shrink to match the card's type scale
+     and stop reading as primary buttons. */
+  .plat-body.is-app .plat-project-status-select,
+  .plat-body.is-app .plat-project-payment-select {
+    font-size: var(--pm-sm);
+    padding-inline: 0.45rem;
+  }
+
+  .plat-body.is-app .plat-project-progress-view {
+    gap: 0.5rem;
+  }
+
+  /* Vista cliente picker: `width:100%` on the select forced the "Ver"
+     button onto its own line. Let the select flex instead so both share
+     one row, and reserve room for the native dropdown arrow so the
+     option label doesn't run underneath it. */
+  .plat-body.is-app .plat-client-preview-form {
+    flex-wrap: nowrap;
+  }
+
+  .plat-body.is-app .plat-client-preview-form select {
+    width: auto;
+    flex: 1 1 0;
+    padding-right: 1.6rem;
+    text-overflow: ellipsis;
+  }
+
+  .plat-body.is-app .plat-client-preview-form .plat-btn {
+    flex: 0 0 auto;
+  }
+}
+
+/* ═══ Small phones (≤360px): one more notch down ═══════════════════
+   Deliberately below 375 — that's the iPhone SE/mini width and a large
+   share of real traffic, and it handles the standard scale fine. This
+   step is for the genuinely narrow 320-360px devices.               */
+
+@media (max-width: 360px) {
+  .plat-body.is-app {
+    --pm-xl: 1.1rem;
+    --pm-lg: 0.9rem;
+    --pm-md: 0.84rem;
+    --pm-base: 0.76rem;
+  }
+
+  /* Two KPI columns stay, but let long money values shrink instead of
+     overflowing their tile. */
+  .plat-body.is-app .plat-card .plat-metric {
+    font-size: 1rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   TABLETS (601–900px)
+   ───────────────────────────────────────────────────────────────────
+   Everything ≤900px shares the drawer navigation, so a tablet also
+   picks up the phone rules above — but a 768px iPad has more than
+   twice the width of a 375px phone, and inheriting phone sizing left
+   it looking like a stretched phone: 2 KPI columns with dead space
+   either side, 4 tabs spread edge to edge, and 12px body copy.
+
+   This block sits between phone and desktop: the scale steps back up
+   toward desktop and the grids use the width that's actually there.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .plat-body.is-app {
+    --pm-2xs: 0.68rem;
+    --pm-xs: 0.72rem;
+    --pm-sm: 0.8rem;
+    --pm-base: 0.86rem;
+    --pm-md: 0.92rem;
+    --pm-lg: 1.05rem;
+    --pm-xl: 1.45rem;
+  }
+
+  /* KPI tiles: four across instead of two half-empty columns. */
+  .plat-body.is-app .plat-dashboard-metrics-grid.plat-news-kpi-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+
+  .plat-body.is-app .plat-dashboard-metrics-grid .plat-news-kpi {
+    min-height: 5.25rem;
+    padding: 0.75rem 0.85rem;
+  }
+
+  .plat-body.is-app .plat-dashboard-metrics-grid .plat-news-kpi .plat-metric {
+    font-size: 1.2rem;
+  }
+
+  /* Period tabs sized by their label, not stretched across the row. */
+  .plat-body.is-app .plat-dashboard-metrics-tabs.plat-tabs .plat-tab {
+    flex: 0 0 auto;
+    padding: 0.6rem 0.9rem;
+    font-size: var(--pm-sm);
+  }
+
+  .plat-body.is-app .plat-section-hero-tabs .plat-tab,
+  .plat-body.is-app .plat-quote-status-tabs .plat-tab {
+    padding: 0.7rem 0.85rem;
+    font-size: var(--pm-sm);
+  }
+
+  /* Two-column card lists — the stacked cards read as very narrow
+     ribbons when each one only fills half the available width. */
+  .plat-body.is-app .plat-quote-hub .plat-quote-list .plat-table tbody,
+  .plat-body.is-app .plat-clients-board .plat-table tbody,
+  .plat-body.is-app .plat-newsletter-board .plat-table tbody {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
+    align-items: start;
+  }
+
+  .plat-body.is-app .plat-quote-hub .plat-quote-list .plat-table tr,
+  .plat-body.is-app .plat-clients-board .plat-table tr,
+  .plat-body.is-app .plat-newsletter-board .plat-table tr {
+    margin-bottom: 0;
+  }
+
+  /* Client hub tiles have room for three across. */
+  .plat-body.is-app .plat-hub-stats,
+  .plat-body.is-app .plat-hub-kv {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* The documents tile holds two buttons: one column is too narrow and
+     stacks them, so give it two. */
+  .plat-body.is-app .plat-hub-stats .plat-hub-stat-docs {
+    grid-column: span 2;
+  }
+
+  .plat-body.is-app .plat-hub-docs {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .plat-body.is-app .plat-hub-grid,
+  .plat-body.is-app .plat-hub-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .plat-body.is-app .plat-hub-hero,
+  .plat-body.is-app .plat-hub-card {
+    padding: 1rem 1.1rem;
+  }
+
+  /* Cotizador: recipient/payment fields pair up at this width. */
+  .plat-body.is-app .plat-quote-grid.is-payment,
+  .plat-body.is-app .plat-quote-grid.is-recipient {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Chat detail can use more of the taller tablet viewport. */
+  .plat-body.is-app .plat-inbox.has-mobile-selection .plat-inbox-detail {
+    height: min(74svh, 46rem);
+    max-height: min(74svh, 46rem);
+  }
+
+  .plat-body.is-app .plat-ops-feed-panel {
+    height: min(64svh, 40rem);
+    max-height: min(64svh, 40rem);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   INBOX — row actions on touch devices
+   ───────────────────────────────────────────────────────────────────
+   `.plat-chat-menu-wrap` ships as opacity:0 + pointer-events:none and
+   is only revealed by `.plat-chat-row:hover`. A touch device never
+   produces hover, so on a phone the per-row menu was both invisible
+   AND untappable — and since it's the only place these actions live
+   (the detail pane has no action bar, and opening a message doesn't
+   mark it read on its own), marking a message read, marking it unread,
+   deleting it, or closing/reopening a chat were simply unreachable on
+   mobile across all three tabs: Webchat, Mensajes and Formularios.
+
+   Keyed on `hover: none` rather than width so it follows the actual
+   input device — a touch laptop gets it too, and a narrow desktop
+   window keeps the tidy hover-reveal. The width clause is a fallback
+   for browsers/emulators that report no hover capability at all.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (hover: none), (max-width: 900px) {
+  .plat-body.is-app .plat-chat-menu-wrap {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* 25px is under the comfortable touch size for a control that sits
+     beside a full-row tap target; give it room so it isn't a mis-tap
+     magnet against the row itself. */
+  .plat-body.is-app .plat-chat-menu-trigger {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  /* A one-item or empty list collapsed to ~150px and left ~650px of
+     bare background under it, which reads as a page that failed to
+     load rather than a short list. Hold the panel open so the empty
+     state sits inside a real surface. */
+  .plat-body.is-app .plat-inbox:not(.has-mobile-selection) .plat-inbox-list {
+    min-height: min(58svh, 26rem);
+  }
+
+  .plat-body.is-app .plat-inbox-empty {
+    display: grid;
+    place-items: center;
+    min-height: 8rem;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    font-size: var(--pm-base);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   COTIZADOR — mobile polish
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  /* The collapsed-editor strip is `nowrap` + ellipsis, so at 264px of
+     usable width "…o expandí para editar" was cut to "…o expandí pa…",
+     losing the one instruction the strip exists to give. Let it wrap. */
+  .plat-body.is-app .plat-quote-json-collapsed {
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .plat-body.is-app .plat-quote-json-collapsed span {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.35;
+  }
+
+  /* Estas dos venían a 13 y 17px — dos tamaños para el mismo control.
+     El tamaño lo fija ahora la regla única de checkboxes más abajo;
+     acá sólo queda lo que es propio de su contenedor flex. */
+  .plat-body.is-app .plat-quote-discount-toggle input[type="checkbox"],
+  .plat-body.is-app .plat-quote-check input[type="checkbox"] {
+    flex-shrink: 0;
+    margin: 0;
+  }
+
+  /* Standalone project-code link inside a quote card: 21px tall, under
+     the WCAG 2.2 24px minimum, and not covered by the inline-text
+     exception since it sits on its own line. */
+  .plat-body.is-app .plat-quote-list .plat-table td .plat-code-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CLIENTES — inline edit inside the card layout
+   ───────────────────────────────────────────────────────────────────
+   On desktop the table header names each column, so the edit inputs
+   need no labels of their own. The card layout hides `thead`, which
+   left edit mode as four unlabelled boxes — and two of them (Empresa
+   and Teléfono, both disabled until the client registers) rendered the
+   exact same placeholder, so neither field said which was which.
+
+   The inputs already carry `aria-label`, so screen readers were fine;
+   this restores the same information for sighted users. Labels are
+   scoped to edit mode on purpose — in read mode the values identify
+   themselves (bold name, an email, a phone) and per-row labels would
+   just add noise to a scannable list.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  /* One field per row while editing: the 2-column card grid squeezed
+     the name input to 287px and stranded the status badge between the
+     first two fields. */
+  .plat-body.is-app .plat-clients-board .plat-table tr.is-editing {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
+
+  /* `grid-row` has to be released too, not just the column: the
+     read-mode rules pin the status badge and the name cell to row 1
+     (badge right, name left), so overriding only the column stacked
+     both into the same cell and the badge drew on top of the name
+     input. `auto` lets them flow one per row. */
+  .plat-body.is-app .plat-clients-board .plat-table tr.is-editing td {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    text-align: left !important;
+  }
+
+  .plat-body.is-app .plat-clients-board .plat-table tr.is-editing td::before {
+    display: block;
+    margin-bottom: 0.2rem;
+    color: #9ec0db;
+    font-size: var(--pm-xs);
+    font-weight: 650;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .plat-body.is-app
+    .plat-clients-board
+    .plat-table
+    tr.is-editing
+    td:nth-of-type(2)::before {
+    content: "Nombre y empresa";
+  }
+
+  .plat-body.is-app
+    .plat-clients-board
+    .plat-table
+    tr.is-editing
+    td:nth-of-type(3)::before {
+    content: "Email";
+  }
+
+  .plat-body.is-app
+    .plat-clients-board
+    .plat-table
+    tr.is-editing
+    td:nth-of-type(4)::before {
+    content: "Teléfono";
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   PROYECTOS — card density
+   ───────────────────────────────────────────────────────────────────
+   Cards were 292px tall, so barely 1.7 fit on a 375×812 screen and a
+   9-project list ran 3.75 screens. The height came from five stacked
+   full-width rows plus two 36px selects, and the last row repeated
+   information already shown two rows above.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  /* Status and payment selects read as primary buttons at 36px with a
+     full border; they're secondary controls inside a list card. */
+  .plat-body.is-app .plat-projects-board .plat-project-status-select,
+  .plat-body.is-app .plat-projects-board .plat-project-payment-select {
+    height: 2.1rem;
+    min-height: 2.1rem;
+    padding-inline: 0.4rem;
+  }
+
+  /* The progress row reserved 36px to draw a 5px bar plus a percentage.
+     Put them on one tight line instead. */
+  .plat-body.is-app .plat-projects-board .plat-project-progress-view {
+    height: auto;
+    min-height: 0;
+    gap: 0.5rem;
+  }
+
+  /* For a cancelled project this cell replaces the actions menu, and
+     its first line just repeats the status select two rows up. The
+     refund figure below it is the only new information, so keep that
+     and drop the echo. */
+  .plat-body.is-app .plat-quote-cancel-meta {
+    gap: 0;
+  }
+
+  .plat-body.is-app .plat-quote-cancel-meta > .plat-quote-muted {
+    display: none;
+  }
+
+  /* Actions menu sits flush with the card's right edge, matching the
+     pattern used in the Clientes cards. */
+  .plat-body.is-app .plat-projects-board .plat-table td:nth-of-type(6) .plat-menu {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .plat-body.is-app
+    .plat-projects-board
+    .plat-table
+    td:nth-of-type(6)
+    .plat-menu-trigger {
+    height: 2.1rem;
+    min-height: 2.1rem;
+    padding-block: 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   PROYECTOS — expanded detail: services blend into the card
+   ───────────────────────────────────────────────────────────────────
+   The services block painted an opaque #16304a slab with square
+   corners edge to edge, and nested a second panel of the SAME colour
+   inside it with its own radius and border. Two stacked surfaces in
+   one blue read as boxes bolted onto the card rather than part of it.
+
+   Here they go transparent and lean on rules to separate the rows, so
+   the whole expanded detail is one continuous surface.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  /* plataforma-dark.css paints these surfaces with `!important` at
+     specificity (0,4,1), so a plain `.plat-body.is-app …` rule loses.
+     Mirror its selector shape exactly — equal specificity, and this
+     file is imported last, so source order decides. */
+  /* `.plat-project-detail` itself paints an opaque #0c1828 over the
+     whole expanded area, which is what read as "a second, darker card"
+     underneath the first. It goes transparent too, so the expanded
+     detail inherits the card's own surface and the pair reads as one
+     card that grew. */
+  :is(
+      html.plat-dark-boot .plat-body.is-app,
+      .plat-body.is-app[data-plat-theme="dark"]
+    )
+    :is(
+      .plat-project-detail,
+      .plat-project-detail-services,
+      .plat-project-services-head,
+      .plat-project-services-panel,
+      .plat-project-services-total
+    ) {
+    background: transparent !important;
+    border-radius: 0 !important;
+  }
+
+  .plat-body.is-app .plat-project-detail,
+  .plat-body.is-app .plat-project-detail-services,
+  .plat-body.is-app .plat-project-services-head,
+  .plat-body.is-app .plat-project-services-panel,
+  .plat-body.is-app .plat-project-services-total {
+    background: transparent;
+    border-radius: 0;
+  }
+
+  :is(
+      html.plat-dark-boot .plat-body.is-app,
+      .plat-body.is-app[data-plat-theme="dark"]
+    )
+    .plat-project-services-panel,
+  .plat-body.is-app .plat-project-services-panel {
+    border: 0 !important;
+    border-top: 1px solid rgba(125, 211, 252, 0.12) !important;
+  }
+
+  /* Rows separated by hairlines instead of by their own container. */
+  .plat-body.is-app .plat-project-services-items > li {
+    padding-inline: 0;
+    border-bottom: 1px solid rgba(125, 211, 252, 0.08);
+  }
+
+  .plat-body.is-app .plat-project-services-items > li:last-child {
+    border-bottom: 0;
+  }
+
+  .plat-body.is-app .plat-project-services-total {
+    padding-inline: 0;
+    border-top: 1px solid rgba(125, 211, 252, 0.12);
+  }
+
+  .plat-body.is-app .plat-project-services-head {
+    padding-inline: 0;
+  }
+
+  /* The PDF field sat in one 140px column of the detail grid, leaving
+     the two buttons ~67px each — enough to fit, but "Cotización" was
+     clipping its own label by 2px. Span the field across both columns
+     so they get half the card each. */
+  .plat-body.is-app .plat-project-detail-grid
+    > div:has(.plat-project-pdf-row) {
+    grid-column: 1 / -1;
+  }
+
+  .plat-body.is-app .plat-project-pdf-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.4rem;
+  }
+
+  .plat-body.is-app .plat-project-pdf-row .plat-btn {
+    width: 100%;
+    justify-content: center;
+    padding-inline: 0.4rem;
+  }
+
+  /* Service names and descriptions are free text: a long unbroken
+     string (no spaces to break at) pushed 14px past the card edge. */
+  .plat-body.is-app .plat-project-services-items li strong,
+  .plat-body.is-app .plat-project-services-items li p {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* Every row carried an "ADICIONAL" pill under a heading that already
+     says "Servicios adicionales" and a counter chip — three ways of
+     saying the same thing. Drop the per-row pill and let the title
+     start the row. The counter in the heading stays. */
+  .plat-body.is-app .plat-project-services-items li .plat-service-chip {
+    display: none;
+  }
+
+  /* Hours × rate on the left, subtotal on the right, one line. */
+  .plat-body.is-app .plat-project-service-math {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 0.3rem;
+  }
+
+  .plat-body.is-app .plat-project-service-math > strong {
+    text-align: right;
+    white-space: nowrap;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CARD LISTS — continuous surface + right-aligned row actions
+   ───────────────────────────────────────────────────────────────────
+   The list panel is a gradient (#12263c → #0e1c2e) and each card added
+   3% white on top, so the gaps between cards read as a darker channel
+   running down the list. Dropping the card fill lets the panel show
+   through continuously; the border alone still delimits each card.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  /* The scroll wrapper paints an opaque #0c1828 ON TOP of the panel's
+     gradient, so clearing the card fill alone wasn't enough — the gaps
+     still showed that darker layer instead of the panel.
+
+     The dark theme sets it through two selectors, and the second one
+     (`… .plat-projects-board .plat-quote-list-scroll`) carries an extra
+     class for specificity (0,5,1). Matching only the shorter form
+     (0,4,1) lost on Proyectos no matter the source order, so the board
+     class is repeated here to level it. */
+  :is(
+      html.plat-dark-boot .plat-body.is-app,
+      .plat-body.is-app[data-plat-theme="dark"]
+    )
+    :is(
+      .plat-projects-board,
+      .plat-clients-board,
+      .plat-newsletter-board,
+      .plat-blog-list,
+      .plat-quote-list
+    )
+    .plat-quote-list-scroll,
+  :is(
+      html.plat-dark-boot .plat-body.is-app,
+      .plat-body.is-app[data-plat-theme="dark"]
+    )
+    .plat-quote-list-scroll,
+  .plat-body.is-app .plat-quote-list-scroll {
+    background: transparent !important;
+  }
+
+  /* With the fill gone, a full border around every card left two
+     parallel lines in each gap — one closing a card, one opening the
+     next. Drop the outline and separate the rows with a single rule
+     instead. */
+  .plat-body.is-app .plat-quote-hub .plat-quote-list .plat-table tbody tr,
+  .plat-body.is-app .plat-projects-board .plat-table tbody tr,
+  .plat-body.is-app .plat-clients-board .plat-table tbody tr,
+  .plat-body.is-app .plat-newsletter-board .plat-table tbody tr,
+  .plat-body.is-app .plat-news-activity .plat-table tbody tr,
+  .plat-body.is-app .plat-blog-list .plat-table tbody tr {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(125, 211, 252, 0.12);
+    border-radius: 0;
+    margin-bottom: 0;
+    padding-block: 0.85rem;
+  }
+
+  /* No trailing rule under the last card in a list. */
+  .plat-body.is-app .plat-quote-hub .plat-quote-list .plat-table tbody tr:last-child,
+  .plat-body.is-app .plat-clients-board .plat-table tbody tr:last-child,
+  .plat-body.is-app .plat-newsletter-board .plat-table tbody tr:last-child,
+  .plat-body.is-app .plat-news-activity .plat-table tbody tr:last-child,
+  .plat-body.is-app .plat-blog-list .plat-table tbody tr:last-child,
+  .plat-body.is-app .plat-projects-board .plat-table tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  /* A project row followed by its expanded detail is one unit — the
+     rule belongs after the detail, not between the two halves. */
+  .plat-body.is-app
+    .plat-projects-board
+    .plat-table
+    tbody
+    tr:has(+ .plat-project-detail-row) {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .plat-body.is-app .plat-projects-board .plat-table tr.plat-project-detail-row {
+    margin: 0;
+    padding: 0 0 0.85rem;
+    border: 0;
+    border-bottom: 1px solid rgba(125, 211, 252, 0.12);
+    border-radius: 0;
+  }
+
+  /* The expanded Proyectos detail joins the card above it, so it has to
+     drop the fill too or the seam reappears as a tone change. */
+  .plat-body.is-app .plat-projects-board .plat-table tr.plat-project-detail-row {
+    background: transparent;
+  }
+
+  /* Newsletter row actions (menu + delete) hugged the left edge of a
+     full-width cell; align them with the status badge on the right,
+     matching the Clientes cards. */
+  .plat-body.is-app .plat-newsletter-board .plat-table td .plat-row-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+/* ── Newsletter · Métricas (móvil y tablet) ─────────────────────── */
+
+@media (max-width: 900px) {
+  /* Los filtros gobiernan los KPIs del período y los gráficos por igual.
+     En escritorio entran en la misma pantalla que los números; acá no, así
+     que suben. Es sólo orden visual, el DOM queda igual. */
+  .plat-body.is-app .plat-newsletter-metrics > .plat-news-metrics-toolbar {
+    order: -1;
+  }
+
+  /* Ocho KPIs en una sola columna eran ~700px de scroll para ocho números.
+     Mismo tratamiento compacto que el grid de métricas del dashboard. */
+  .plat-body.is-app .plat-news-kpi-grid:not(.plat-dashboard-metrics-grid) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .plat-body.is-app
+    .plat-news-kpi-grid:not(.plat-dashboard-metrics-grid)
+    .plat-news-kpi {
+    min-height: 0;
+    padding: 0.6rem 0.65rem;
+    gap: 0.1rem;
+  }
+
+  .plat-body.is-app
+    .plat-news-kpi-grid:not(.plat-dashboard-metrics-grid)
+    .plat-news-kpi-top {
+    gap: 0.35rem;
+  }
+
+  .plat-body.is-app
+    .plat-news-kpi-grid:not(.plat-dashboard-metrics-grid)
+    .plat-news-kpi-icon {
+    width: 1.45rem;
+    height: 1.45rem;
+    border-radius: 0.42rem;
+  }
+
+  .plat-body.is-app
+    .plat-news-kpi-grid:not(.plat-dashboard-metrics-grid)
+    .plat-news-kpi-icon svg {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
+  .plat-body.is-app
+    .plat-news-kpi-grid:not(.plat-dashboard-metrics-grid)
+    .plat-news-kpi
+    .plat-metric-sub {
+    font-size: var(--pm-xs);
+    line-height: 1.25;
+  }
+
+  /* "Origen top" muestra un nombre, no un número: sin esto desborda la
+     mitad de tarjeta en pantallas angostas. */
+  .plat-body.is-app
+    .plat-news-kpi-grid:not(.plat-dashboard-metrics-grid)
+    .plat-news-kpi
+    .plat-metric {
+    font-size: 1.05rem;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+
+  .plat-body.is-app
+    .plat-news-kpi-grid:not(.plat-dashboard-metrics-grid)
+    .plat-news-kpi-hint {
+    font-size: var(--pm-2xs);
+    line-height: 1.25;
+  }
+
+  /* Los dos selectores entran de a dos: "Últimos 30 días" y "Todos" son
+     cortos, y apilados gastaban una fila entera cada uno. */
+  .plat-body.is-app .plat-news-metrics-toolbar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: end;
+    gap: 0.5rem;
+  }
+
+  /* Tarjetas de gráfico: la altura de escritorio (21rem de tarjeta sobre
+     260px de canvas) dejaba mucho aire vacío arriba y abajo del dato. */
+  .plat-body.is-app .plat-news-metrics-charts {
+    gap: 0.6rem;
+  }
+
+  .plat-body.is-app .plat-news-metrics-charts .plat-chart-card {
+    min-height: 0;
+    padding: 0.85rem 0.85rem 0.9rem !important;
+  }
+
+  .plat-body.is-app .plat-news-metrics-charts .plat-chart-card h3 {
+    margin-bottom: 0.6rem;
+    font-size: var(--pm-lg);
+  }
+
+  .plat-body.is-app
+    .plat-news-metrics-charts
+    .plat-chart-wrap
+    > .recharts-responsive-container {
+    height: 13rem !important;
+    min-height: 13rem !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* Newsletter usa la leyenda propia de Recharts, que trae su tamaño de
+     texto y sus íconos por inline style. Se ajusta por CSS y sólo acá, en
+     vez de reemplazar el componente: así escritorio queda intacto. */
+  .plat-body.is-app
+    .plat-news-metrics-charts
+    .recharts-legend-wrapper {
+    font-size: var(--pm-sm);
+  }
+
+  .plat-body.is-app
+    .plat-news-metrics-charts
+    .recharts-default-legend
+    .recharts-legend-item {
+    margin-right: 0.85rem !important;
+  }
+
+  .plat-body.is-app
+    .plat-news-metrics-charts
+    .recharts-default-legend
+    .recharts-legend-item
+    svg {
+    width: 0.6rem !important;
+    height: 0.6rem !important;
+    vertical-align: middle !important;
+  }
+}
+
+/* Altas / bajas recientes: era la única lista de la plataforma que seguía
+   siendo una tabla real (417px dentro de un contenedor de 284px), o sea
+   scroll horizontal para leer cada fila. Pasa a cards como el resto:
+   nombre + fecha en la primera línea, email debajo y origen al pie. */
+
+@media (max-width: 900px) {
+  .plat-body.is-app .plat-news-activity {
+    min-height: 0;
+    padding: 0.85rem 0.9rem 0.9rem !important;
+  }
+
+  .plat-body.is-app .plat-news-activity-grid {
+    min-height: 0;
+    gap: 0.6rem;
+  }
+
+  .plat-body.is-app .plat-news-activity > header {
+    margin-bottom: 0.35rem;
+  }
+
+  .plat-body.is-app .plat-news-activity > header h3 {
+    font-size: var(--pm-lg);
+  }
+
+  .plat-body.is-app .plat-news-activity > header span {
+    font-size: var(--pm-sm);
+  }
+
+  /* El wrapper existe para el scroll vertical del escritorio; en móvil
+     la página ya scrollea, y dejarlo activo recortaba las cards. */
+  .plat-body.is-app .plat-news-activity-scroll {
+    overflow: visible;
+    max-height: none;
+  }
+
+  .plat-body.is-app .plat-news-activity .plat-table tr {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 0.15rem 0.6rem;
+  }
+
+  /* Nombre */
+  .plat-body.is-app .plat-news-activity .plat-table td:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: var(--pm-md);
+    font-weight: 650;
+    color: #e2f2ff;
+    overflow-wrap: anywhere;
+  }
+
+  /* Fecha, a la derecha y en línea con el nombre */
+  .plat-body.is-app .plat-news-activity .plat-table td:nth-of-type(4) {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    white-space: nowrap;
+    font-size: var(--pm-xs);
+    color: #9ec0db;
+  }
+
+  /* Email */
+  .plat-body.is-app .plat-news-activity .plat-table td:nth-of-type(2) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: var(--pm-sm);
+    color: #9ec0db;
+    overflow-wrap: anywhere;
+  }
+
+  /* Origen */
+  .plat-body.is-app .plat-news-activity .plat-table td:nth-of-type(3) {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    font-size: var(--pm-xs);
+    color: #7ea8c8;
+  }
+
+  .plat-body.is-app .plat-news-activity .plat-table tbody tr {
+    padding-block: 0.6rem;
+    padding-inline: 0;
+  }
+}
+
+/* En tablet vuelve a haber ancho para cuatro KPIs por fila. */
+@media (min-width: 601px) and (max-width: 900px) {
+  .plat-body.is-app .plat-news-kpi-grid:not(.plat-dashboard-metrics-grid) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+
+  .plat-body.is-app
+    .plat-news-kpi-grid:not(.plat-dashboard-metrics-grid)
+    .plat-news-kpi
+    .plat-metric {
+    font-size: 1.2rem;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   Ajustes de control táctil — móvil
+   La escala de radios vive ahora en plataforma.css (tokens --pr-*) y
+   aplica a las dos versiones por igual, así que acá sólo queda lo que
+   es específico del tacto.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  /* ── Objetivo táctil de las casillas (WCAG 2.5.8) ──────────────
+     Venían a 18×18px, siete por debajo del mínimo de 24. */
+  .plat-body.is-app input[type="checkbox"] {
+    width: 1.5rem;
+    height: 1.5rem;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    accent-color: #1b75bb;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   PROYECTOS — densidad y jerarquía de la card
+   Nueve proyectos ocupaban 2498px (≈3 pantallas) a 240px por card. El
+   problema no era el largo sino el reparto: el título se comía dos
+   líneas al mismo peso que todo lo demás, y los dos selectores de
+   estado ocupaban una fila entera dentro de cada card.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .plat-body.is-app .plat-projects-board .plat-table tbody tr {
+    padding-block: 0.7rem;
+    gap: 0.2rem 0.5rem;
+  }
+
+  /* Título: dos líneas como máximo y algo más de aire debajo, para que
+     se lea como encabezado de la card y no como un bloque de texto. */
+  .plat-body.is-app .plat-projects-board .plat-table td:nth-of-type(1) strong {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: var(--pm-md);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  /* Cliente y mail: bajan un escalón para que no compitan con el título. */
+  .plat-body.is-app .plat-projects-board .plat-table td:nth-of-type(2) {
+    font-size: var(--pm-sm);
+    line-height: 1.35;
+  }
+
+  /* Avance: a lo ancho y con el porcentaje encima, igual que en la
+     vista del cliente. Antes era una línea gris de 3.5rem perdida al
+     costado del número, que a 0% no se distinguía del fondo. */
+  .plat-body.is-app .plat-projects-board .plat-project-progress-view {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+    min-width: 0;
+    min-height: 0;
+    margin-block: 0.15rem;
+  }
+
+  .plat-body.is-app .plat-projects-board .plat-project-progress-view small {
+    order: -1;
+    min-width: 0;
+    text-align: left;
+    font-size: var(--pm-xs);
+    color: #9ec0db;
+  }
+
+  .plat-body.is-app .plat-projects-board .plat-project-progress-view .plat-progress {
+    width: 100%;
+    min-width: 0;
+    height: 0.4rem;
+    background: rgba(125, 211, 252, 0.16);
+  }
+
+  /* Selectores de estado y pago: siguen accesibles desde la lista, pero
+     con peso de control secundario en vez de dos botones grandes. */
+  .plat-body.is-app
+    .plat-projects-board
+    :is(.plat-project-status-select, .plat-project-payment-select) {
+    min-height: 2rem;
+    height: 2rem;
+    padding-block: 0;
+    font-size: var(--pm-xs);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   INBOX — el panel reservaba 416px para una conversación de 79px
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  /* La regla anterior sostenía el panel abierto a 58svh para que una
+     lista corta no dejara el fondo pelado. Con un solo contacto eso
+     dejaba 337px vacíos adentro, que se lee peor que una lista corta.
+     Ahora sólo garantiza presencia mínima y crece con el contenido. */
+  .plat-body.is-app .plat-inbox:not(.has-mobile-selection) .plat-inbox-list {
+    min-height: 0;
+  }
+
+  .plat-body.is-app .plat-inbox:not(.has-mobile-selection) .plat-inbox-list ul {
+    min-height: 0;
+  }
+
+  /* El estado vacío sí necesita cuerpo propio: sin items no hay nada
+     que le dé altura a la tarjeta. */
+  .plat-body.is-app .plat-inbox-empty {
+    min-height: 9rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   BLOG — título y subtítulo se leían como bloques resaltados
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  /* Son inputs sin borde ni fondo (estilo editor). En móvil, sobre el
+     fondo oscuro, el relleno del campo quedaba como una banda plana de
+     lado a lado. Se les da el mismo tratamiento que al resto de campos. */
+  .plat-body.is-app
+    :is(.plat-blog-title-input, .plat-blog-subtitle-input) {
+    padding: 0.55rem 0.7rem;
+    border: 1px solid rgba(125, 211, 252, 0.16);
+    border-radius: var(--pr-sm);
+    background: rgba(125, 211, 252, 0.05);
+  }
+
+  .plat-body.is-app .plat-blog-title-input {
+    font-size: 1.15rem;
+    line-height: 1.25;
+  }
+
+  .plat-body.is-app .plat-blog-subtitle-input {
+    font-size: var(--pm-md);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CLIENTES — el teléfono ausente se leía como un fallo de render
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  /* En la tabla de escritorio un guión largo es la convención y ocupa
+     poco. En la card de móvil queda solo en su renglón y parece que el
+     dato no cargó. Acá se nombra; el guión sigue en el DOM para no
+     alterar la columna en escritorio. */
+  .plat-body.is-app .plat-clients-board .plat-cell-empty {
+    font-size: 0;
+  }
+
+  .plat-body.is-app .plat-clients-board .plat-cell-empty::after {
+    content: "Sin teléfono";
+    font-size: var(--pm-sm);
+    color: #7ea8c8;
+  }
+}
+
+@media (max-width: 900px) {
+  /* El bloque de cancelación repetía el estado que ya muestra el
+     selector justo encima ("Cancelado" dos veces en la misma card).
+     Queda sólo el dato que no está en ningún otro lado: la devolución. */
+  .plat-body.is-app
+    .plat-projects-board
+    .plat-quote-cancel-meta
+    > .plat-quote-muted {
+    display: none;
+  }
+
+  /* Nombre y mail del cliente: mismo contenido, un escalón más abajo en
+     la jerarquía y sin el interlineado de párrafo que traían. */
+  .plat-body.is-app .plat-projects-board .plat-table td:nth-of-type(2) > div {
+    font-size: var(--pm-sm);
+    line-height: 1.25;
+  }
+
+  .plat-body.is-app
+    .plat-projects-board
+    .plat-table
+    td:nth-of-type(2)
+    .plat-quote-muted {
+    display: block;
+    font-size: var(--pm-xs);
+    line-height: 1.2;
+  }
+}

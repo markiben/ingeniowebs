@@ -1,3 +1,23 @@
+/* ── Escala de radios ───────────────────────────────────────────────
+   Antes convivían 21 valores distintos (0.4, 0.45, 0.5, 0.55, 0.6,
+   0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1, 1.05, 1.1, 1.15, 1.25,
+   1.4rem…). La diferencia entre 0.7 y 0.75 nadie la percibe como
+   intención, sólo como esquinas que no coinciden. Cuatro pasos con
+   salto real, más la píldora:
+
+     xs  4px   micro-elementos
+     sm  8px   controles: botones, campos, selectores, chips
+     md  12px  paneles y tiles dentro de una tarjeta
+     lg  16px  contenedores de primer nivel
+   ─────────────────────────────────────────────────────────────────── */
+:root {
+  --pr-xs: 0.25rem;
+  --pr-sm: 0.5rem;
+  --pr-md: 0.75rem;
+  --pr-lg: 1rem;
+  --pr-pill: 9999px;
+}
+
 .plat-body {
   min-height: 100svh;
   background:
@@ -22,6 +42,8 @@
   background: #0a1420;
   /* Mismo hueco: barra superior ↔ banner ↔ cards ↔ marco */
   --plat-frame: 0.75rem;
+  --plat-sidebar-width: 13.25rem;
+  --plat-sidebar-rail: 3.5rem;
 }
 
 @media (min-width: 640px) {
@@ -119,7 +141,7 @@
   width: 2.15rem;
   height: 2.15rem;
   border: 0;
-  border-radius: 0.65rem;
+  border-radius: var(--pr-sm);
   background: transparent;
   color: rgba(255, 255, 255, 0.72);
   -webkit-tap-highlight-color: transparent;
@@ -149,7 +171,7 @@
   min-height: 2.15rem;
   padding: 0.2rem 0.45rem 0.2rem 0.2rem;
   border: 0;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   background: rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.78);
   overflow: visible;
@@ -174,7 +196,7 @@
 .plat-site-header .plat-avatar-fallback {
   width: 1.7rem;
   height: 1.7rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   flex-shrink: 0;
 }
 
@@ -235,12 +257,12 @@
 
 .plat-body ::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
 }
 
 .plat-body ::-webkit-scrollbar-thumb {
   background: rgba(125, 211, 252, 0.28);
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   border: 2px solid transparent;
   background-clip: padding-box;
 }
@@ -263,12 +285,11 @@
 .plat-shell {
   position: relative;
   display: grid;
-  grid-template-columns: 16.5rem 1fr;
+  grid-template-columns: var(--plat-sidebar-width, 13.25rem) 1fr;
   grid-template-rows: minmax(0, 1fr);
   flex: 1 1 auto;
   min-height: 0;
-  height: auto;
-  max-height: none;
+  align-items: stretch;
   gap: var(--plat-frame, 0.75rem);
   padding: var(--plat-frame, 0.75rem);
   overflow: hidden;
@@ -280,7 +301,7 @@
 }
 
 .plat-shell.is-collapsed {
-  grid-template-columns: 3.85rem 1fr;
+  grid-template-columns: var(--plat-sidebar-rail, 3.5rem) 1fr;
 }
 
 @media (max-width: 900px) {
@@ -310,9 +331,9 @@
   gap: 0.65rem;
   height: 100%;
   min-height: 0;
-  padding: 0.75rem 0.65rem 1rem;
+  padding: 0.75rem 0.5rem 1rem;
   border: 1px solid rgba(148, 163, 184, 0.12);
-  border-radius: 1rem;
+  border-radius: var(--pr-lg);
   background: linear-gradient(180deg, #0a1628 0%, #0f2744 52%, #0a1a30 100%);
   box-shadow:
     0 8px 28px rgba(0, 0, 0, 0.35),
@@ -329,7 +350,7 @@
   min-height: 2.5rem;
   padding: 0 0.65rem;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
   background: rgba(255, 255, 255, 0.12);
   color: #fff;
   font-size: 0.875rem;
@@ -358,7 +379,7 @@
   padding: 0;
   justify-content: center;
   gap: 0;
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
 }
 
 .plat-menubar {
@@ -400,7 +421,7 @@
   margin-left: auto;
   flex-shrink: 0;
   border: 0;
-  border-radius: 0.45rem;
+  border-radius: var(--pr-sm);
   background: transparent;
   color: rgba(255, 255, 255, 0.72);
   cursor: pointer;
@@ -442,7 +463,7 @@
   width: 2.5rem;
   height: 2.5rem;
   margin-left: 0;
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   color: rgba(255, 255, 255, 0.85);
 }
 
@@ -470,10 +491,11 @@
   width: 100%;
   height: 2.5rem;
   min-height: 2.5rem;
-  padding: 0 0.65rem;
+  padding: 0 0.5rem;
   justify-content: flex-start;
-  gap: 0.55rem;
+  gap: 0.5rem;
   box-sizing: border-box;
+  font-size: 0.84rem;
 }
 
 .plat-nav-label {
@@ -535,14 +557,13 @@
   padding: 0;
   justify-content: center;
   gap: 0;
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
 }
 
 @media (max-width: 900px) {
   .plat-sidebar {
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
-    height: auto;
+    border-radius: var(--pr-lg);
   }
 }
 
@@ -569,7 +590,7 @@
   margin: 0;
   flex-shrink: 0;
   border: 1px solid rgba(148, 163, 184, 0.14);
-  border-radius: 1rem;
+  border-radius: var(--pr-lg);
   background: linear-gradient(
     135deg,
     #0a1628 0%,
@@ -633,7 +654,7 @@
   border: 0;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(8, 28, 52, 0.45);
-  border-radius: 0 0 1rem 1rem;
+  border-radius: 0 0 var(--pr-lg) var(--pr-lg);
   box-shadow: none;
 }
 
@@ -686,7 +707,7 @@
   align-items: center;
   justify-content: center;
   padding: 0 0.4rem;
-  border-radius: 9999px !important;
+  border-radius: var(--pr-pill) !important;
   background: rgba(255, 255, 255, 0.16) !important;
   color: rgba(255, 255, 255, 0.92) !important;
   font-size: 0.72rem;
@@ -726,7 +747,7 @@
   margin-bottom: 0;
   padding: 1.35rem 1.4rem 1.4rem;
   border: 1px solid rgba(148, 163, 184, 0.14);
-  border-radius: 1rem;
+  border-radius: var(--pr-lg);
   background: linear-gradient(
     135deg,
     #0a1628 0%,
@@ -798,7 +819,7 @@
   padding: 0;
   margin-bottom: 0.85rem;
   border: 1px solid rgba(15, 23, 42, 0.1);
-  border-radius: 0.85rem;
+  border-radius: var(--pr-md);
   background: #0b121a;
   overflow-x: auto;
 }
@@ -833,14 +854,14 @@
   right: 0.55rem;
   bottom: 0;
   height: 2px;
-  border-radius: 999px;
+  border-radius: var(--pr-pill);
   background: #67e8f9;
 }
 
 .plat-body.is-app .plat-inbox {
   padding: 0;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 1rem;
+  border-radius: var(--pr-lg);
   background: #ffffff;
   box-shadow:
     0 1px 2px rgba(15, 23, 42, 0.04),
@@ -991,7 +1012,7 @@
   border: 0;
   background: #ffffff;
   color: #0f172a;
-  border-radius: 1.4rem;
+  border-radius: var(--pr-lg);
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
 }
 
@@ -1218,7 +1239,7 @@
   padding: 0 0.35rem;
   overflow-x: auto;
   border: 1px solid rgba(15, 23, 42, 0.1);
-  border-radius: 0.85rem;
+  border-radius: var(--pr-md);
   background: #0b121a;
   box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.04);
   scrollbar-width: thin;
@@ -1252,7 +1273,7 @@
   align-items: center;
   justify-content: center;
   padding: 0 0.4rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   background: rgba(255, 255, 255, 0.08);
   color: rgba(168, 197, 216, 0.8);
   font-size: 0.72rem;
@@ -1278,7 +1299,7 @@
   right: 0.55rem;
   bottom: 0;
   height: 2px;
-  border-radius: 999px;
+  border-radius: var(--pr-pill);
   background: #67e8f9;
 }
 
@@ -1592,10 +1613,10 @@
   gap: 0.55rem;
   height: 2.5rem;
   min-height: 2.5rem;
-  padding: 0 0.65rem;
-  border-radius: 0.75rem;
+  padding: 0 0.5rem;
+  border-radius: var(--pr-sm);
   color: rgba(255, 255, 255, 0.88);
-  font-size: 0.875rem;
+  font-size: 0.84rem;
   font-weight: 550;
   box-sizing: border-box;
   transition: background 0.15s ease, color 0.15s ease;
@@ -1702,6 +1723,86 @@
 .plat-content:has(.plat-projects-board) > .plat-topbar,
 .plat-content:has(.plat-projects-board) > .plat-section-hero {
   flex-shrink: 0;
+}
+
+.plat-main:has(.plat-dashboard-hub) {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.plat-content:has(.plat-dashboard-hub) {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-bottom: 0;
+  box-sizing: border-box;
+}
+
+.plat-content > .plat-dashboard-hub {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+}
+
+.plat-content:has(.plat-dashboard-hub) > .plat-section-hero {
+  flex-shrink: 0;
+}
+
+.plat-dashboard-hub > .plat-section-hero {
+  flex-shrink: 0;
+}
+
+.plat-dashboard-hub > .plat-ops,
+.plat-dashboard-hub > .plat-dashboard-metrics {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.plat-dashboard-hub > .plat-dashboard-metrics {
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+
+.plat-dashboard-metrics-filters {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 30;
+  overflow: visible;
+}
+
+.plat-dashboard-metrics-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding-bottom: 0.75rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.plat-dashboard-metrics-body > * {
+  flex-shrink: 0;
+}
+
+.plat-dashboard-metrics-body > .plat-dashboard-metrics-charts {
+  flex: 1 1 auto;
+  min-height: 0;
+  align-self: stretch;
+}
+
+@media (min-width: 1201px) {
+  .plat-dashboard-metrics-body {
+    overflow: hidden;
+    padding-bottom: 0;
+  }
 }
 
 .plat-projects-board.plat-card {
@@ -1811,7 +1912,7 @@
   place-items: center;
   width: 2.25rem;
   height: 2.25rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.04);
   color: rgba(255, 255, 255, 0.88);
@@ -1832,7 +1933,7 @@
   min-width: 1rem;
   height: 1rem;
   padding: 0 0.25rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   background: #f87171;
   color: #fff;
   font-size: 0.62rem;
@@ -1850,7 +1951,7 @@
 .plat-avatar-btn {
   width: 2.25rem;
   height: 2.25rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   border: 1px solid rgba(255, 255, 255, 0.14);
   padding: 0;
   overflow: hidden;
@@ -1881,7 +1982,7 @@
   top: calc(100% + 0.45rem);
   z-index: 30;
   width: min(20.5rem, 82vw);
-  border-radius: 1rem;
+  border-radius: var(--pr-lg);
   overflow: hidden;
 }
 
@@ -1913,7 +2014,7 @@
   max-height: none;
   display: flex;
   flex-direction: column;
-  border-radius: 1.15rem 0 0 1.15rem;
+  border-radius: var(--pr-lg) 0 0 var(--pr-lg);
   border: 1px solid rgba(15, 23, 42, 0.1);
   border-right: 0;
   background: #ffffff;
@@ -1981,7 +2082,7 @@
   width: 2.55rem;
   height: 2.55rem;
   flex-shrink: 0;
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   overflow: hidden;
   background: #e8f1fb;
   color: #0e335f;
@@ -2141,7 +2242,7 @@
   place-items: center;
   width: 2.5rem;
   height: 2.5rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   background: rgba(125, 211, 252, 0.1);
   color: #7dd3fc;
   margin-bottom: 0.15rem;
@@ -2170,7 +2271,7 @@
   display: inline-flex;
   align-items: center;
   padding: 0.35rem 0.65rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   border: 1px solid rgba(125, 211, 252, 0.22);
   background: rgba(125, 211, 252, 0.08);
   font-size: 0.74rem;
@@ -2204,7 +2305,7 @@
   min-width: 0;
   padding: 0.4rem 0.35rem;
   border: 0;
-  border-radius: 0.55rem;
+  border-radius: var(--pr-sm);
   background: transparent;
   color: rgba(255, 255, 255, 0.55);
   font-size: 0.72rem;
@@ -2218,7 +2319,7 @@
   min-width: 1.1rem;
   height: 1.1rem;
   padding: 0 0.25rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   background: rgba(255, 255, 255, 0.08);
   font-size: 0.65rem;
 }
@@ -2260,7 +2361,7 @@
   align-items: center;
   gap: 0.3rem;
   padding: 0.28rem 0.55rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.04);
   color: rgba(255, 255, 255, 0.78);
@@ -2319,7 +2420,7 @@
   font-weight: 600;
   cursor: pointer;
   padding: 0.25rem 0.4rem;
-  border-radius: 0.4rem;
+  border-radius: var(--pr-sm);
 }
 
 .plat-notify-center-link:hover:not(:disabled) {
@@ -2338,7 +2439,7 @@
   width: 1.85rem;
   height: 1.85rem;
   border: 0;
-  border-radius: 0.5rem;
+  border-radius: var(--pr-sm);
   background: transparent;
   color: #64748b;
   cursor: pointer;
@@ -2376,7 +2477,7 @@
   min-width: 1.15rem;
   height: 1.15rem;
   padding: 0 0.28rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   background: rgba(27, 117, 187, 0.12);
   color: #1b75bb;
   font-size: 0.66rem;
@@ -2394,7 +2495,7 @@
   right: 0;
   bottom: -1px;
   height: 2px;
-  border-radius: 9999px 9999px 0 0;
+  border-radius: var(--pr-pill) var(--pr-pill) 0 0;
   background: #1b75bb;
 }
 
@@ -2411,7 +2512,7 @@
   gap: 0.35rem;
   padding: 0.35rem 0.7rem;
   border: 0;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   background: rgba(15, 23, 42, 0.05);
   color: #64748b;
   font-size: 0.74rem;
@@ -2460,7 +2561,7 @@
   width: 2.35rem;
   height: 2.35rem;
   flex-shrink: 0;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   background: rgba(27, 117, 187, 0.12);
   color: #1b75bb;
 }
@@ -2521,7 +2622,7 @@
   display: inline-flex;
   align-items: center;
   padding: 0.4rem 0.75rem;
-  border-radius: 0.55rem;
+  border-radius: var(--pr-sm);
   background: #1b75bb;
   color: #fff;
   font-size: 0.74rem;
@@ -2546,7 +2647,7 @@
   width: 1.75rem;
   height: 1.75rem;
   border: 0;
-  border-radius: 0.45rem;
+  border-radius: var(--pr-sm);
   background: transparent;
   color: #94a3b8;
   cursor: pointer;
@@ -2596,7 +2697,7 @@
 .plat-notify-center-footer a {
   display: inline-flex;
   padding: 0.35rem 0.65rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   border: 1px solid rgba(27, 117, 187, 0.22);
   background: rgba(27, 117, 187, 0.06);
   color: #1b75bb;
@@ -2629,7 +2730,7 @@
   gap: 1.1rem;
   flex-wrap: wrap;
   padding: 1.25rem 1.35rem;
-  border-radius: 1.15rem;
+  border-radius: var(--pr-lg);
   border: 1px solid rgba(15, 23, 42, 0.08);
   background: #fff;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
@@ -2645,7 +2746,7 @@
   place-items: center;
   width: 5.25rem;
   height: 5.25rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   overflow: hidden;
   background: #e8f1fb;
   color: #0e335f;
@@ -2670,7 +2771,7 @@
   width: 1.7rem;
   height: 1.7rem;
   border: 2px solid #fff;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   background: #1b75bb;
   color: #fff;
   cursor: pointer;
@@ -2712,7 +2813,7 @@
   align-items: center;
   gap: 0.35rem;
   border: 0;
-  border-radius: 0.55rem;
+  border-radius: var(--pr-sm);
   background: rgba(27, 117, 187, 0.12);
   color: #1b75bb;
   font-size: 0.78rem;
@@ -2738,7 +2839,7 @@
   gap: 0.9rem;
   align-items: flex-start;
   padding: 1.1rem 1.2rem;
-  border-radius: 1.05rem;
+  border-radius: var(--pr-lg);
   border: 1px solid rgba(15, 23, 42, 0.08);
   background: #fff;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
@@ -2750,7 +2851,7 @@
   width: 2.55rem;
   height: 2.55rem;
   flex-shrink: 0;
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
   background: rgba(27, 117, 187, 0.1);
   color: #1b75bb;
 }
@@ -2912,7 +3013,7 @@
 .plat-modal .plat-field input {
   width: 100%;
   border: 1px solid rgba(15, 23, 42, 0.12);
-  border-radius: 0.65rem;
+  border-radius: var(--pr-sm);
   background: #f8fafc;
   color: #0f172a;
   padding: 0.7rem 0.8rem;
@@ -2929,7 +3030,7 @@
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  border-radius: 1.15rem 0 0 1.15rem;
+  border-radius: var(--pr-lg) 0 0 var(--pr-lg);
   border: 1px solid rgba(15, 23, 42, 0.1);
   border-right: 0;
   background: #ffffff;
@@ -2981,7 +3082,7 @@
 .plat-profile-drawer-form select {
   width: 100%;
   border: 1px solid rgba(15, 23, 42, 0.12);
-  border-radius: 0.65rem;
+  border-radius: var(--pr-sm);
   background: #f8fafc;
   color: #0f172a;
   padding: 0.7rem 0.8rem;
@@ -3019,7 +3120,7 @@
 .plat-avatar-preview {
   width: 4.5rem;
   height: 4.5rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.04);
@@ -3042,7 +3143,7 @@
   border: 1px solid rgba(15, 23, 42, 0.14);
   background: transparent;
   color: #475569;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   padding: 0.35rem 0.75rem;
   font-size: 0.8rem;
   cursor: pointer;
@@ -3072,7 +3173,7 @@
   min-width: 1.15rem;
   height: 1.15rem;
   padding: 0 0.3rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   background: #22c55e;
   color: #052e16;
   font-size: 0.68rem;
@@ -3089,7 +3190,7 @@
   max-width: 100%;
   min-height: 28rem;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 1rem;
+  border-radius: var(--pr-lg);
   overflow: hidden;
   background: #ffffff;
   box-shadow:
@@ -3169,7 +3270,7 @@
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: stretch;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 0.85rem;
+  border-radius: var(--pr-md);
   background: #f8fafc;
   overflow: visible;
 }
@@ -3225,7 +3326,7 @@
   min-width: 1.2rem;
   height: 1.2rem;
   padding: 0 0.32rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   background: #22c55e;
   color: #052e16;
   font-size: 0.68rem;
@@ -3272,7 +3373,7 @@
   width: 1.55rem;
   height: 1.55rem;
   border: 0;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   background: transparent;
   color: #64748b;
   cursor: pointer;
@@ -3293,7 +3394,7 @@
   display: grid;
   gap: 0.1rem;
   padding: 0.35rem;
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: #1f2937;
   box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
@@ -3305,7 +3406,7 @@
   gap: 0.5rem;
   width: 100%;
   border: 0;
-  border-radius: 0.5rem;
+  border-radius: var(--pr-sm);
   background: transparent;
   color: rgba(255, 255, 255, 0.9);
   padding: 0.55rem 0.65rem;
@@ -3427,7 +3528,7 @@
   border: 1px solid rgba(125, 211, 252, 0.35);
   background: rgba(27, 117, 187, 0.18);
   color: #bae6fd;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   padding: 0.28rem 0.7rem;
   font-size: 0.68rem;
   font-weight: 650;
@@ -3442,6 +3543,10 @@
   border-color: rgba(125, 211, 252, 0.55);
 }
 
+.plat-quote-summary-chip-short {
+  display: none;
+}
+
 .plat-quote-summary-pop {
   position: absolute;
   top: calc(100% - 0.35rem);
@@ -3450,7 +3555,7 @@
   z-index: 30;
   margin-top: 0.35rem;
   max-width: min(100%, 28rem);
-  border-radius: 0.9rem;
+  border-radius: var(--pr-md);
   border: 1px solid rgba(125, 211, 252, 0.28);
   background: linear-gradient(165deg, #16304a 0%, #0f1e32 100%);
   box-shadow: 0 16px 40px rgba(2, 8, 23, 0.45);
@@ -3482,7 +3587,7 @@
   place-items: center;
   width: 1.7rem;
   height: 1.7rem;
-  border-radius: 0.45rem;
+  border-radius: var(--pr-sm);
   border: 1px solid transparent;
   background: transparent;
   color: #94a3b8;
@@ -3553,6 +3658,15 @@
 }
 
 .plat-inbox-date {
+  margin: 0.3rem 0 0;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.plat-inbox-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
   margin: 0.3rem 0 0;
   color: #64748b;
   font-size: 0.85rem;
@@ -3652,6 +3766,44 @@
   border: 0;
 }
 
+.plat-live-thread-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.plat-live-thread-wrap .plat-live-thread {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
+}
+
+.plat-live-jump-latest {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: var(--pr-pill);
+  border: 1px solid rgba(125, 211, 252, 0.25);
+  background: rgba(8, 20, 36, 0.85);
+  color: #7dd3fc;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.plat-live-jump-latest:hover {
+  background: rgba(27, 117, 187, 0.9);
+  color: #fff;
+}
+
 /* Composer flotante estilo WhatsApp (sin bloque gris) */
 .plat-live-chat .chat-composer.is-platform {
   position: relative;
@@ -3687,7 +3839,7 @@
   max-height: 6.5rem;
   padding: 0.65rem 1rem;
   border: 0;
-  border-radius: 1.4rem;
+  border-radius: var(--pr-lg);
   background: #ffffff;
   color: #0f172a;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
@@ -3707,7 +3859,7 @@
   min-width: 2.55rem;
   padding: 0;
   border: 0;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   background: #1b75bb;
   color: #ffffff;
   opacity: 1;
@@ -3738,7 +3890,7 @@
 
 .plat-live-chat .chat-composer.is-platform .chat-composer-preview {
   margin: 0 0 0.35rem 2.9rem;
-  border-radius: 1rem;
+  border-radius: var(--pr-lg);
   background: rgba(255, 255, 255, 0.92);
   border-color: rgba(15, 23, 42, 0.1);
 }
@@ -3792,7 +3944,7 @@
   flex-shrink: 0;
   width: 2rem;
   height: 2rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   overflow: hidden;
   display: grid;
   place-items: center;
@@ -3820,7 +3972,7 @@
   max-width: 100%;
   min-width: 0;
   padding: 0.55rem 0.7rem;
-  border-radius: 0.85rem;
+  border-radius: var(--pr-md);
   border: 1px solid rgba(15, 23, 42, 0.1);
   box-sizing: border-box;
   overflow-wrap: anywhere;
@@ -3892,7 +4044,7 @@
 .plat-live-typing span {
   width: 0.35rem;
   height: 0.35rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   background: rgba(255, 255, 255, 0.7);
   opacity: 0.55;
   animation: plat-typing-bounce 1.1s infinite ease-in-out;
@@ -3929,7 +4081,7 @@
 .plat-live-composer input {
   flex: 1;
   min-width: 0;
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(0, 0, 0, 0.25);
   color: #fff;
@@ -3949,7 +4101,7 @@
   width: 0.45rem;
   height: 0.45rem;
   margin-right: 0.4rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   vertical-align: middle;
 }
 
@@ -4008,7 +4160,7 @@
   justify-content: center;
   width: 1.7rem;
   height: 1.7rem;
-  border-radius: 0.45rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(125, 211, 252, 0.35);
   background: rgba(125, 211, 252, 0.1);
   color: #bae6fd;
@@ -4044,7 +4196,7 @@
   justify-content: center;
   margin-top: 0.7rem;
   border: 0;
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   padding: 0.5rem 0.95rem;
   background: #1b75bb;
   color: #fff;
@@ -4121,7 +4273,7 @@
   gap: 1rem;
   margin-bottom: 0;
   padding: 1.35rem 1.4rem 1.4rem;
-  border-radius: 1rem;
+  border-radius: var(--pr-lg);
   border: 1px solid rgba(125, 211, 252, 0.14);
   background:
     radial-gradient(ellipse 55% 120% at 92% 40%, rgba(27, 117, 187, 0.38), transparent 58%),
@@ -4166,7 +4318,7 @@
 
 .plat-card {
   padding: 1.05rem 1.15rem;
-  border-radius: 1.25rem;
+  border-radius: var(--pr-lg);
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: #153e6b;
   box-shadow:
@@ -4214,7 +4366,7 @@
   align-items: center;
   gap: 0.65rem;
   padding: 0.7rem 0.8rem;
-  border-radius: 0.9rem;
+  border-radius: var(--pr-md);
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
@@ -4233,7 +4385,7 @@
   width: 2rem;
   height: 2rem;
   flex-shrink: 0;
-  border-radius: 0.65rem;
+  border-radius: var(--pr-sm);
   background: #fff;
   color: #1b75bb;
 }
@@ -4318,7 +4470,7 @@
   justify-content: center;
   min-width: 4.75rem;
   padding: 0.2rem 0.55rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   font-size: 0.7rem;
   font-weight: 650;
   background: rgba(125, 211, 252, 0.14);
@@ -4417,7 +4569,7 @@
   z-index: 1;
   width: min(100%, 26rem);
   padding: 1.65rem 1.5rem 1.5rem;
-  border-radius: 1.25rem;
+  border-radius: var(--pr-lg);
   border: 1px solid rgba(77, 184, 255, 0.28);
   background: linear-gradient(160deg, rgba(10, 35, 66, 0.96) 0%, rgba(13, 42, 74, 0.94) 100%);
   box-shadow:
@@ -4466,7 +4618,7 @@
 .plat-auth-card.is-compact .plat-password-input-wrap input {
   padding: 0.55rem 0.75rem;
   font-size: 0.88rem;
-  border-radius: 0.65rem;
+  border-radius: var(--pr-sm);
 }
 
 .plat-auth-card.is-compact .plat-password-input-wrap input {
@@ -4567,7 +4719,7 @@
 .plat-form select {
   width: 100%;
   padding: 0.75rem 0.85rem;
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.04);
   color: #fff;
@@ -4592,7 +4744,8 @@
   justify-content: center;
   gap: 0.4rem;
   padding: 0.75rem 1rem;
-  border-radius: 0.8rem;
+  /* Control, no panel: acompaña a campos y selectores en --pr-sm. */
+  border-radius: var(--pr-sm);
   border: 0;
   background: #1b75bb;
   color: #fff;
@@ -4662,7 +4815,7 @@
   padding: 0;
   margin: 0;
   accent-color: #1b75bb;
-  border-radius: 0.2rem;
+  border-radius: var(--pr-xs);
   cursor: pointer;
 }
 
@@ -4719,7 +4872,7 @@
 
 .plat-error {
   padding: 0.7rem 0.85rem;
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
   background: rgba(248, 113, 113, 0.12);
   color: #fca5a5;
   font-size: 0.85rem;
@@ -4739,7 +4892,7 @@
 
 .plat-success {
   padding: 0.7rem 0.85rem;
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(74, 222, 128, 0.45);
   background: rgba(22, 163, 74, 0.28);
   color: #bbf7d0;
@@ -4782,7 +4935,7 @@
   width: 2rem;
   height: 2rem;
   border: 0;
-  border-radius: 0.45rem;
+  border-radius: var(--pr-sm);
   background: transparent;
   color: rgba(255, 255, 255, 0.55);
   cursor: pointer;
@@ -4797,7 +4950,7 @@
   list-style: none;
   margin: 0;
   padding: 0.65rem 0.75rem;
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.03);
   display: grid;
@@ -4894,7 +5047,7 @@
 
 .plat-progress {
   height: 0.45rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   background: rgba(255, 255, 255, 0.08);
   overflow: hidden;
 }
@@ -4940,7 +5093,7 @@
   width: 1.55rem;
   height: 1.55rem;
   border: 0;
-  border-radius: 0.45rem;
+  border-radius: var(--pr-sm);
   background: transparent;
   color: #64748b;
   cursor: pointer;
@@ -4980,7 +5133,7 @@ a.plat-code-link:hover {
   max-width: 100%;
   margin: 0.85rem 0 0.75rem;
   padding: 0.55rem 0.9rem;
-  border-radius: 0.85rem;
+  border-radius: var(--pr-md);
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: #153e6b;
   box-shadow:
@@ -5054,7 +5207,7 @@ a.plat-code-link:hover {
 
 .plat-hours-form input[type="number"] {
   width: 100%;
-  border-radius: 0.5rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: #0a0d12;
   color: #fff;
@@ -5075,7 +5228,7 @@ a.plat-code-link:hover {
   align-items: flex-end;
   gap: 0.85rem;
   padding: 0.95rem 1.1rem;
-  border-radius: 1rem;
+  border-radius: var(--pr-lg);
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: #12161d;
 }
@@ -5090,7 +5243,7 @@ a.plat-code-link:hover {
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: transparent;
   color: rgba(255, 255, 255, 0.72);
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   padding: 0.4rem 0.85rem;
   font-size: 0.82rem;
   cursor: pointer;
@@ -5117,7 +5270,7 @@ a.plat-code-link:hover {
   height: 2.5rem;
   min-height: 2.5rem;
   min-width: 8.5rem;
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: #0a0d12;
   color: #fff;
@@ -5146,6 +5299,8 @@ a.plat-code-link:hover {
 .plat-chart-card h3 {
   margin: 0 0 0.85rem;
   font-size: 0.95rem;
+  text-transform: none;
+  letter-spacing: normal;
 }
 
 .plat-chart-empty {
@@ -5164,7 +5319,7 @@ a.plat-code-link:hover {
   margin-bottom: 0.85rem;
   padding: 0 0.35rem;
   overflow-x: auto;
-  border-radius: 0.85rem;
+  border-radius: var(--pr-md);
   border: 1px solid rgba(125, 211, 252, 0.12);
   background: #0b121a;
   box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.04);
@@ -5194,7 +5349,7 @@ a.plat-code-link:hover {
   align-items: center;
   justify-content: center;
   padding: 0 0.4rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   background: rgba(255, 255, 255, 0.08);
   font-size: 0.72rem;
   font-weight: 700;
@@ -5217,7 +5372,7 @@ a.plat-code-link:hover {
   right: 0.55rem;
   bottom: 0;
   height: 2px;
-  border-radius: 999px;
+  border-radius: var(--pr-pill);
   background: #67e8f9;
 }
 
@@ -5283,7 +5438,7 @@ a.plat-code-link:hover {
   display: grid;
   gap: 0.35rem;
   padding: 0.75rem;
-  border-radius: 0.85rem;
+  border-radius: var(--pr-md);
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: #12161d;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
@@ -5339,7 +5494,7 @@ a.plat-code-link:hover {
   place-items: center;
   width: 1.35rem;
   height: 1.35rem;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   border: 1px solid rgba(125, 211, 252, 0.28);
   background: rgba(125, 211, 252, 0.1);
   color: #7dd3fc;
@@ -5356,7 +5511,7 @@ a.plat-code-link:hover {
   z-index: 1200;
   width: min(18rem, 72vw);
   padding: 0.85rem;
-  border-radius: 0.85rem;
+  border-radius: var(--pr-md);
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: #12161d;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
@@ -5462,7 +5617,7 @@ a.plat-code-link:hover {
   height: 2.5rem;
   min-height: 2.5rem;
   min-width: 9.5rem;
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(0, 0, 0, 0.35);
   color: #fff;
@@ -5521,7 +5676,7 @@ a.plat-code-link:hover {
   display: grid;
   gap: 0.15rem;
   padding: 0.4rem;
-  border-radius: 0.85rem;
+  border-radius: var(--pr-md);
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: linear-gradient(160deg, #121a28 0%, #0a1220 100%);
   box-shadow:
@@ -5544,7 +5699,7 @@ a.plat-code-link:hover {
   color: rgba(255, 255, 255, 0.9);
   text-align: left;
   padding: 0.55rem 0.7rem;
-  border-radius: 0.55rem;
+  border-radius: var(--pr-sm);
   font-size: 0.88rem;
   cursor: pointer;
   white-space: nowrap;
@@ -5677,7 +5832,7 @@ a.plat-code-link:hover {
 .plat-cell-input {
   width: 100%;
   min-width: 8.5rem;
-  border-radius: 0.45rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(125, 211, 252, 0.35);
   background: rgba(0, 0, 0, 0.28);
   color: #fff;
@@ -5730,7 +5885,7 @@ a.plat-code-link:hover {
   z-index: 1;
   width: min(100%, 24rem);
   padding: 1.5rem 1.35rem 1.25rem;
-  border-radius: 1.1rem;
+  border-radius: var(--pr-lg);
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: linear-gradient(180deg, #152235 0%, #0d1724 100%);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
@@ -5746,7 +5901,7 @@ a.plat-code-link:hover {
   width: 2rem;
   height: 2rem;
   border: 0;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
   background: rgba(255, 255, 255, 0.06);
   color: rgba(255, 255, 255, 0.65);
   cursor: pointer;
@@ -5763,7 +5918,7 @@ a.plat-code-link:hover {
   margin: 0 auto 0.9rem;
   display: grid;
   place-items: center;
-  border-radius: 9999px;
+  border-radius: var(--pr-pill);
 }
 
 .plat-modal-icon.is-danger {
@@ -5809,7 +5964,7 @@ a.plat-code-link:hover {
 .plat-modal-body .plat-field input,
 .plat-modal-body .plat-field textarea {
   border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   padding: 0.6rem 0.75rem;
   font-size: 0.95rem;
   font-weight: 500;
@@ -5929,7 +6084,7 @@ a.plat-code-link:hover {
   box-sizing: border-box;
   padding: 1.15rem 1.25rem;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 1rem;
+  border-radius: var(--pr-lg);
   background: #ffffff;
   box-shadow:
     0 1px 2px rgba(15, 23, 42, 0.04),
@@ -5980,7 +6135,7 @@ a.plat-code-link:hover {
   resize: none;
   overflow: auto;
   border: 1px solid rgba(15, 23, 42, 0.14);
-  border-radius: 0.85rem;
+  border-radius: var(--pr-md);
   padding: 0.85rem 1rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 0.8rem;
@@ -5999,7 +6154,7 @@ a.plat-code-link:hover {
   width: 100%;
   margin: 0;
   padding: 0.75rem 0.95rem;
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
   border: 1px dashed rgba(15, 23, 42, 0.16);
   background: rgba(248, 250, 252, 0.9);
   color: #64748b;
@@ -6067,7 +6222,7 @@ a.plat-code-link:hover {
 .plat-quote-grid .plat-field input,
 .plat-quote-panel .plat-field input {
   border: 1px solid rgba(15, 23, 42, 0.14);
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   padding: 0.55rem 0.7rem;
   font-size: 0.9rem;
   font-weight: 500;
@@ -6090,7 +6245,7 @@ a.plat-code-link:hover {
   min-width: 0;
   height: 2.55rem;
   min-height: 2.55rem;
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   padding: 0 0.75rem;
   font-size: 0.9rem;
   font-weight: 500;
@@ -6109,7 +6264,7 @@ a.plat-code-link:hover {
   width: max(100%, 14rem);
   max-width: min(22rem, 92vw);
   padding: 0.45rem;
-  border-radius: 0.85rem;
+  border-radius: var(--pr-md);
 }
 
 .plat-quote-select-panel .plat-menu-item {
@@ -6151,7 +6306,7 @@ a.plat-code-link:hover {
   position: relative;
   z-index: 1;
   padding: 0.85rem 1rem;
-  border-radius: 0.9rem;
+  border-radius: var(--pr-md);
   border: 1px solid rgba(15, 23, 42, 0.08);
   background: #f8fafc;
 }
@@ -6237,7 +6392,7 @@ a.plat-code-link:hover {
 .plat-quote-discount-input input {
   width: 4.5rem;
   border: 1px solid rgba(27, 117, 187, 0.28);
-  border-radius: 0.65rem;
+  border-radius: var(--pr-sm);
   padding: 0.5rem 0.6rem;
   font-size: 0.95rem;
   font-weight: 600;
@@ -6257,7 +6412,7 @@ a.plat-code-link:hover {
   align-items: center;
   margin-top: 0.9rem;
   padding: 1rem 1.1rem;
-  border-radius: 0.9rem;
+  border-radius: var(--pr-md);
   background: linear-gradient(
     135deg,
     #0a1628 0%,
@@ -6312,7 +6467,7 @@ a.plat-code-link:hover {
   width: 100%;
   text-align: left;
   border: 1px solid rgba(15, 23, 42, 0.1);
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   background: #fff;
   padding: 0.55rem 0.75rem;
   cursor: pointer;
@@ -6339,7 +6494,7 @@ a.plat-code-link:hover {
   align-items: center;
   gap: 0.55rem;
   border: 1px solid rgba(15, 23, 42, 0.14);
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   padding: 0 0.75rem;
   background: #fff;
 }
@@ -6362,7 +6517,7 @@ a.plat-code-link:hover {
 .plat-quote-search-empty {
   margin: 0.55rem 0 0;
   padding: 0.65rem 0.8rem;
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   background: rgba(245, 158, 11, 0.1);
   border: 1px solid rgba(245, 158, 11, 0.28);
   color: #92400e;
@@ -6392,7 +6547,7 @@ a.plat-code-link:hover {
 .plat-quote-error {
   margin: 0;
   padding: 0.7rem 0.85rem;
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   background: rgba(220, 38, 38, 0.08);
   border: 1px solid rgba(220, 38, 38, 0.2);
   color: #b91c1c;
@@ -6404,7 +6559,7 @@ a.plat-code-link:hover {
   display: block;
   margin: 0;
   padding: 0.7rem 0.85rem;
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   background: rgba(22, 163, 74, 0.1);
   border: 1px solid rgba(22, 163, 74, 0.22);
   color: #166534;
@@ -6460,7 +6615,7 @@ a.plat-code-link:hover {
 .plat-quote-policy {
   margin: 0.85rem 0 0;
   padding: 0.7rem 0.85rem;
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(27, 117, 187, 0.2);
   background: rgba(27, 117, 187, 0.06);
   color: #0e335f;
@@ -6497,7 +6652,7 @@ a.plat-code-link:hover {
   max-height: 22rem;
   overflow: auto;
   border: 1px solid rgba(15, 23, 42, 0.1);
-  border-radius: 0.85rem;
+  border-radius: var(--pr-md);
   background: #fff;
 }
 
@@ -6671,7 +6826,7 @@ a.plat-code-link:hover {
 .plat-news-kpi {
   min-height: 5.1rem;
   padding: 0.75rem 0.85rem;
-  border-radius: 0.9rem;
+  border-radius: var(--pr-md);
   border: 1px solid rgba(15, 23, 42, 0.1);
   background: #fff;
   display: grid;
@@ -6691,7 +6846,7 @@ a.plat-code-link:hover {
   place-items: center;
   width: 1.7rem;
   height: 1.7rem;
-  border-radius: 0.5rem;
+  border-radius: var(--pr-sm);
   background: rgba(27, 117, 187, 0.1);
   color: #1b75bb;
   flex-shrink: 0;
@@ -6728,7 +6883,7 @@ a.plat-code-link:hover {
   margin: 0;
   min-height: 21rem;
   padding: 1.05rem 1.15rem 1.1rem !important;
-  border-radius: 1rem !important;
+  border-radius: var(--pr-lg) !important;
   border: 1px solid rgba(15, 23, 42, 0.1);
   overflow: hidden;
   box-sizing: border-box;
@@ -6829,7 +6984,7 @@ a.plat-code-link:hover {
   min-height: 21rem;
   height: 100%;
   padding: 1.05rem 1.15rem 1.1rem !important;
-  border-radius: 1rem !important;
+  border-radius: var(--pr-lg) !important;
   border: 1px solid rgba(15, 23, 42, 0.1);
   overflow: hidden;
   box-sizing: border-box;
@@ -6932,7 +7087,7 @@ a.plat-code-link:hover {
   height: 2.5rem;
   min-width: 11rem;
   padding: 0 0.8rem;
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(15, 23, 42, 0.12);
   background: #fff;
   color: #0f172a;
@@ -6963,7 +7118,7 @@ a.plat-code-link:hover {
   box-sizing: border-box;
   width: 17.75rem;
   padding: 0.85rem;
-  border-radius: 0.95rem;
+  border-radius: var(--pr-md);
   border: 1px solid rgba(15, 23, 42, 0.12);
   background: #fff;
   box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14);
@@ -6993,7 +7148,7 @@ a.plat-code-link:hover {
   width: 2rem;
   height: 2rem;
   border: 1px solid rgba(15, 23, 42, 0.1);
-  border-radius: 0.55rem;
+  border-radius: var(--pr-sm);
   background: #fff;
   color: #475569;
   cursor: pointer;
@@ -7027,7 +7182,7 @@ a.plat-code-link:hover {
   min-height: 2rem;
   width: 100%;
   border: 0;
-  border-radius: 0.55rem;
+  border-radius: var(--pr-sm);
   background: transparent;
   color: #0f172a;
   font-size: 0.82rem;
@@ -7058,7 +7213,7 @@ a.plat-code-link:hover {
   margin-top: 0.6rem;
   height: 2.1rem;
   border: 1px solid rgba(27, 117, 187, 0.25);
-  border-radius: 0.6rem;
+  border-radius: var(--pr-sm);
   background: rgba(27, 117, 187, 0.06);
   color: #0e335f;
   font-size: 0.82rem;
@@ -7109,7 +7264,7 @@ a.plat-code-link:hover {
   min-width: 1.25rem;
   height: 1.25rem;
   padding: 0 0.35rem;
-  border-radius: 999px;
+  border-radius: var(--pr-pill);
   background: #22c55e;
   color: #052e16;
   font-size: 0.72rem;
@@ -7134,7 +7289,7 @@ a.plat-code-link:hover {
   align-items: center;
   gap: 0.7rem;
   padding: 0.85rem 0.9rem;
-  border-radius: 1rem;
+  border-radius: var(--pr-lg);
   border: 1px solid rgba(15, 23, 42, 0.08);
   background: #ffffff;
   box-shadow:
@@ -7158,7 +7313,7 @@ a.plat-code-link:hover {
   width: 2.1rem;
   height: 2.1rem;
   flex-shrink: 0;
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   background: rgba(27, 117, 187, 0.1);
   color: #1b75bb;
 }
@@ -7218,7 +7373,7 @@ a.plat-code-link:hover {
   gap: 0.15rem;
   min-width: 4.5rem;
   padding: 0.65rem 0.75rem;
-  border-radius: 0.85rem;
+  border-radius: var(--pr-md);
   background: rgba(27, 117, 187, 0.06);
   border: 1px solid rgba(27, 117, 187, 0.14);
 }
@@ -7292,7 +7447,7 @@ a.plat-code-link:hover {
   min-height: 6rem;
   margin-top: 0.5rem;
   padding: 1rem 0.75rem;
-  border-radius: 0.85rem;
+  border-radius: var(--pr-md);
   border: 1px dashed rgba(15, 23, 42, 0.12);
   background: rgba(248, 250, 252, 0.8);
 }
@@ -7315,7 +7470,7 @@ a.plat-code-link:hover {
   justify-content: space-between;
   gap: 0.75rem;
   padding: 0.7rem 0.75rem;
-  border-radius: 0.8rem;
+  border-radius: var(--pr-md);
   border: 1px solid rgba(15, 23, 42, 0.08);
   background: rgba(248, 250, 252, 0.9);
   color: #0f172a;
@@ -7373,43 +7528,164 @@ a.plat-code-link:hover {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.plat-dashboard-metrics-filters {
+.plat-dashboard-metrics-filters.plat-section-hero-tabs {
+  flex-shrink: 0;
+  border-top: 0;
+  border-radius: var(--pr-lg);
+  overflow: visible;
+}
+
+.plat-dashboard-metrics-filters-row {
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  gap: 0.65rem 0.75rem;
-  padding: 0.85rem 1rem;
-  border-radius: 1rem;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  background: #ffffff;
-  box-shadow:
-    0 1px 2px rgba(15, 23, 42, 0.04),
-    0 8px 24px rgba(15, 23, 42, 0.05);
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+  min-width: 0;
+  padding: 0 0.85rem;
+  overflow: visible;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
-.plat-dashboard-metrics-grid {
+.plat-dashboard-metrics-filters-row::-webkit-scrollbar {
+  display: none;
+}
+
+.plat-dashboard-metrics-tabs.plat-tabs {
+  flex: 0 0 auto;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.plat-dashboard-metrics-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+.plat-dashboard-metrics-controls .plat-metrics-menu.plat-filter-select {
+  display: block;
+  gap: 0;
   margin: 0;
-  gap: 0.75rem;
+  min-width: 0;
 }
 
-.plat-body.is-app .plat-dashboard-metrics-grid.plat-grid.stats {
-  gap: 0.75rem;
+.plat-dashboard-metrics-controls .plat-metrics-menu .plat-menu-trigger.is-compact {
+  height: 2.15rem;
+  min-height: 2.15rem;
+  min-width: 4.75rem;
+  padding: 0 0.55rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.plat-dashboard-metrics-controls .plat-metrics-menu .plat-menu-panel,
+.plat-dashboard-metrics-controls .plat-metrics-date .plat-date-panel {
+  z-index: 60;
+}
+
+.plat-dashboard-metrics-controls .plat-metrics-date .plat-date-panel {
+  left: auto;
+  right: 0;
+}
+
+.plat-dashboard-metrics-controls .plat-metrics-date .plat-date-picker-shell {
+  position: relative;
+  overflow: visible;
+}
+
+.plat-dashboard-metrics-controls .plat-metrics-date.plat-date-picker {
+  display: block;
+  margin: 0;
+}
+
+.plat-dashboard-metrics-controls .plat-metrics-date .plat-date-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  box-sizing: border-box;
+  height: 2.15rem;
+  min-height: 2.15rem;
+  min-width: 9.5rem;
+  padding: 0 0.55rem;
+  border-radius: var(--pr-sm);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.plat-dashboard-metrics-controls .plat-metrics-date .plat-date-trigger svg {
+  color: rgba(255, 255, 255, 0.72);
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.plat-dashboard-metrics-controls .plat-metrics-date .plat-date-trigger:hover,
+.plat-dashboard-metrics-controls .plat-metrics-date .plat-date-trigger.is-open {
+  border-color: rgba(77, 184, 255, 0.4);
+  background: rgba(27, 117, 187, 0.18);
+  color: #fff;
+}
+
+.plat-dashboard-metrics-grid.plat-news-kpi-grid {
+  margin: 0;
+  gap: 0.65rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.plat-body.is-app .plat-dashboard-metrics-grid.plat-news-kpi-grid {
+  gap: 0.65rem;
+}
+
+@media (min-width: 900px) {
+  .plat-body.is-app .plat-dashboard-metrics-grid.plat-news-kpi-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.plat-dashboard-metrics-grid .plat-news-kpi .plat-metric-sub {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.78rem;
+}
+
+.plat-dashboard-metrics-grid .plat-news-kpi .plat-metric {
+  margin: 0;
+  color: #0e335f;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.15;
 }
 
 .plat-dash-metric {
   min-height: 5.4rem;
+  min-width: 0;
   padding: 0.9rem 1rem;
   display: grid;
   align-content: start;
   gap: 0.2rem;
-  border-radius: 1rem;
+  border-radius: var(--pr-lg);
   border: 1px solid rgba(15, 23, 42, 0.08);
   background: #ffffff;
   box-shadow:
     0 1px 2px rgba(15, 23, 42, 0.04),
     0 8px 24px rgba(15, 23, 42, 0.05);
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .plat-dash-metric .plat-metric-sub {
@@ -7431,6 +7707,36 @@ a.plat-code-link:hover {
   min-height: 0;
 }
 
+.plat-dashboard-metrics-body .plat-chart-card {
+  flex-shrink: 0;
+}
+
+.plat-dashboard-metrics-charts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 1fr);
+  gap: 0.85rem;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  align-items: stretch;
+}
+
+.plat-dashboard-metrics-charts .plat-chart-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  margin: 0;
+  padding: 1.05rem 1.15rem 1.1rem !important;
+  box-sizing: border-box;
+}
+
+.plat-dashboard-metrics-charts .plat-chart-card h3 {
+  flex-shrink: 0;
+  margin: 0 0 0.75rem;
+}
+
 .plat-body.is-app .plat-dashboard-metrics .plat-chart-card h3 {
   color: #0e335f;
   font-size: 0.95rem;
@@ -7441,12 +7747,63 @@ a.plat-code-link:hover {
   color: #94a3b8;
 }
 
-.plat-dashboard-metrics .plat-charts {
-  gap: 0.85rem;
+.plat-dashboard-metrics-charts .plat-chart-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.plat-dashboard-metrics > .plat-chart-card {
-  margin-top: 0;
+.plat-dashboard-metrics-charts .plat-chart-wrap > .recharts-responsive-container {
+  flex: 1 1 auto;
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+.plat-dashboard-metrics-charts .plat-status-legend {
+  flex-shrink: 0;
+  margin-top: 0.5rem;
+}
+
+.plat-dashboard-metrics-charts .plat-chart-empty {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.plat-dashboard-metrics .plat-charts {
+  gap: 0.85rem;
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 1200px) {
+  .plat-dashboard-metrics-charts {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    flex: 0 0 auto;
+  }
+
+  .plat-dashboard-metrics-charts .plat-chart-card {
+    height: auto;
+    min-height: 18rem;
+  }
+
+  .plat-dashboard-metrics-charts .plat-chart-wrap > .recharts-responsive-container {
+    min-height: 14rem !important;
+    height: 14rem !important;
+  }
+}
+
+.plat-dashboard-metrics .plat-chart-wrap {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.plat-dashboard-metrics .plat-chart-card {
+  min-width: 0;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .plat-newsletter-board .plat-projects-filters {
@@ -7466,7 +7823,7 @@ a.plat-code-link:hover {
   height: 2.5rem;
   min-height: 2.5rem;
   padding: 0 0.9rem;
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   font-size: 0.9rem;
   line-height: 1.2;
 }
@@ -7474,7 +7831,7 @@ a.plat-code-link:hover {
 .plat-newsletter-hint {
   margin: 0 0 0.85rem;
   padding: 0.7rem 0.85rem;
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(27, 117, 187, 0.18);
   background: rgba(27, 117, 187, 0.06);
   color: #0e335f;
@@ -7593,7 +7950,7 @@ a.plat-code-link:hover {
   display: inline-flex;
   align-items: center;
   padding: 0.18rem 0.5rem;
-  border-radius: 999px;
+  border-radius: var(--pr-pill);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -7613,7 +7970,7 @@ a.plat-code-link:hover {
 .plat-project-services-empty {
   margin: 0;
   padding: 0.85rem 1rem;
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
   border: 1px dashed rgba(15, 23, 42, 0.14);
   background: rgba(248, 250, 252, 0.9);
   color: #64748b;
@@ -7622,7 +7979,7 @@ a.plat-code-link:hover {
 }
 
 .plat-project-services-panel {
-  border-radius: 0.85rem;
+  border-radius: var(--pr-md);
   border: 1px solid rgba(15, 23, 42, 0.08);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.96));
@@ -7716,7 +8073,7 @@ a.plat-code-link:hover {
   display: grid;
   gap: 0.45rem;
   padding: 0.85rem 0.95rem;
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(27, 117, 187, 0.18);
   background:
     linear-gradient(180deg, rgba(27, 117, 187, 0.08), rgba(27, 117, 187, 0.03));
@@ -7794,7 +8151,7 @@ a.plat-code-link:hover {
   display: inline-grid;
   place-items: center;
   border: 0;
-  border-radius: 0.4rem;
+  border-radius: var(--pr-sm);
   background: transparent;
   color: #64748b;
   cursor: pointer;
@@ -7837,7 +8194,7 @@ a.plat-code-link:hover {
   height: var(--plat-ctrl-h);
   min-height: var(--plat-ctrl-h);
   max-height: var(--plat-ctrl-h);
-  border-radius: 0.5rem;
+  border-radius: var(--pr-sm);
   font-size: 0.8rem;
   line-height: 1;
   padding-top: 0;
@@ -7907,7 +8264,7 @@ a.plat-code-link:hover {
   gap: 0.2rem;
   margin-top: 0.9rem;
   padding: 0.85rem 0.95rem;
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(217, 119, 6, 0.35);
   background: rgba(251, 191, 36, 0.12);
 }
@@ -7993,7 +8350,7 @@ a.plat-code-link:hover {
   border-collapse: collapse;
   background: #fff;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 0.65rem;
+  border-radius: var(--pr-sm);
   overflow: hidden;
 }
 
@@ -8055,7 +8412,7 @@ a.plat-code-link:hover {
   justify-content: space-between;
   gap: 0.75rem;
   padding: 0.55rem 0.65rem;
-  border-radius: 0.55rem;
+  border-radius: var(--pr-sm);
   background: rgba(15, 23, 42, 0.04);
   font-size: 0.85rem;
 }
@@ -8129,7 +8486,7 @@ a.plat-code-link:hover {
   font-weight: 650;
   letter-spacing: 0.02em;
   padding: 0.15rem 0.4rem;
-  border-radius: 999px;
+  border-radius: var(--pr-pill);
   background: rgba(15, 23, 42, 0.06);
   color: #94a3b8;
 }
@@ -8151,7 +8508,7 @@ a.plat-code-link:hover {
 .plat-project-client-requests {
   margin: 0.85rem 0 1rem;
   padding: 0.75rem 0.85rem;
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(251, 146, 60, 0.35);
   background: rgba(251, 146, 60, 0.08);
 }
@@ -8193,7 +8550,7 @@ a.plat-code-link:hover {
   gap: 0.35rem 0.75rem;
   align-items: baseline;
   padding: 0.7rem 0.9rem;
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(37, 99, 235, 0.28);
   background: rgba(37, 99, 235, 0.08);
   font-size: 0.88rem;
@@ -8205,7 +8562,7 @@ a.plat-code-link:hover {
 
 .plat-hub-hero,
 .plat-hub-card {
-  border-radius: 1rem;
+  border-radius: var(--pr-lg);
   border: 1px solid rgba(15, 23, 42, 0.08);
   background: #fff;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
@@ -8276,7 +8633,7 @@ a.plat-code-link:hover {
   display: grid;
   gap: 0.25rem;
   padding: 0.75rem 0.85rem;
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
   background: #f8fafc;
   border: 1px solid rgba(15, 23, 42, 0.06);
   min-width: 0;
@@ -8317,7 +8674,7 @@ a.plat-code-link:hover {
   align-items: center;
   gap: 0.4rem;
   padding: 0.55rem 0.65rem;
-  border-radius: 0.65rem;
+  border-radius: var(--pr-sm);
   background: #f8fafc;
   border: 1px solid rgba(15, 23, 42, 0.06);
   color: #94a3b8;
@@ -8385,7 +8742,7 @@ a.plat-code-link:hover {
   display: grid;
   gap: 0.2rem;
   padding: 0.65rem 0.75rem;
-  border-radius: 0.65rem;
+  border-radius: var(--pr-sm);
   background: #f8fafc;
   border: 1px solid rgba(15, 23, 42, 0.06);
 }
@@ -8431,7 +8788,7 @@ a.plat-code-link:hover {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.75rem 0.85rem;
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(15, 23, 42, 0.08);
   background: #f8fafc;
 }
@@ -8479,7 +8836,7 @@ a.plat-code-link:hover {
   width: 100%;
   min-height: 6rem;
   resize: vertical;
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(15, 23, 42, 0.12);
   background: #fff;
   padding: 0.75rem 0.85rem;
@@ -8510,7 +8867,7 @@ a.plat-code-link:hover {
 .plat-hub-error {
   margin: 0.85rem 0 0;
   padding: 0.7rem 0.8rem;
-  border-radius: 0.65rem;
+  border-radius: var(--pr-sm);
   font-size: 0.88rem;
   line-height: 1.45;
 }
@@ -8588,7 +8945,7 @@ a.plat-code-link:hover {
   width: 100%;
   min-width: 0;
   height: 2.35rem;
-  border-radius: 0.55rem;
+  border-radius: var(--pr-sm);
   border: 1px solid var(--plat-border, #dbe3f0);
   background: var(--plat-input-bg, #fff);
   color: inherit;
@@ -8648,7 +9005,7 @@ a.plat-code-link:hover {
 .plat-blog-editor-hint kbd {
   display: inline-block;
   padding: 0.05rem 0.35rem;
-  border-radius: 0.35rem;
+  border-radius: var(--pr-xs);
   border: 1px solid rgba(15, 23, 42, 0.14);
   background: rgba(15, 23, 42, 0.04);
   font-size: 0.78rem;
@@ -8671,7 +9028,7 @@ a.plat-code-link:hover {
   box-sizing: border-box;
   width: 100%;
   height: 2.55rem;
-  border-radius: 0.7rem;
+  border-radius: var(--pr-sm);
   border: 1px solid rgba(15, 23, 42, 0.12);
   background: #fff;
   color: #0f172a;
@@ -8686,7 +9043,7 @@ a.plat-code-link:hover {
   max-width: 760px;
   margin-inline: auto;
   padding: 1.15rem 1.2rem 1.25rem;
-  border-radius: 1rem;
+  border-radius: var(--pr-lg);
   border: 1px solid rgba(15, 23, 42, 0.08);
   background: linear-gradient(180deg, #fbfdff 0%, #ffffff 40%);
 }
@@ -8710,7 +9067,7 @@ a.plat-code-link:hover {
   gap: 0.35rem;
   margin: 0;
   padding: 0.32rem 0.7rem;
-  border-radius: 999px;
+  border-radius: var(--pr-pill);
   border: 1px solid rgba(27, 117, 187, 0.35);
   background: rgba(27, 117, 187, 0.08);
   color: #0e335f;
@@ -8788,7 +9145,7 @@ a.plat-code-link:hover {
   aspect-ratio: 16 / 9;
   overflow: hidden;
   padding: 0;
-  border-radius: 1rem;
+  border-radius: var(--pr-lg);
   border: 1.5px dashed rgba(15, 23, 42, 0.22);
   background:
     linear-gradient(180deg, rgba(248, 250, 252, 0.95) 0%, #eef2f7 100%);
@@ -8876,7 +9233,7 @@ a.plat-code-link:hover {
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  border-radius: 1rem;
+  border-radius: var(--pr-lg);
   border: 1px solid rgba(15, 23, 42, 0.1);
   background: #e2e8f0;
   box-shadow:
@@ -8936,7 +9293,7 @@ a.plat-code-link:hover {
   box-sizing: border-box;
   width: 100%;
   min-height: 16rem;
-  border-radius: 0.85rem;
+  border-radius: var(--pr-md);
   border: 1px solid rgba(15, 23, 42, 0.12);
   background: #fff;
   color: #0f172a;
@@ -9020,7 +9377,7 @@ a.plat-code-link:hover {
   max-width: 100%;
   height: auto;
   margin: 0.75rem 0;
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
 }
 
 .plat-blog-editor-prose p.is-editor-empty:first-child::before,
@@ -9037,7 +9394,7 @@ a.plat-code-link:hover {
   width: 100%;
   min-height: 16rem;
   resize: vertical;
-  border-radius: 0.85rem;
+  border-radius: var(--pr-md);
   border: 1px solid rgba(15, 23, 42, 0.12);
   background: #fff;
   color: #0f172a;
@@ -9062,7 +9419,7 @@ a.plat-code-link:hover {
   max-height: 16rem;
   overflow: auto;
   padding: 0.35rem;
-  border-radius: 0.85rem;
+  border-radius: var(--pr-md);
   border: 1px solid rgba(15, 23, 42, 0.12);
   background: #fff;
   box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14);
@@ -9076,7 +9433,7 @@ a.plat-code-link:hover {
   gap: 0.65rem;
   width: 100%;
   border: 0;
-  border-radius: 0.65rem;
+  border-radius: var(--pr-sm);
   background: transparent;
   color: #0f172a;
   text-align: left;
@@ -9094,7 +9451,7 @@ a.plat-code-link:hover {
   place-items: center;
   width: 1.85rem;
   height: 1.85rem;
-  border-radius: 0.5rem;
+  border-radius: var(--pr-sm);
   background: rgba(27, 117, 187, 0.12);
   color: #1b75bb;
   flex-shrink: 0;
@@ -9129,7 +9486,10 @@ a.plat-code-link:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 1rem;
+  /* Share the canvas's width and centring so the buttons line up with
+     the edit box instead of running out to the card's own edge. */
+  max-width: 760px;
+  margin: 1rem auto 0;
   justify-content: flex-end;
 }
 
@@ -9150,7 +9510,7 @@ a.plat-code-link:hover {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  border-radius: 1.1rem;
+  border-radius: var(--pr-lg);
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: #0b0d10;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
@@ -9221,7 +9581,7 @@ a.plat-code-link:hover {
 .plat-blog-preview-stage .blog-article-content img {
   max-width: 100%;
   height: auto;
-  border-radius: 1rem;
+  border-radius: var(--pr-lg);
 }
 
 .plat-blog-preview-stage .blog-article-content blockquote {
@@ -9278,9 +9638,637 @@ a.plat-code-link:hover {
 
 .plat-blog-preview-md img {
   max-width: 100%;
-  border-radius: 0.75rem;
+  border-radius: var(--pr-sm);
 }
 
 .plat-body.is-app .plat-success {
   color: #15803d;
+}
+
+/* ─── Mobile-first: shell drawer + operación + responsive global ─── */
+
+.plat-mobile-menu-btn,
+.plat-mobile-nav-close {
+  display: none;
+}
+
+.plat-mobile-nav-backdrop {
+  display: none;
+}
+
+.plat-ops {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+}
+
+.plat-ops-status-compact {
+  display: grid;
+  gap: 0.1rem;
+  flex-shrink: 0;
+  min-width: 6.75rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: var(--pr-sm);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(8, 20, 36, 0.55);
+  text-align: right;
+}
+
+.plat-ops-status-compact.has-alerts {
+  border-color: rgba(251, 113, 133, 0.38);
+  background: rgba(251, 113, 133, 0.1);
+}
+
+.plat-ops-status-compact-kicker {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.plat-ops-status-compact strong {
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.plat-ops-status-compact span:last-child {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.62);
+  line-height: 1.2;
+}
+
+.plat-ops-inbox {
+  padding: 0.85rem 1rem !important;
+  flex-shrink: 0;
+}
+
+.plat-ops-inbox-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+}
+
+.plat-ops-inbox-head h3 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #f5f9fc;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.plat-ops-inbox-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.plat-ops-inbox-link:hover {
+  color: #7dd3fc;
+}
+
+.plat-ops-inbox-rows {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.plat-ops-inbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: var(--pr-sm);
+  border: 1px solid rgba(96, 165, 250, 0.14);
+  background: #16304a;
+  color: #e8f1fa;
+  text-decoration: none;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.plat-ops-inbox-row:hover {
+  border-color: rgba(56, 189, 248, 0.32);
+  background: #1a3a58;
+}
+
+.plat-ops-inbox-row.has-count {
+  border-color: rgba(251, 113, 133, 0.28);
+}
+
+.plat-ops-inbox-row-icon {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--pr-sm);
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+}
+
+.plat-ops-inbox-row.has-count .plat-ops-inbox-row-icon {
+  background: rgba(251, 113, 133, 0.14);
+  color: #fb7185;
+}
+
+.plat-ops-inbox-row-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 0.8rem;
+  color: #9ec0db;
+  line-height: 1.25;
+}
+
+.plat-ops-inbox-row-value {
+  flex: 0 0 auto;
+  margin-left: auto;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #f5f9fc;
+  line-height: 1;
+}
+
+.plat-ops-feed-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.plat-ops-feed-tabs {
+  display: flex;
+  gap: 0;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(96, 165, 250, 0.14);
+}
+
+.plat-ops-feed-tab {
+  flex: 1 1 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 2.65rem;
+  padding: 0.45rem 0.65rem;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #9ec0db;
+  font-size: 0.78rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.plat-ops-feed-tab:hover {
+  color: #e8f1fa;
+  background: rgba(56, 189, 248, 0.06);
+}
+
+.plat-ops-feed-tab.is-active {
+  color: #f5f9fc;
+  border-bottom-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.plat-ops-feed-tab-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  padding: 0 0.3rem;
+  border-radius: var(--pr-pill);
+  background: rgba(251, 113, 133, 0.2);
+  color: #fda4af;
+  font-size: 0.62rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.plat-ops-feed-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.65rem 0.75rem 0.75rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.plat-ops-panel {
+  min-width: 0;
+}
+
+.plat-ops-panel-head h3 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f5f9fc;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.plat-ops-panel-head p {
+  margin: 0.3rem 0 0;
+  font-size: 0.82rem;
+  color: #9ec0db;
+}
+
+.plat-ops-feed {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.plat-ops-feed-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.55rem;
+  padding: 0.62rem 0.7rem;
+  border-radius: var(--pr-sm);
+  border: 1px solid rgba(96, 165, 250, 0.16);
+  background: #16304a;
+  color: #e8f1fa;
+  text-decoration: none;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.plat-ops-feed-item:hover {
+  border-color: rgba(56, 189, 248, 0.32);
+  background: #1a3a58;
+}
+
+.plat-ops-feed-item.is-urgent {
+  border-color: rgba(251, 113, 133, 0.35);
+  background: rgba(251, 113, 133, 0.1);
+}
+
+.plat-ops-feed-item.is-warn {
+  border-color: rgba(251, 191, 36, 0.32);
+  background: rgba(251, 191, 36, 0.08);
+}
+
+.plat-ops-feed-item.is-info {
+  border-color: rgba(56, 189, 248, 0.22);
+}
+
+.plat-ops-feed-main {
+  display: grid;
+  gap: 0.12rem;
+  min-width: 0;
+}
+
+.plat-ops-feed-main strong {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: 0.84rem;
+  font-weight: 650;
+  color: #f5f9fc;
+  line-height: 1.3;
+}
+
+.plat-ops-feed-main span {
+  font-size: 0.74rem;
+  color: #9ec0db;
+  line-height: 1.35;
+}
+
+.plat-ops-feed-when {
+  flex-shrink: 0;
+  font-size: 0.68rem;
+  color: #7a9bb8;
+  white-space: nowrap;
+}
+
+.plat-ops-empty {
+  margin: 0;
+  padding: 1rem 0.25rem;
+  font-size: 0.84rem;
+  color: #9ec0db;
+  text-align: center;
+}
+
+@media (min-width: 901px) {
+  .plat-ops-inbox-rows {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .plat-ops-inbox-row {
+    gap: 0.4rem;
+    padding: 0.55rem 0.65rem;
+  }
+
+  .plat-ops-inbox-row-label {
+    font-size: 0.74rem;
+    line-height: 1.2;
+  }
+
+  .plat-ops-inbox-row-value {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .plat-mobile-menu-btn {
+    display: inline-grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--pr-sm);
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .plat-mobile-menu-btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .plat-mobile-nav-close {
+    display: inline-grid;
+    place-items: center;
+    width: 1.85rem;
+    height: 1.85rem;
+    margin-left: auto;
+    flex-shrink: 0;
+    border: 0;
+    border-radius: var(--pr-sm);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+  }
+
+  .plat-mobile-nav-close:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+  }
+
+  /* Specificity must beat `.plat-body.is-app > *` (position:relative;z-index:1),
+     which otherwise wins over a single-class selector and collapses this
+     fixed, full-viewport overlay to a 0-height, non-fixed element. */
+  .plat-body.is-app .plat-mobile-nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    border: 0;
+    padding: 0;
+    background: rgba(2, 8, 18, 0.62);
+    backdrop-filter: blur(3px);
+    cursor: pointer;
+  }
+
+  /* `.plat-body.is-app > *` (elsewhere) pins .plat-shell to z-index:1,
+     which — since z-index only creates a stacking context on a *number*,
+     never on `auto` — turns .plat-shell into its own stacking context.
+     That context paints as one atomic unit, so EVERYTHING inside it
+     (.plat-sidebar *and* .plat-main together) sits on one side of the
+     backdrop's z-index:70, never split across it. Bumping the whole
+     shell above 70 (an earlier attempt) fixed the sidebar but dragged
+     .plat-main up with it — undimmed and intercepting clicks meant for
+     the backdrop. Reverting to z-index:auto here removes that stacking
+     context entirely, so .plat-sidebar's own z-index:80 and .plat-main's
+     default (auto, i.e. unelevated) are compared directly against the
+     backdrop instead: sidebar stays above it, main stays below/dimmed
+     and click-through to close. */
+  .plat-body.is-app .plat-shell {
+    z-index: auto;
+  }
+
+  .plat-shell .plat-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 80;
+    width: min(var(--plat-sidebar-width, 13.25rem), 80vw);
+    height: 100svh;
+    max-height: 100svh;
+    margin: 0;
+    border-radius: 0 var(--pr-lg) var(--pr-lg) 0;
+    transform: translateX(-110%);
+    transition: transform 0.24s ease;
+    box-shadow: 12px 0 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .plat-shell.is-mobile-nav-open .plat-sidebar {
+    transform: translateX(0);
+  }
+
+  .plat-shell .plat-main {
+    grid-column: 1;
+    min-height: auto;
+  }
+
+  .plat-section-hero-head {
+    padding: 1rem 1rem 0.9rem;
+  }
+
+  .plat-section-hero-head h1 {
+    font-size: clamp(1.2rem, 5vw, 1.55rem);
+  }
+
+  .plat-section-hero-head p {
+    font-size: 0.7rem;
+    line-height: 1.4;
+  }
+
+  .plat-section-hero-tabs .plat-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .plat-section-hero-tabs .plat-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .plat-content {
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .plat-main:has(.plat-dashboard-hub),
+  .plat-content:has(.plat-dashboard-hub) {
+    overflow: visible;
+  }
+
+  .plat-ops-feed-scroll {
+    max-height: min(22rem, 52svh);
+  }
+
+  .plat-table-wrap {
+    margin-inline: -0.25rem;
+    padding-inline: 0.25rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .plat-quote-panel-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .plat-quote-panel-head .plat-btn,
+  .plat-quote-panel-head .plat-quote-actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .plat-inbox-hub .plat-tabs,
+  .plat-quote-hub .plat-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .plat-dashboard-metrics-filters-row {
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .plat-inbox-hub .plat-tabs::-webkit-scrollbar,
+  .plat-quote-hub .plat-tabs::-webkit-scrollbar,
+  .plat-dashboard-metrics-filters-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .plat-content:has(.plat-projects-board) {
+    overflow: visible;
+    min-height: auto;
+  }
+
+  .plat-main:has(.plat-projects-board) {
+    overflow: visible;
+  }
+
+  .plat-projects-board .plat-quote-list-scroll {
+    max-height: none;
+  }
+
+  .plat-dashboard-metrics-grid.plat-news-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .plat-top-nav-inner {
+    gap: 0.55rem;
+  }
+
+  .plat-top-nav-brand {
+    margin-right: auto;
+  }
+
+  .plat-btn,
+  .plat-nav a,
+  .plat-logout .plat-btn {
+    min-height: 2.75rem;
+  }
+
+  /* Centred dialog rather than a bottom sheet: these are short
+     destructive confirmations, and anchoring them to the bottom edge
+     put them far from where the eye already is and read as a detached
+     toast rather than a modal demanding a decision. */
+  .plat-modal-root {
+    padding: 1rem;
+    align-items: center;
+  }
+
+  .plat-modal {
+    width: 100%;
+    max-width: none;
+    border-radius: var(--pr-lg);
+  }
+}
+
+@media (max-width: 560px) {
+  .plat-ops-status-compact {
+    width: 100%;
+    text-align: left;
+  }
+
+  .plat-ops-feed-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .plat-ops-feed-when {
+    white-space: normal;
+  }
+
+  .plat-dashboard-metrics-grid.plat-news-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FOCUS VISIBLE — WCAG 2.4.7 (AA)
+   ───────────────────────────────────────────────────────────────────
+   The reset strips the UA outline platform-wide, and the replacement
+   box-shadows only ever covered the header chips, the auth/profile
+   forms and the chat composer. Every other control — section tabs,
+   period tabs, the ops inbox links, feed tabs, table action menus,
+   list rows — focused with no visible indicator at all, so keyboard
+   navigation was untrackable.
+
+   Uses :focus-visible so the ring appears for keyboard/AT users
+   without adding a halo to mouse clicks. Ring colour is the sky
+   accent already used for active tabs, at 2px + a dark 1px spacer so
+   it stays legible over both the card and the banner gradient.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.plat-body.is-app :is(a, button, [role="tab"], summary):focus-visible,
+.plat-body.is-app :is(input, select, textarea):focus-visible {
+  outline: 2px solid #7dd3fc;
+  outline-offset: 2px;
+  border-radius: var(--pr-sm);
+}
+
+/* Controls that sit flush inside a scroll container or against a card
+   edge would get their ring clipped by the offset — draw it inside. */
+.plat-body.is-app .plat-tab:focus-visible,
+.plat-body.is-app .plat-ops-feed-tab:focus-visible,
+.plat-body.is-app .plat-inbox-item:focus-visible,
+.plat-body.is-app .plat-ops-inbox-row:focus-visible,
+.plat-body.is-app .plat-ops-feed-item:focus-visible {
+  outline-offset: -2px;
+}
+
+/* Already-styled controls keep their own ring; don't double it up. */
+.plat-body.is-app .plat-site-header .plat-icon-chip:focus-visible,
+.plat-body.is-app .plat-site-header .plat-avatar-btn:focus-visible {
+  outline: none;
 }

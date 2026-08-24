@@ -30,21 +30,21 @@ export async function POST(request: Request) {
   let messages: LiveChatMessage[] = [];
 
   if (Array.isArray(body.messages) && body.messages.length > 0) {
-    messages = body.messages
-      .map((entry, index) => {
-        const roleRaw = String(entry.role ?? "user");
-        const text = String(entry.body ?? entry.content ?? "").trim();
-        if (!text) return null;
-        const role: LiveChatMessage["role"] =
-          roleRaw === "assistant" || roleRaw === "admin" ? "admin" : "visitor";
-        return {
+    messages = body.messages.flatMap((entry, index): LiveChatMessage[] => {
+      const roleRaw = String(entry.role ?? "user");
+      const text = String(entry.body ?? entry.content ?? "").trim();
+      if (!text) return [];
+      const role: LiveChatMessage["role"] =
+        roleRaw === "assistant" || roleRaw === "admin" ? "admin" : "visitor";
+      return [
+        {
           id: `api_${index}`,
           role,
           body: text,
           createdAt: now,
-        };
-      })
-      .filter((entry): entry is LiveChatMessage => Boolean(entry));
+        },
+      ];
+    });
   } else if (body.message?.trim()) {
     messages = [
       {

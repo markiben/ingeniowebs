@@ -1023,12 +1023,19 @@ export default function QuoteBuilder({
         <div className="plat-quote-total">
           <div>
             <span className="plat-quote-total-label">Total de la propuesta</span>
-            <span>Subtotal {money(totals.subtotal, currency)}</span>
+            {/* Without a discount the subtotal equals the total, so the row
+                showed the same figure twice side by side — on a phone the
+                two land ~20px apart and read as a contradiction rather
+                than a breakdown. Only show the breakdown when there is
+                actually something to break down. */}
             {discountEnabled && totals.discountPercent > 0 ? (
-              <small>
-                Descuento {totals.discountPercent}% (−
-                {money(totals.discountAmount, currency)})
-              </small>
+              <>
+                <span>Subtotal {money(totals.subtotal, currency)}</span>
+                <small>
+                  Descuento {totals.discountPercent}% (−
+                  {money(totals.discountAmount, currency)})
+                </small>
+              </>
             ) : null}
           </div>
           <strong>{money(totals.total, currency)}</strong>

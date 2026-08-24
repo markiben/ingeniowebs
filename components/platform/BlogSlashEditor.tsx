@@ -637,7 +637,7 @@ export default function BlogSlashEditor({
     <div className="plat-blog-editor">
       <div className="plat-blog-editor-hint">
         Escribí <kbd>/</kbd> para insertar título, texto, negrita, link, imagen o
-        archivo. El formato se ve al instante (sin `**`).
+        archivo.
         {uploading ? <span> Subiendo…</span> : null}
       </div>
       <div className="plat-blog-editor-shell">

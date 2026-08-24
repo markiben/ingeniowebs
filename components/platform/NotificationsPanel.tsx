@@ -14,10 +14,8 @@ import {
   Archive,
   ArchiveRestore,
   Bell,
-  Calculator,
   CheckCheck,
   FileText,
-  FolderKanban,
   Inbox,
   MessageCircle,
   MessageSquare,
@@ -45,8 +43,6 @@ const KIND_ICON: Record<
   message: MessageSquare,
   livechat: MessageCircle,
   client: Users,
-  proposal: FolderKanban,
-  ticket: Calculator,
 };
 
 const INBOX_KINDS = new Set<PlatformNotificationKind>([
@@ -76,7 +72,6 @@ function actionLabel(kind: PlatformNotificationKind) {
   if (kind === "message") return "Ver mensaje";
   if (kind === "livechat") return "Abrir chat";
   if (kind === "client") return "Ver cliente";
-  if (kind === "proposal") return "Ver propuesta";
   return "Ver detalle";
 }
 

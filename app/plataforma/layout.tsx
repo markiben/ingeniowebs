@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./plataforma.css";
 import "./plataforma-dark.css";
+import "./plataforma-responsive.css";
 
 export const metadata: Metadata = {
   title: "Plataforma | Ingenio Webs",

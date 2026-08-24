@@ -15,6 +15,8 @@ type Props = {
   onChange: (next: PlatformDateValue) => void;
   years?: number[];
   label?: string;
+  hideLabel?: boolean;
+  className?: string;
 };
 
 const WEEKDAYS = ["Lu", "Ma", "Mi", "Ju", "Vi", "Sá", "Do"];
@@ -41,6 +43,8 @@ export default function PlatformDatePicker({
   onChange,
   years,
   label = "Fecha",
+  hideLabel = false,
+  className,
 }: Props) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
@@ -107,8 +111,13 @@ export default function PlatformDatePicker({
   };
 
   return (
-    <div className="plat-date-picker" ref={rootRef}>
-      <span className="plat-date-picker-label">{label}</span>
+    <div
+      className={`plat-date-picker${className ? ` ${className}` : ""}`}
+      ref={rootRef}
+    >
+      {hideLabel ? null : (
+        <span className="plat-date-picker-label">{label}</span>
+      )}
       <div className="plat-date-picker-shell">
         <button
           type="button"

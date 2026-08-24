@@ -357,8 +357,8 @@ export default function NewsletterMetrics({
                   />
                   <Tooltip
                     cursor={{ fill: chart.cursorFill, radius: 8 }}
-                    formatter={(value: number | string) => [
-                      String(value),
+                    formatter={(value) => [
+                      String(value ?? 0),
                       "Altas",
                     ]}
                     contentStyle={{
