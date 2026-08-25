@@ -2637,7 +2637,16 @@
 
   /* Título: dos líneas como máximo y algo más de aire debajo, para que
      se lea como encabezado de la card y no como un bloque de texto. */
-  .plat-body.is-app .plat-projects-board .plat-table td:nth-of-type(1) strong {
+  /* `tr:not(...)` no es decorativo: la fila del detalle expandido tiene
+     una sola celda, así que también coincide con td:nth-of-type(1) y
+     esta regla se le estaba aplicando a los <strong> de adentro —
+     por eso los valores del detalle salían al tamaño del título. */
+  .plat-body.is-app
+    .plat-projects-board
+    .plat-table
+    tr:not(.plat-project-detail-row)
+    td:nth-of-type(1)
+    strong {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -2788,5 +2797,385 @@
     display: block;
     font-size: var(--pm-xs);
     line-height: 1.2;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   COTIZACIONES — solapas de estado en una sola línea
+   Las cuatro sumaban 378px contra 375 disponibles: "Rechazadas" caía
+   sola a una segunda fila por 3px. Se comprime sólo este grupo — el
+   de Proyectos son cinco solapas y sigue envolviendo, que para ese
+   caso es mejor que recortar la última contra el borde.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .plat-body.is-app .plat-quote-status-tabs .plat-tab {
+    gap: 0.28rem;
+    padding: 0.55rem 0.35rem;
+    font-size: 0.68rem;
+  }
+
+  .plat-body.is-app .plat-quote-status-tabs .plat-tab .plat-tab-count {
+    min-width: 0.95rem;
+    height: 0.95rem;
+    padding: 0 0.22rem;
+    font-size: 0.56rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   COTIZACIONES — reordenado de la card
+   El código de proyecto y su estado de registro venían juntos en una
+   sola celda al pie. Se aplana esa celda para que sus dos partes sean
+   items del grid y puedan ubicarse por separado:
+
+     1  IQ-…                        Aprobada
+     2  Nombre + mail
+     3  Pendiente de registro
+     4  IW-…                       US$ 3.654
+     5  fecha
+     6  PDF                         Acciones
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .plat-body.is-app .plat-quote-hub .plat-quote-list .plat-table td:nth-of-type(6),
+  .plat-body.is-app .plat-quote-hub .plat-quote-list .plat-table .plat-quote-project-cell {
+    display: contents;
+  }
+
+  /* Estado de registro: sube a la línea siguiente al mail */
+  .plat-body.is-app .plat-quote-hub .plat-quote-list .plat-table .plat-quote-reg-badge {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+
+  /* Código de proyecto e importe comparten fila */
+  .plat-body.is-app .plat-quote-hub .plat-quote-list .plat-table .plat-code-row {
+    grid-column: 1;
+    grid-row: 4;
+  }
+
+  .plat-body.is-app .plat-quote-hub .plat-quote-list .plat-table td:nth-of-type(3) {
+    grid-column: 2;
+    grid-row: 4;
+    justify-self: end;
+    text-align: right;
+  }
+
+  /* Fecha a lo ancho, y acá va el separador: la celda que lo tenía
+     ahora es `display: contents` y no puede pintar borde. */
+  .plat-body.is-app .plat-quote-hub .plat-quote-list .plat-table td:nth-of-type(4) {
+    grid-column: 1 / -1;
+    grid-row: 5;
+    text-align: left;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid rgba(125, 211, 252, 0.1);
+  }
+
+  .plat-body.is-app .plat-quote-hub .plat-quote-list .plat-table td:nth-of-type(7),
+  .plat-body.is-app .plat-quote-hub .plat-quote-list .plat-table td:nth-of-type(8) {
+    grid-row: 6;
+  }
+}
+
+@media (max-width: 900px) {
+  /* Cotización sin proyecto vinculado: la celda trae un guión suelto en
+     lugar del código. En la tabla de escritorio marca la columna vacía,
+     pero en la card queda como una línea huérfana que parece un dato que
+     no cargó. El estado ("Enviada") ya dice que todavía no hay proyecto.
+     El selector es hijo directo a propósito: cuando sí hay proyecto, la
+     celda contiene .plat-quote-project-cell y esta regla no aplica. */
+  .plat-body.is-app
+    .plat-quote-hub
+    .plat-quote-list
+    .plat-table
+    td:nth-of-type(6)
+    > .plat-quote-muted {
+    display: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   PROYECTOS — el detalle expandido, alineado con su card
+   Medido a 440px, el detalle rompía la escala por todos lados:
+
+     · padding lateral 0 contra los 0.85rem de la card, así que el
+       contenido arrancaba 13.6px más a la izquierda que el de arriba
+     · cinco tamaños de texto conviviendo (10.9 / 12.8 / 13.6 / 14 /
+       14.4px), con los valores al mismo peso que el título de la card
+       pese a ser información secundaria
+     · botones de PDF de 44px de alto contra los 32px de los controles
+       de la card — un 37% más grandes
+
+   Se alinea al borde de la card y se reduce a tres tamaños: etiqueta,
+   valor, y encabezado de sección.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  /* Mismo margen lateral que el contenido de la card de arriba */
+  .plat-body.is-app .plat-projects-board .plat-project-detail {
+    padding-inline: 0.85rem;
+    /* La primera etiqueta del detalle arrancaba a 0px de la última línea
+       de la card: se leían como un solo bloque. Mismo respiro que usa la
+       card arriba (0.7rem), sin línea divisoria — proyecto y detalle son
+       una unidad y el borde ya se omite entre los dos. */
+    padding-top: 0.7rem;
+    padding-bottom: 0.85rem;
+  }
+
+  /* Etiquetas (CÓDIGO, INICIO, VALOR…) — ya estaban bien, se fijan */
+  .plat-body.is-app .plat-projects-board .plat-project-detail-label {
+    font-size: var(--pm-xs);
+  }
+
+  /* Valores: un escalón por debajo del título de la card, que es lo
+     que son. Antes competían con él a 14px. */
+  .plat-body.is-app .plat-projects-board .plat-project-detail-grid {
+    font-size: var(--pm-sm);
+  }
+
+  /* Los valores son <strong> y traen su propio tamaño: hay que
+     alcanzarlos a ellos, no al contenedor. */
+  .plat-body.is-app
+    .plat-projects-board
+    .plat-project-detail-grid
+    strong {
+    font-size: var(--pm-sm);
+  }
+
+  .plat-body.is-app
+    .plat-projects-board
+    .plat-project-detail
+    .plat-quote-muted {
+    font-size: var(--pm-xs);
+  }
+
+  /* Campo de horas: a la altura de los controles de la card */
+  .plat-body.is-app .plat-projects-board .plat-project-hours-edit input {
+    height: 2rem;
+    min-height: 2rem;
+    padding-block: 0;
+    font-size: var(--pm-sm);
+  }
+
+  /* Botones de PDF: 44px era casi el doble de su contenido */
+  .plat-body.is-app .plat-projects-board .plat-project-pdf-row .plat-btn {
+    min-height: 2rem;
+    height: 2rem;
+    padding: 0 0.6rem;
+    font-size: var(--pm-xs);
+  }
+
+  .plat-body.is-app .plat-projects-board .plat-project-pdf-row .plat-btn svg {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+
+  /* Encabezado de servicios: el único que sube, porque es título de
+     sección. Antes era 14.4px, un tamaño que no existía en ningún
+     otro lado de la plataforma. */
+  .plat-body.is-app .plat-projects-board .plat-project-services-head h4 {
+    font-size: var(--pm-md);
+  }
+
+  .plat-body.is-app .plat-projects-board .plat-project-services-empty {
+    font-size: var(--pm-sm);
+  }
+}
+
+@media (max-width: 900px) {
+  /* Servicios adicionales: aportaba seis tamaños más (12.48 / 12.8 /
+     13.12 / 14.72 / 15.2 / 16px), todos a menos de un punto de
+     distancia entre sí. Se alinean con los tres del resto del detalle:
+     etiqueta 10.9 · dato 12 · encabezado 14. */
+  .plat-body.is-app .plat-projects-board .plat-project-service-main strong {
+    font-size: var(--pm-sm);
+  }
+
+  .plat-body.is-app .plat-projects-board .plat-project-service-main p {
+    font-size: var(--pm-xs);
+    line-height: 1.35;
+  }
+
+  .plat-body.is-app .plat-projects-board .plat-project-service-math span {
+    font-size: var(--pm-xs);
+  }
+
+  .plat-body.is-app .plat-projects-board .plat-project-service-math strong {
+    font-size: var(--pm-sm);
+  }
+
+  .plat-body.is-app .plat-projects-board .plat-project-services-total span {
+    font-size: var(--pm-sm);
+  }
+
+  /* El total sí se destaca: es el único número que resume al resto. */
+  .plat-body.is-app .plat-projects-board .plat-project-services-total strong {
+    font-size: var(--pm-md);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   PROYECTOS · detalle expandido — escritorio
+   Tres defectos que en móvil ya estaban resueltos pero en pantalla
+   grande seguían: el bloque de servicios pintado sobre la card, los
+   botones de PDF desbordando su columna, y el resaltado de fila
+   aplicándose también al detalle.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (min-width: 901px) {
+  /* El panel de servicios se pintaba con --plat-d-elevated, un azul más
+     claro que la card: eso es el "cuadrado" que aparecía al expandir.
+     Se vuelve transparente y la separación la hace una línea, igual que
+     en móvil, para que el detalle se lea como la misma card que creció. */
+  :is(
+      html.plat-dark-boot .plat-body.is-app,
+      .plat-body.is-app[data-plat-theme="dark"]
+    )
+    :is(
+      .plat-project-detail-services,
+      .plat-project-services-head,
+      .plat-project-services-panel,
+      .plat-project-services-total
+    ) {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  :is(
+      html.plat-dark-boot .plat-body.is-app,
+      .plat-body.is-app[data-plat-theme="dark"]
+    )
+    .plat-project-services-panel {
+    border: 0 !important;
+    border-top: 1px solid rgba(125, 211, 252, 0.12) !important;
+    border-radius: 0 !important;
+  }
+
+  /* Los dos botones necesitaban 212px dentro de una columna de 171px, y
+     "Cotización" se salía de la tabla. La grilla usa columnas iguales
+     (auto-fit), así que la columna no puede ensancharse: se les permite
+     envolver y ocupar el ancho completo de su celda. */
+  .plat-body.is-app .plat-projects-board .plat-project-pdf-row {
+    flex-wrap: wrap;
+    min-height: 0;
+  }
+
+  .plat-body.is-app .plat-projects-board .plat-project-pdf-row .plat-btn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}
+
+/* El resaltado al pasar el cursor sirve para elegir una fila de la
+   lista. El detalle expandido no es una fila elegible —es contenido de
+   la de arriba— así que se lo excluye en todos los anchos.
+
+   El tema oscuro lo pinta con !important desde un selector con la forma
+   :is(html.plat-dark-boot …), así que hay que repetir esa forma y
+   agregarle la clase propia para ganarle por especificidad. */
+:is(
+    html.plat-dark-boot .plat-body.is-app,
+    .plat-body.is-app[data-plat-theme="dark"]
+  )
+  .plat-table
+  tr.plat-project-detail-row:hover
+  td,
+.plat-body.is-app .plat-table tr.plat-project-detail-row:hover td {
+  background: transparent !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   NOTIFICACIONES — panel compacto en móvil
+   Cada aviso ocupaba 127px: título, preview, un botón azul relleno
+   ("Ver mensaje"), los iconos de acción y la fecha, todo en filas
+   apiladas. Nueve avisos eran 1150px de scroll.
+
+   El botón relleno era el grueso del peso visual y además redundante:
+   el enlace pasa a cubrir la tarjeta entera —se toca donde sea— y la
+   fecha comparte fila con los iconos de acción.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .plat-body.is-app .plat-notify-card {
+    position: relative;
+    gap: 0.55rem;
+    padding: 0.6rem 0.7rem;
+  }
+
+  .plat-body.is-app .plat-notify-card-icon {
+    width: 1.85rem;
+    height: 1.85rem;
+  }
+
+  .plat-body.is-app .plat-notify-card-icon svg {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+
+  /* Texto a la izquierda, acciones a la derecha, en dos filas */
+  .plat-body.is-app .plat-notify-card-body {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.15rem 0.5rem;
+    align-items: center;
+  }
+
+  .plat-body.is-app .plat-notify-card-title {
+    grid-column: 1 / -1;
+    gap: 0.1rem;
+  }
+
+  .plat-body.is-app .plat-notify-card-title strong {
+    font-size: var(--pm-sm);
+    line-height: 1.3;
+  }
+
+  /* El preview se acota a dos líneas: era lo que hacía que unos avisos
+     midieran 127px y otros 145. */
+  .plat-body.is-app .plat-notify-card-title span {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: var(--pm-xs);
+    line-height: 1.35;
+  }
+
+  .plat-body.is-app .plat-notify-card-body time {
+    grid-column: 1;
+    grid-row: 2;
+    font-size: var(--pm-2xs);
+  }
+
+  .plat-body.is-app .plat-notify-card-row {
+    grid-column: 2;
+    grid-row: 2;
+    justify-content: flex-end;
+    gap: 0.2rem;
+  }
+
+  /* El enlace cubre la tarjeta y deja de ocupar espacio propio.
+     Conserva su texto para lectores de pantalla. */
+  .plat-body.is-app .plat-notify-card-cta {
+    position: absolute;
+    inset: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font-size: 0;
+    border-radius: 0;
+  }
+
+  /* Los iconos quedan por encima del enlace para seguir siendo
+     pulsables por separado. */
+  .plat-body.is-app .plat-notify-card-actions {
+    position: relative;
+    z-index: 1;
+    gap: 0.15rem;
+  }
+
+  .plat-body.is-app .plat-notify-card-actions button {
+    width: 1.75rem;
+    height: 1.75rem;
   }
 }
