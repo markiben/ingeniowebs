@@ -978,7 +978,7 @@ export default function ChatWidget() {
                                 (message.senderName &&
                                   message.senderName !== chat.liveAgent)
                                   ? message.senderAvatarUrl ||
-                                    "/marco-bretschneider.png"
+                                    "/marco-bretschneider.jpg"
                                   : LIVE_AGENT_AVATAR
                               ).split("?")[0]}
                               alt={
@@ -1008,7 +1008,7 @@ export default function ChatWidget() {
                               (adminDisplayName || chat.liveAgent) ===
                               chat.liveAgent
                                 ? LIVE_AGENT_AVATAR
-                                : "/marco-bretschneider.png"
+                                : "/marco-bretschneider.jpg"
                             }
                             alt={adminDisplayName || chat.liveAgent}
                             width={32}

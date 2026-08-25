@@ -40,7 +40,7 @@ import { inboxPath } from "@/lib/platform/inbox";
 import type { LiveChatMessage, LiveChatSession } from "@/lib/platform/types";
 
 const MR_INGENIO_AVATAR = "/chat/mr-ingenio.png";
-const OPERATOR_FALLBACK_AVATAR = "/marco-bretschneider.png";
+const OPERATOR_FALLBACK_AVATAR = "/marco-bretschneider.jpg";
 
 type ChatFilter = "open" | "closed" | "all";
 

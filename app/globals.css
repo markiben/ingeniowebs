@@ -1383,7 +1383,13 @@ body.site-body > main.blog-journal-page.is-viewport-fit {
   }
 }
 
+/* Como hijo de un contenedor flex, el chip se estiraba a la altura de
+   la fila y el texto quedaba pegado arriba: 4.8px de aire encima contra
+   12px debajo. inline-flex + center lo centra en la altura que tome. */
 .help-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: rgba(77, 184, 255, 0.1);
   border: 1px solid rgba(77, 184, 255, 0.22);
   color: rgba(255, 255, 255, 0.88);

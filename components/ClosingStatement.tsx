@@ -27,7 +27,7 @@ export default function ClosingStatement() {
             <div className="closing-statement-avatar-ring" aria-hidden="true" />
             <div className="closing-statement-avatar">
               <Image
-                src="/marco-bretschneider.png"
+                src="/marco-bretschneider.jpg"
                 alt={section.name}
                 width={112}
                 height={112}
