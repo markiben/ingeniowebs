@@ -18,31 +18,31 @@ export const BLOG_TOPICS: BlogTopic[] = [
   {
     id: "diseno",
     aliases: ["diseño", "diseno", "design", "ui", "ux"],
-    cover: "/portfolio/novastudio-presentacion.png",
+    cover: "/blog/temas/diseno.jpg",
     accent: "#f9a8d4",
   },
   {
     id: "desarrollo",
     aliases: ["desarrollo", "development", "fullstack", "full stack", "código", "codigo"],
-    cover: "/portfolio/liquifaster-detail.png",
+    cover: "/blog/temas/desarrollo.jpg",
     accent: "#7dd3fc",
   },
   {
     id: "proyectos",
     aliases: ["proyectos", "projects", "casos", "cases", "portfolio"],
-    cover: "/portfolio/trading-miami-detail.png",
+    cover: "/blog/temas/proyectos.jpg",
     accent: "#fcd34d",
   },
   {
     id: "negocios",
     aliases: ["negocios", "business", "tips", "estrategia"],
-    cover: "/portfolio/capital-flow-3d.png",
+    cover: "/blog/temas/negocios.jpg",
     accent: "#86efac",
   },
   {
     id: "novedades",
     aliases: ["novedades", "news", "novedad", "anuncios", "general"],
-    cover: "/portfolio/mls-capital.png",
+    cover: "/blog/temas/novedades.jpg",
     accent: "#c4b5fd",
   },
 ];

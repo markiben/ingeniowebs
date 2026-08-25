@@ -3,7 +3,7 @@ title: "Por qué una web profesional cambia la percepción de tu negocio"
 description: "Una presencia digital clara no es un gasto decorativo: es la base de confianza, conversión y crecimiento."
 date: "2026-08-04T09:20"
 category: "Negocios"
-cover: "/portfolio/trading-miami-detail.png"
+cover: "/blog/temas/negocios.jpg"
 draft: false
 ---
 

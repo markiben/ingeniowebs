@@ -3,7 +3,7 @@ title: "Detrás de un lanzamiento: del brief al deploy"
 description: "Cómo ordenamos un proyecto para que salga a tiempo, con calidad y sin sorpresas."
 date: "2026-08-01T11:15"
 category: "Proyectos"
-cover: "/portfolio/trading-miami-detail.png"
+cover: "/blog/temas/proyectos.jpg"
 draft: false
 ---
 

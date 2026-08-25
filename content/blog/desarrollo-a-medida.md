@@ -3,7 +3,7 @@ title: "Desarrollo a medida sin deuda técnica innecesaria"
 description: "Construimos productos rápidos, mantenibles y listos para crecer con tu operación."
 date: "2026-08-02T16:45"
 category: "Desarrollo"
-cover: "/portfolio/liquifaster-detail.png"
+cover: "/blog/temas/desarrollo.jpg"
 draft: false
 ---
 

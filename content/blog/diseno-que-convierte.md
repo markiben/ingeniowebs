@@ -3,7 +3,7 @@ title: "Diseño que convierte, no que solo se ve bonito"
 description: "Una interfaz atractiva no alcanza: tiene que guiar, generar confianza y empujar a la acción."
 date: "2026-08-03T10:30"
 category: "Diseño"
-cover: "/portfolio/novastudio-presentacion.png"
+cover: "/blog/temas/diseno.jpg"
 draft: false
 ---
 

@@ -3,7 +3,7 @@ title: "Bienvenida al blog de Ingenio Webs"
 description: "El espacio donde vamos a compartir ideas, aprendizajes y novedades sobre diseño, desarrollo y productos digitales."
 date: "2026-08-05T14:00"
 category: "Novedades"
-cover: "/portfolio/novastudio-presentacion.png"
+cover: "/blog/temas/novedades.jpg"
 draft: false
 ---
 
