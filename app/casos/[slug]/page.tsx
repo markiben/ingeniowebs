@@ -21,6 +21,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${item.title} | Ingenio Webs`,
     description: item.challenge,
+    alternates: { canonical: `/casos/${slug}` },
+    openGraph: {
+      type: "article",
+      title: item.title,
+      description: item.challenge,
+      url: `/casos/${slug}`,
+      images: item.screenshot ? [{ url: item.screenshot }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: item.title,
+      description: item.challenge,
+      images: item.screenshot ? [item.screenshot] : undefined,
+    },
   };
 }
 

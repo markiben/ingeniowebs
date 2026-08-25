@@ -16,9 +16,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getBlogPost(slug);
   if (!post) return { title: "Blog | Ingenio Webs" };
 
+  const descripcion = post.description || post.title;
+
   return {
     title: `${post.title} | Blog Ingenio Webs`,
-    description: post.description || post.title,
+    description: descripcion,
+    /* Sin esto cada artículo heredaba el canonical de la raíz y se
+       declaraba a sí mismo como duplicado de la portada. */
+    alternates: { canonical: `/blog/${slug}` },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: descripcion,
+      url: `/blog/${slug}`,
+      publishedTime: post.date,
+      images: post.cover ? [{ url: post.cover }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: descripcion,
+      images: post.cover ? [post.cover] : undefined,
+    },
   };
 }
 

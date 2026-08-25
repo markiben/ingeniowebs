@@ -26,10 +26,27 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
+/* metadataBase es lo que permite declarar las imágenes con rutas
+   relativas: sin esto, Next no puede convertirlas en las URLs absolutas
+   que exigen Facebook, WhatsApp, LinkedIn y X para mostrar la tarjeta. */
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ingeniowebs.com";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Ingenio Webs | Diseño Web & Desarrollo de Software",
   description:
     "Diseño UI/UX, desarrollo Full Stack, plataformas a medida y aplicaciones web para empresas y emprendedores. Soluciones digitales de alto impacto.",
+  alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   keywords: [
     "diseño web",
     "desarrollo software",
@@ -42,10 +59,27 @@ export const metadata: Metadata = {
     title: "Ingenio Webs | Diseño Web & Desarrollo de Software",
     description:
       "Transformamos ideas en plataformas digitales, sistemas a medida y aplicaciones web de alto impacto.",
-    url: "https://ingeniowebs.com",
+    url: SITE_URL,
     siteName: "Ingenio Webs",
     locale: "es_ES",
     type: "website",
+    images: [
+      {
+        url: "/og-ingenio-webs.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Ingenio Webs — Diseño web y desarrollo de software",
+      },
+    ],
+  },
+  /* summary_large_image es la que muestra la imagen ancha; sin esto X
+     usaba "summary", que la recorta a una miniatura cuadrada. */
+  twitter: {
+    card: "summary_large_image",
+    title: "Ingenio Webs | Diseño Web & Desarrollo de Software",
+    description:
+      "Transformamos ideas en plataformas digitales, sistemas a medida y aplicaciones web de alto impacto.",
+    images: ["/og-ingenio-webs.jpg"],
   },
   icons: {
     icon: [

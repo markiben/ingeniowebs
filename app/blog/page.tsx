@@ -6,6 +6,7 @@ import { es } from "@/lib/i18n/es";
 export const metadata: Metadata = {
   title: `${es.blog.title} | Ingenio Webs`,
   description: es.blog.description,
+  alternates: { canonical: "/blog" },
 };
 
 export default function BlogPage() {

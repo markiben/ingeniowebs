@@ -10,6 +10,7 @@ type Props = {
 export const metadata: Metadata = {
   title: `${es.blog.exploreTitle} | Ingenio Webs`,
   description: es.blog.exploreDescription,
+  alternates: { canonical: "/blog/explorar" },
 };
 
 export default async function BlogExplorePage({ searchParams }: Props) {
